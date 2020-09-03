@@ -1,0 +1,13 @@
+<script>
+  let kata = prompt('Masukan kata').toLowerCase();
+
+  cekKata = (kata) => {
+    if (kata == kata.split('').reverse().join('')) {
+      return 'Kata Polindrom';
+    } else {
+      return 'Bukan kata';
+    }
+  };
+
+  alert(cekKata(kata));
+</script>

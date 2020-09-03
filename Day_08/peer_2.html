@@ -1,0 +1,104 @@
+<script>
+  // membuat class constructro Produk
+  // class Produk {
+  //   constructor(_nama, _harga, _stock) {
+  //     this.nama = _nama;
+  //     this.harga = _harga;
+  //     this.stock = _stock;
+  //   }
+  // }
+
+  // membuat object Produk
+  let produk = [
+    { nama: 'Apel', harga: 10000, stock: 10 },
+    { nama: 'Mangga', harga: 15000, stock: 10 },
+    { nama: 'Jeruk', harga: 20000, stock: 10 },
+    { nama: 'Semangka', harga: 30000, stock: 10 },
+  ];
+
+  while (true) {
+    // fungsi cetal list produk
+    let cetakListProduk = () => {
+      let listProduk = '';
+      for (let i = 0; i < produk.length; i++) {
+        listProduk += `${i + 1}. ${produk[i].nama} Rp.${produk[
+          i
+        ].harga.toLocaleString()} - ${produk[i].stock} kg\n`;
+      }
+      return listProduk;
+    };
+
+    // menu utama
+    let menuUtama = prompt(
+      `Selamat Datang di Toko Buah\n1. Belanja\n2. Tambah Produk\n3. Lihat Stock Produk`
+    );
+
+    if (menuUtama == 1) {
+      let qty;
+      // memanggil fungsi cetak list produk
+      cetakListProduk();
+      let pilihMenuBelanja = parseInt(
+        prompt(`Silahkan pilih item dibawah ini:\n${cetakListProduk()}`) - 1
+      );
+
+      while (true) {
+        qty = parseInt(prompt(`Silahkan masukan qty yang dibeli:`));
+        // jika qty > qty input
+        if (qty <= produk[pilihMenuBelanja].stock) {
+          let totalBelanja = qty * produk[pilihMenuBelanja].harga;
+          let bayar = parseInt(
+            prompt(
+              `Total belanja anda : Rp.${totalBelanja.toLocaleString()}\nSilahkan melakukan pembayaran :`
+            )
+          );
+          // jika pembayaran lebih kecil dari total belanja
+          bayar < totalBelanja
+            ? (bayar = parseInt(
+                prompt(
+                  `Maaf anda kurang bayar, silahkan melakukan pembayaran kembali sebesar Rp. ${totalBelanja.toLocaleString()} :`
+                )
+              ))
+            : null;
+
+          produk[pilihMenuBelanja].stock -= qty;
+
+          alert(
+            `Kembalian anda adalah Rp.${(
+              bayar - totalBelanja
+            ).toLocaleString()}`
+          );
+
+          // menghapus produk
+          if (produk[pilihMenuBelanja].stock == 0) {
+            produk.splice(pilihMenuBelanja, 1);
+          }
+          //   console.log('hapus:', produk);
+          break;
+        } else {
+          alert(
+            `Maaf stock saat ini untuk ${produk[pilihMenuBelanja].nama} = ${produk[pilihMenuBelanja].stock} Kg`
+          );
+        }
+      }
+    } else if (menuUtama == 2) {
+      // Input Produk
+      let inputProduk = prompt(`Masukan nama Produk : `);
+      let inputHarga = parseInt(prompt(`Masukan harga Produk : `));
+      let inputStock = parseInt(prompt(`Masukan stock Produk : `));
+      //menambahkan produk
+      produk.push({ nama: inputProduk, harga: inputHarga, stock: inputStock });
+      // memanggil fungsi cetak list
+      cetakListProduk();
+      // output list
+      alert(`Item ${inputProduk} sudah terdaftar\n${cetakListProduk()}`);
+    } else if (menuUtama == 3) {
+      alert(
+        `Stock Produk saat ini:\n------------------------------------\n${cetakListProduk()}`
+      );
+    }
+    if (!confirm(`Apakah anda ingin kembali ke menu utama ?`)) {
+      alert(`Terima kasih`);
+      break;
+    }
+  }
+</script>

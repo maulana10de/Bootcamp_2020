@@ -1,0 +1,131 @@
+<script>
+  let produk = ['apel', 'mangga', 'jeruk'];
+  let harga = [20000, 15000, 5000];
+  let stock = [10, 20, 30];
+  let totalBelanja, jumlahKembalian, jumlahBayar;
+
+  while (true) {
+    // tampilkan data
+    let menu = [];
+    produk.forEach((elem1, i) => {
+      const elem2 = stock[i];
+      menu += `${i + 1}.${elem1} = ${elem2} Kg \n`;
+    });
+
+    alert(`
+  SELAMAT DATANG
+  DAFTAR BUAH YANG BISA DI ORDER 
+  ----------------------------------
+  ${menu}
+  ----------------------------------
+      `);
+
+    let pilihMenu = parseInt(prompt(`Silahkan masukan No Menu disini!`));
+
+    if (pilihMenu == 1) {
+      let qty = parseInt(prompt(`Mau beli berapa banyak:`));
+
+      // check jika qty lebih besar dari stock
+      if (qty > stock[0]) {
+        alert(`Qty melebihi stock : ${stock[0]} Kg`);
+        qty = parseInt(prompt(`Silahkan masukan kembali qty yang dibeli:`));
+      }
+
+      // mengurangi stock
+      stock[0] -= qty;
+
+      // kalkulasi total belanja
+      totalBelanja = harga[0] * qty;
+
+      jumlahBayar = parseInt(
+        prompt(`
+        Total belanja : ${totalBelanja.toLocaleString('id')}
+        ----------------------------------------
+        Silahkan bayar :`)
+      );
+      // check jika kurang bayar
+      if (jumlahBayar < totalBelanja) {
+        confirm(`Uang yang anda bayarkan masih kurang, silahkan bayar kembali`);
+        jumlahBayar = parseInt(
+          prompt(
+            `Silahkan masukan senilai Rp.${totalBelanja.toLocaleString(
+              'id'
+            )}  :`
+          )
+        );
+      }
+
+      // hitung kembalian
+      jumlahKembalian = jumlahBayar - totalBelanja;
+      alert(`
+        Rincian Order Anda :
+        ---------------------------------------------
+        Item                     => Apel
+        Qty                      => ${qty} Kg
+        Total Belanja            => Rp.${totalBelanja.toLocaleString('id')}
+        ---------------------------------
+        Cash                     => Rp.${jumlahBayar.toLocaleString('id')}
+        Change                   => Rp.${jumlahKembalian.toLocaleString('id')}
+        ----------------------------------------------`);
+      // notifikasi stock produk
+      alert(`Stock buah ${produk[0]} sisa ${stock[0]} kg`);
+
+      // check jika stock = 0
+      if (stock[0] === 0) {
+        produk.splice(0, 1);
+        stock.splice(0, 1);
+        harga.splice(0, 1);
+
+        // tampilkan data
+        let tampilData = '';
+        produk.forEach((pos1, i) => {
+          const pos2 = stock[i];
+          tampilData += `Stock ${pos1} = ${pos2} Kg \n`;
+        });
+
+        alert(`
+  Stock yang tersedia saat ini :
+  -----------------------------
+  ${tampilData}
+            `);
+      }
+    } else if (pilihMenu == 4) {
+      alert('Selamat datang dihalaman tambah Produk');
+      let inputProduk = prompt('Silahkan masukan nama produk !').toLowerCase();
+
+      // check jika ada item yang sama
+      for (let i = 0; i < produk.length; i++) {
+        if (inputProduk === produk[i]) {
+          alert('item tersebut sudah ada');
+          inputProduk = prompt(
+            'Silahkan masukan kembali nama itemnya !'
+          ).toLowerCase();
+        }
+      }
+
+      let inputHarga = parseInt(prompt('Silahkan masukan harga produk !'));
+      let inputStock = parseInt(
+        prompt('Silahkan masukan stock produk !').toLowerCase()
+      );
+
+      // tambah ke data
+      produk.push(inputProduk);
+      harga.push(inputHarga);
+      stock.push(inputStock);
+
+      //tampilkan
+      alert(`
+            Daftar produk saat ini :
+            - ${produk.join('-')}
+            - ${harga.join('-')}
+            - ${stock.join('-')}
+          `);
+    }
+
+    // konfirmasi jika ingin melanjutkan belanja
+    if (!confirm('Apakah anda ingin belanja kembali ')) {
+      alert('Terima kasih');
+      break;
+    }
+  }
+</script>

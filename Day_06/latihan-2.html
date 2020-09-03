@@ -1,0 +1,22 @@
+<script>
+  let daftarSiswa = [
+    'ade',
+    'alex',
+    'adi',
+    'ado',
+    'angga',
+    'alex',
+    'anda',
+    'ari',
+    'ale',
+    'andre',
+  ];
+
+  let inputSiswa = prompt('Silahkan masukan nama siswa :').toLowerCase();
+
+  for (let i = 0; i < daftarSiswa.length; i++) {
+    if (inputSiswa !== daftarSiswa[i]) {
+      daftarSiswa.push(inputSiswa);
+    }
+  }
+</script>

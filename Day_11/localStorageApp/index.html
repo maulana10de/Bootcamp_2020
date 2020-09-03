@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Warga Griya</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="box">
+      <div class="box__section">
+        <h2>Data List</h2>
+        <form autocomplete="off" id="form">
+          <div>
+            <label for="name">Name </label>
+            <input type="text" name="name" id="name" />
+          </div>
+          <div>
+            <label for="umur">Umur</label>
+            <input type="number" name="umur" id="umur" />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+          </div>
+        </form>
+        <button type="submit" onclick="addData()">Submit</button>
+      </div>
+
+      <div class="box__section">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbData"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

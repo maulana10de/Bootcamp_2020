@@ -1,0 +1,13 @@
+<script>
+  let jumlah = parseInt(prompt('Silahkan masukan jumlah angkanya:'));
+  let result = '';
+  let resultGanjil = '';
+  for (let i = 1; i <= jumlah; i++) {
+    if (i % 2 == 0) {
+      result += i + ` = genap <br/>`;
+    } else {
+      result += i + `= ganjil <br/>`;
+    }
+  }
+  document.write(result);
+</script>

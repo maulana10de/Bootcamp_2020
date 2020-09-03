@@ -1,0 +1,41 @@
+<script>
+  let kata = prompt('Masukan kata').toLowerCase().split('');
+  let vocal = ['a', 'i', 'u', 'e', 'o'];
+  let valVoc = 0;
+  let valKon = 0;
+  let temp = 0;
+  let count = 1;
+
+  hitungVocalKonsonan = (kata) => {
+    for (let i = 0; i < kata.length; i++) {
+      if (
+        kata[i] == 'a' ||
+        kata[i] == 'i' ||
+        kata[i] == 'u' ||
+        kata[i] == 'e' ||
+        kata[i] == 'o'
+      ) {
+        valVoc++;
+      } else {
+        valKon++;
+      }
+
+      //   for (let j = 0; j < vocal.length; j++) {
+      //     console.log(kata[i], vocal[j]);
+      //     if (kata[i] === vocal[j]) {
+      //       console.log('huruf vocal', kata[i]);
+      //       console.log('count:', count);
+      //       temp = kata[i];
+      //       console.log('temp:', temp);
+      //       if (temp === kata[i]) {
+      //         count++;
+      //         console.log('count setelah tidak sama:', count);
+      //       }
+      //     }
+      //   }
+    }
+    return valKon;
+  };
+
+  alert(hitungVocalKonsonan(kata));
+</script>

@@ -1,0 +1,36 @@
+<script>
+  let input = parseInt(
+    prompt(`
+  Kalkulator
+  =======================
+  Ketik 1 untuk Pertambahan
+  Ketik 2 untuk Pengurangan
+  Ketik 3 untuk Perkalian
+  Ketik 4 untuk Pembagian
+  =======================
+  `)
+  );
+
+  if (input == 1) {
+    let angka1 = parseFloat(prompt('Masukan angka pertama:'));
+    let angka2 = parseFloat(prompt('Masukan angka kedua:'));
+    let hasil = angka1 + angka2;
+    alert(`${angka1} + ${angka2} = ${hasil}`);
+  } else if (input == 2) {
+    let angka1 = parseFloat(prompt('Masukan angka pertama:'));
+    let angka2 = parseFloat(prompt('Masukan angka kedua:'));
+    let hasil = angka1 - angka2;
+    alert(`${angka1} - ${angka2} = ${hasil}`);
+  } else if (input == 3) {
+    let angka1 = parseFloat(prompt('Masukan angka pertama:'));
+    let angka2 = parseFloat(prompt('Masukan angka kedua:'));
+    let hasil = angka1 * angka2;
+    alert(`${angka1} x ${angka2} = ${hasil}`);
+  }
+  if (input == 4) {
+    let angka1 = parseFloat(prompt('Masukan angka pertama:'));
+    let angka2 = parseFloat(prompt('Masukan angka kedua:'));
+    let hasil = angka1 / angka2;
+    alert(`${angka1} : ${angka2} = ${hasil}`);
+  }
+</script>

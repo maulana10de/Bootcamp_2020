@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rapid Test Monitoring</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="box">
+      <div class="box__section">
+        <h2>Rapid Test Monitoring</h2>
+        <fieldset>
+          <legend>Warga</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbData"></tbody>
+            <form autocomplete="off" id="form">
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th><input type="text" name="nama" id="nama" /></th>
+                  <th><input type="text" name="asal" id="asal" /></th>
+                  <th><input type="text" name="tujuan" id="tujuan" /></th>
+                  <th>
+                    <button type="button" onclick="getData()">Add Data</button>
+                  </th>
+                </tr>
+              </tfoot>
+            </form>
+          </table>
+        </fieldset>
+        <!-- Rapid Test Table -->
+        <fieldset>
+          <legend>Rapid Test</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataRapid"></tbody>
+          </table>
+        </fieldset>
+        <!-- Pasien Positif -->
+        <fieldset>
+          <legend>Pasien Positif</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataPositif"></tbody>
+          </table>
+        </fieldset>
+        <!-- Pasien Negatif -->
+        <fieldset>
+          <legend>Pasien Negatif</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataNegatif"></tbody>
+          </table>
+        </fieldset>
+        <!-- Pasien Sembuh -->
+        <fieldset>
+          <legend>Pasien Sembuh</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataSembuh"></tbody>
+          </table>
+        </fieldset>
+        <!-- Pasien Meninggal -->
+        <fieldset>
+          <legend>Pasien Meninggal</legend>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 100px;">Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataMeninggal"></tbody>
+          </table>
+        </fieldset>
+        <!-- Summary -->
+        <fieldset>
+          <legend>Statistik</legend>
+          <table>
+            <thead>
+              <tr>
+                <th>Jml Warga</th>
+                <th>Jml Rapid Test</th>
+                <th>Jml Positif</th>
+                <th>Jml Negatif</th>
+                <th>Jml Sembuh</th>
+                <th>Jml Meninggal</th>
+              </tr>
+            </thead>
+            <tbody id="tbDataSummary"></tbody>
+          </table>
+        </fieldset>
+      </div>
+    </div>
+    <!-- script -->
+    <script src="script.js"></script>
+  </body>
+</html>

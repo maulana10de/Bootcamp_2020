@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purwadhika</title>
+  </head>
+  <body>
+    <center>
+      <p>Kalkulator Sederhana</p>
+
+      <form action="">
+        <table>
+          <tr>
+            <td>Angka 1:</td>
+            <td><input type="number" name="angka1" id="angka1" /><br /></td>
+          </tr>
+          <tr>
+            <td>Angka 2</td>
+            <td><input type="number" name="angka2" id="angka2" /></td>
+          </tr>
+          <tr>
+            <td><button type="button" onclick="tambah()">Tambah</button></td>
+            <td><button type="button" onclick="kurang()">Kurang</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" onclick="bagi()">Bagi</button></td>
+            <td><button type="button" onclick="kali()">Kali</button></td>
+          </tr>
+        </table>
+      </form>
+      <p id="hasil"></p>
+    </center>
+
+    <script>
+      function tambah() {
+        let angka1 = parseInt(document.getElementById('angka1').value);
+        let angka2 = parseInt(document.getElementById('angka2').value);
+        let hasil = angka1 + angka2;
+        document.getElementById('hasil').innerHTML = hasil;
+      }
+
+      function kurang() {
+        let angka1 = parseInt(document.getElementById('angka1').value);
+        let angka2 = parseInt(document.getElementById('angka2').value);
+        let hasil = angka1 - angka2;
+        document.getElementById('hasil').innerHTML = hasil;
+      }
+
+      function bagi() {
+        let angka1 = parseInt(document.getElementById('angka1').value);
+        let angka2 = parseInt(document.getElementById('angka2').value);
+        let hasil = angka1 / angka2;
+        document.getElementById('hasil').innerHTML = hasil;
+      }
+
+      function kali() {
+        let angka1 = parseInt(document.getElementById('angka1').value);
+        let angka2 = parseInt(document.getElementById('angka2').value);
+        let hasil = angka1 * angka2;
+        document.getElementById('hasil').innerHTML = hasil;
+      }
+    </script>
+  </body>
+</html>

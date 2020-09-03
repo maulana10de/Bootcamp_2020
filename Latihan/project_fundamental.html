@@ -1,0 +1,87 @@
+<script>
+  let produk = ['Apel', 'Mangga', 'Jeruk'];
+  let harga = [3000, 20000, 10000];
+  let stock = [10, 10, 20];
+
+  while (true) {
+    let listProduk = '';
+    // menu utama
+    let menuUtama = prompt(`Selamat Datang di Toko Buah
+      1. Belanja
+      2. Input Produk
+      3. Lihat Stock Produk`);
+
+    // pilihan menu utama
+    if (menuUtama == 1) {
+      // Belanja
+      let qty;
+      for (let i = 0; i < produk.length; i++) {
+        listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]} - ${stock[i]}\n`;
+      }
+
+      let pilihMenuBelanja = parseInt(
+        prompt(`Silahkan pilih item dibawah ini:\n${listProduk}`) - 1
+      );
+      console.log('index' + pilihMenuBelanja);
+
+      while (true) {
+        qty = parseInt(prompt(`Silahkan masukan qty yang dibeli:`));
+        // jika qty > qty input
+        if (qty <= stock[pilihMenuBelanja]) {
+          let totalBelanja = qty * harga[pilihMenuBelanja];
+          let bayar = parseInt(
+            prompt(`
+            Total Belanja : Rp. ${totalBelanja}
+            Silahkan bayar :`)
+          );
+          console.log(bayar);
+
+          stock[pilihMenuBelanja] -= qty;
+          alert(`Kembalian anda adalah Rp. ${bayar - totalBelanja}`);
+          // update stock
+          if (stock[pilihMenuBelanja] == 0) {
+            produk.splice(pilihMenuBelanja, 1);
+            harga.splice(pilihMenuBelanja, 1);
+            stock.splice(pilihMenuBelanja, 1);
+          }
+          break;
+        } else {
+          alert(
+            `Maaf stock saat ini untuk ${produk[pilihMenuBelanja]} = ${stock[pilihMenuBelanja]} Kg`
+          );
+        }
+      }
+    } else if (menuUtama == 2) {
+      // Input Produk
+      let inputProduk = prompt(`Masukan nama Produk : `);
+      let inputHarga = parseInt(prompt(`Masukan harga Produk : `));
+      let inputStock = parseInt(prompt(`Masukan stock Produk : `));
+
+      produk.push(inputProduk);
+      harga.push(inputHarga);
+      stock.push(inputStock);
+      let listProduk = '';
+
+      for (let i = 0; i < produk.length; i++) {
+        listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]} - ${stock[i]}\n`;
+      }
+
+      alert(`Item ${inputProduk} sudah terdaftar\n${listProduk}`);
+
+      //
+    } else if (menuUtama == 3) {
+      // Lihat Stock Produk
+      let listProduk = '';
+      for (let i = 0; i < produk.length; i++) {
+        listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]} - ${stock[i]}\n`;
+      }
+      alert(`Stock Produk:\n${listProduk}`);
+    } else {
+      //
+    }
+    if (!confirm(`Apakah anda ingin kembali ke menu utama ?`)) {
+      alert(`Terima kasih`);
+      break;
+    }
+  }
+</script>

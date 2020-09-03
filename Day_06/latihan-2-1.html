@@ -1,0 +1,19 @@
+<script>
+  let siswa = ['ade', 'alex', 'adi', 'ado'];
+  let inputSiswa = prompt('Silahkan masukan nama siswa :').toLowerCase();
+
+  siswa.splice(siswa.indexOf(inputSiswa), 1);
+
+  let allSiswa = [];
+  for (let i = 0; i < siswa.length; i++) {
+    allSiswa += `${i + 1} - ${siswa[i]} \n`;
+  }
+
+  alert(`
+Berhasil menghapus :
+${inputSiswa.toUpperCase()}.
+----------------------------
+Daftar siswa saat ini adalah
+${allSiswa}
+    `);
+</script>

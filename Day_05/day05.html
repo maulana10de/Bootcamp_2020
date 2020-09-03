@@ -1,0 +1,12 @@
+<script>
+  let inputAngka = parseInt(prompt('Silahkan masukan angkanya :'));
+  for (let i = 1; i <= inputAngka; i++) {
+    if (i % 3 == 0 && i % 5 == 0) {
+      document.write(`${i} : bis bus bis bus <br/>`);
+    } else if (i % 3 == 0) {
+      document.write(`${i} : bis <br/>`);
+    } else if (i % 5 == 0) {
+      document.write(`${i} : bus<br/>`);
+    }
+  }
+</script>

@@ -1,0 +1,33 @@
+<script>
+  let kata = prompt('Masukkan kalimat');
+  function vowel() {
+    let vokal = '';
+    let konsonan = '';
+    for (let i = 0; i < kata.length; i++) {
+      if (
+        kata.charAt(i).toLowerCase() == 'a' ||
+        kata.charAt(i).toLowerCase() == 'i' ||
+        kata.charAt(i).toLowerCase() == 'u' ||
+        kata.charAt(i).toLowerCase() == 'e' ||
+        kata.charAt(i).toLowerCase() == 'o'
+      ) {
+        if (!vokal.includes(kata.charAt(i).toLowerCase())) {
+          vokal += kata.charAt(i).toLowerCase();
+        }
+      } else {
+        if (!konsonan.includes(kata.charAt(i).toLowerCase())) {
+          konsonan += kata.charAt(i).toLowerCase();
+        }
+      }
+    }
+    return alert(`
+      Kalimat = ${kata}
+      Huruf vokal = ${vokal}
+      Huruf konsonan = ${konsonan}
+      Jumlah jenis huruf vokal = ${vokal.length}
+      Jumlah jenis huruf konsonan = ${konsonan.length}
+      `);
+  }
+
+  vowel();
+</script>

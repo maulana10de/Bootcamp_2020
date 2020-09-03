@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milan Store Indonesia</title>
+    <style>
+      body {
+        background-color: crimson;
+        height: 100vh;
+      }
+      .login-page {
+        width: 360px;
+        padding: 10% 0 0;
+        margin: auto;
+      }
+      .form {
+        max-width: 360px;
+        margin: 0 auto 100px;
+        position: relative;
+        /* z-index: 1; */
+        background-color: #ffffff;
+        padding: 45px;
+        text-align: center;
+      }
+      .form input {
+        background-color: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        outline: 1;
+      }
+
+      .form button {
+        text-transform: uppercase;
+        outline: 0;
+        background-color: green;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .form .message {
+        color: grey;
+        font-size: 12px;
+        margin: 15px 0;
+      }
+      .form .message a {
+        text-decoration: none;
+        color: #4caf40;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- login & register page -->
+    <div class="login-page">
+      <div class="form">
+        <!-- register form -->
+        <form id="register-form" style="display: none;">
+          <input type="text" name="username" placeholder="username" />
+          <input type="password" name="password" placeholder="password" />
+          <input type="email" name="email" placeholder="email" />
+          <button type="button" onclick="createUser()">Create</button>
+          <p class="message">
+            Already Registered? <a href="#" id="login">Login</a>
+          </p>
+        </form>
+
+        <!-- login form -->
+        <form id="login-form">
+          <input type="text" name="username" placeholder="username" />
+          <input type="password" name="password" placeholder="password" />
+          <button type="button" onclick="loginUser()">Login</button>
+          <p class="message">
+            Not Registered? <a href="#" id="register">Register</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Homepage -->
+    <div class="container" id="container" style="display: none;">
+      <center>
+        <h1>HELLO WORLD</h1>
+      </center>
+    </div>
+
+    <script>
+      let registerToggle = document.getElementById('register');
+      let loginToggle = document.getElementById('login');
+
+      registerToggle.addEventListener('click', () => {
+        document.getElementById('register-form').style.display = 'block';
+        document.getElementById('login-form').style.display = 'none';
+      });
+
+      loginToggle.addEventListener('click', () => {
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
+      });
+
+      let dbUser = [];
+      // register user
+      createUser = () => {
+        let inUsername = document.getElementById('register-form').elements[0]
+          .value;
+        let inPassword = document.getElementById('register-form').elements[1]
+          .value;
+        let inEmail = document.getElementById('register-form').elements[2]
+          .value;
+        dbUser.push({
+          username: inUsername,
+          password: inPassword,
+          email: inEmail,
+        });
+        alert('Anda berhasil register');
+        console.log(dbUser);
+      };
+
+      loginUser = () => {
+        let inUsername = document.getElementById('login-form').elements[0]
+          .value;
+        let inPassword = document.getElementById('login-form').elements[1]
+          .value;
+        let homepage = document.querySelector('.container');
+        for (let i = 0; i < dbUser.length; i++) {
+          if (
+            inUsername == dbUser[i].username &&
+            inPassword == dbUser[i].password
+          ) {
+            homepage.style.display = 'Block';
+            document.querySelector('.login-page').style.display = 'none';
+          } else {
+            alert('Username / Password salah');
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

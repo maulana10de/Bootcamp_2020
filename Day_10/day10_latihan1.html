@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko</title>
+  </head>
+  <body>
+    <form action="POST" id="data">
+      Nama : <input type="text" name="nama" id="nama" /><br />
+      Harga : <input type="number" name="harga" id="harga" /><br />
+      Stock : <input type="number" name="stock" id="stock" /><br />
+    </form>
+    <button type="button" onclick="getData()">Ok</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nama Buah</th>
+          <th>Harga</th>
+          <th>Stock</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tbData"></tbody>
+    </table>
+
+    <!-- script -->
+    <script>
+      let dataSiswa = [];
+      function getData() {
+        let form = document.getElementById('data');
+        dataSiswa.push({
+          nama: form.elements[0].value,
+          harga: form.elements[1].value,
+          stock: form.elements[2].value,
+        });
+        printData();
+      }
+
+      function printData() {
+        let print = '';
+        dataSiswa.forEach((item, i) => {
+          print += `
+                <tr>
+                    <td>${item.nama}</td>
+                    <td>${item.harga}</td>
+                    <td>${item.stock}</td>
+                    <td><button type='button' onclick='deleteItem(${i})'>Delete</button><td>
+                </tr>
+                `;
+        });
+        document.getElementById('tbData').innerHTML = print;
+      }
+
+      function deleteItem(i) {
+        dataSiswa.splice(i, 1);
+        printData();
+      }
+    </script>
+  </body>
+</html>

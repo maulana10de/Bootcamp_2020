@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Warga Griya</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="box">
+      <div class="box__section">
+        <center>
+          <input type="text" id="search" placeholder="search" />
+          <button type="button" onclick="searchName()">Search</button>
+        </center>
+        <h2>Data Warga</h2>
+        <form autocomplete="off" id="form">
+          <div>
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" />
+          </div>
+          <div>
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+          </div>
+          <div>
+            <label>Gender</label>
+            <div>
+              <input
+                style="display: inline; margin-right: 5px;"
+                type="radio"
+                name="gender"
+                id="male"
+                value="Male"
+                checked
+              />
+              <label for="male">Male</label>
+              <input
+                style="display: inline; margin-right: 5px;"
+                type="radio"
+                name="gender"
+                id="female"
+                value="Female"
+              />
+              <label for="female">Female</label>
+            </div>
+          </div>
+          <div>
+            <label for="job">Job</label>
+            <select id="job" name="job">
+              <option value="Doctor">Doctor</option>
+              <option value="Police">Police</option>
+              <option value="Teacher">Teacher</option>
+            </select>
+          </div>
+          <div>
+            <label for="photo">Photo</label>
+            <input type="text" name="photo" id="photo" />
+          </div>
+          <div>
+            <label for="address">Address</label><br />
+            <textarea
+              name="address"
+              id="address"
+              rows="5"
+              cols="30"
+              value="Address"
+            ></textarea>
+          </div>
+        </form>
+        <button type="submit" onclick="addData()">Submit</button>
+      </div>
+
+      <div class="box__section">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Photo</th>
+              <th>Full Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th style="width: 100px;">Gender</th>
+              <th>Job</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbData"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

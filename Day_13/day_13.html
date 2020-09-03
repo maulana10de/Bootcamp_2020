@@ -1,0 +1,11 @@
+<script>
+  let input = prompt('Masukan nama anda');
+
+  if (input.length % 2 == 0) {
+    let value1 = input.charAt(input.length / 2 - 1);
+    let value2 = input.charAt(input.length / 2);
+    alert(value1 + value2);
+  } else {
+    alert(input.charAt(input.length / 2));
+  }
+</script>

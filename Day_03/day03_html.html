@@ -1,0 +1,80 @@
+<script>
+  let input = parseInt(
+    prompt(
+      'Silahkan ketik angka 1 jika pilih mangga, 2 jika pilih Mangga, 3 Jika pilih jeruk '
+    )
+  );
+
+  let apel = [1, 'Apel', 20000];
+  let mangga = [2, 'Mangga', 10000];
+  let jeruk = [3, 'Jeruk', 5000];
+
+  if (input == apel[0]) {
+    let jmlItem = parseInt(prompt('Jumlah yang anda beli:'));
+    let totalBelanja = apel[2] * jmlItem;
+
+    let bayar = parseInt(
+      prompt(`
+    Anda telah membeli ${apel[1]} sebanyak ${jmlItem} buah
+    Uang yang harus anda bayarkan adalah : ${totalBelanja}
+    `)
+    );
+    if (bayar < totalBelanja) {
+      confirm(
+        'Maaf uang yang anda bayarkan tidak emncukupi, silahkan coba lagi'
+      );
+      bayar = parseInt(prompt('Silahkan bayar :'));
+    }
+    let kembalian = bayar - totalBelanja;
+    alert(`
+    Uang yang anda bayarkan adalah ${bayar}, jadi kembaliannya adalah ${kembalian}
+    `);
+  }
+  // else if (input == 2) {
+  //     let harga = 10000;
+  //     let nama = 'Mangga';
+  //     let jmlItem = parseInt(prompt('Jumlah yang anda beli:'));
+  //     let totalBelanja = harga * jmlItem;
+
+  //     let bayar = parseInt(
+  //       prompt(`
+  //     Anda telah membeli ${nama} sebanyak ${jmlItem} buah
+  //     Uang yang harus anda bayarkan adalah : ${totalBelanja}
+  //     `)
+  //     );
+  //     if (bayar < totalBelanja) {
+  //       confirm(
+  //         'Maaf uang yang anda bayarkan tidak emncukupi, silahkan coba lagi'
+  //       );
+  //       bayar = parseInt(prompt('Silahkan bayar :'));
+  //     }
+  //     let kembalian = bayar - totalBelanja;
+  //     alert(`
+  //     Uang yang anda bayarkan adalah ${bayar}, jadi kembaliannya adalah ${kembalian}
+  //     `);
+  //   } else if (input == 3) {
+  //     let harga = 5000;
+  //     let nama = 'Jeruk';
+  //     let jmlItem = parseInt(prompt('Jumlah yang anda beli:'));
+  //     let totalBelanja = harga * jmlItem;
+
+  //     let bayar = parseInt(
+  //       prompt(`
+  //     Anda telah membeli ${nama} sebanyak ${jmlItem} buah
+  //     Uang yang harus anda bayarkan adalah : ${totalBelanja}
+  //     `)
+  //     );
+  //     if (bayar < totalBelanja) {
+  //       confirm(
+  //         'Maaf uang yang anda bayarkan tidak emncukupi, silahkan coba lagi'
+  //       );
+  //       bayar = parseInt(prompt('Silahkan bayar :'));
+  //     }
+  //     let kembalian = bayar - totalBelanja;
+  //     alert(`
+  //     Uang yang anda bayarkan adalah ${bayar}, jadi kembaliannya adalah ${kembalian}
+  //     `);
+  //   } else {
+  //     alert('Maaf untuk item tersebut sedang kosong');
+  //   }
+</script>

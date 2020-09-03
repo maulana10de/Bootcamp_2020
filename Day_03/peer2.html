@@ -1,0 +1,143 @@
+<script>
+  while (true) {
+    let menuUtama = parseInt(
+      prompt(`
+
+    Selamat datang di Aplikasi KITA
+    Silahkan pilih menu dibawah ini :
+      1. Menu Belanja
+      2. Menu Belajar
+    `)
+    );
+
+    if (menuUtama == 1) {
+      while (true) {
+        let input = parseInt(
+          prompt(`
+    Selamat Datang di Toko Buah Amanah
+    -------------------------------------------
+    Berikut buah yang tersedia untuk dibeli :
+    ketik 1 Apel,
+    Ketik 2 Mangga,
+    Ketik 3 Jeruk
+    -------------------------------------------`)
+        );
+
+        if (input == 1) {
+          let harga = 20000;
+          let nama = 'Apel';
+          let jmlItem = parseInt(prompt(`Berapa banyak yang ingin dibeli:`));
+          let totalBelanja = harga * jmlItem;
+
+          let bayar = parseInt(
+            prompt(`
+    Total belanja anda yaitu ${totalBelanja.toLocaleString('id')}
+    ----------------------------------------
+    Silahkan lakukan pembayaran :`)
+          );
+
+          if (bayar < totalBelanja) {
+            confirm(`
+      Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+            bayar = parseInt(
+              prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+            );
+          }
+
+          let kembalian = bayar - totalBelanja;
+
+          alert(`
+    Order Anda :
+    ---------------------------------
+    Item                    => ${nama}
+    Qty                     => ${jmlItem} Kg
+    Total Belanja           => ${totalBelanja.toLocaleString('id')}
+    ---------------------------------
+    Cash                    => ${bayar.toLocaleString('id')}
+    Change                  => ${kembalian.toLocaleString('id')}
+    ---------------------------------
+    `);
+        } else if (input == 2) {
+          let harga = 10000;
+          let nama = 'Mangga';
+          let jmlItem = parseInt(prompt(`Berapa banyak yang ingin dibeli:`));
+          let totalBelanja = harga * jmlItem;
+
+          let bayar = parseInt(
+            prompt(`
+    Total belanja anda yaitu ${totalBelanja}
+    ----------------------------------------
+    Silahkan lakukan pembayaran :`)
+          );
+
+          if (bayar < totalBelanja) {
+            confirm(`
+      Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+            bayar = parseInt(
+              prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+            );
+          }
+
+          let kembalian = bayar - totalBelanja;
+          alert(`
+    Order Anda :
+    ---------------------------------
+    Item                    => ${nama}
+    Qty                     => ${jmlItem} Kg
+    Total Belanja           => ${totalBelanja.toLocaleString('id')}
+    ---------------------------------
+    Cash                    => ${bayar.toLocaleString('id')}
+    Change                  => ${kembalian.toLocaleString('id')}
+    ---------------------------------
+    `);
+        } else if (input == 3) {
+          let harga = 5000;
+          let nama = 'Jeruk';
+          let jmlItem = parseInt(prompt(`Berapa banyak yang ingin dibeli:`));
+          let totalBelanja = harga * jmlItem;
+
+          let bayar = parseInt(
+            prompt(`
+    Total belanja anda yaitu ${totalBelanja}
+    ----------------------------------------
+    Silahkan lakukan pembayaran :`)
+          );
+
+          if (bayar < totalBelanja) {
+            confirm(`
+      Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+            bayar = parseInt(
+              prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+            );
+          }
+
+          let kembalian = bayar - totalBelanja;
+          alert(`
+    Order Anda :
+    ---------------------------------
+    Item                    => ${nama}
+    Qty                     => ${jmlItem} Kg
+    Total Belanja           => ${totalBelanja}
+    ---------------------------------
+    Cash                    => ${bayar}
+    Change                  => ${kembalian}
+    ---------------------------------
+    `);
+        }
+
+        if (!confirm('Apakah anda ingin belanja kembali')) {
+          alert('Terima kasih');
+          break;
+        }
+      }
+    } else if (menuUtama == 2) {
+      alert('Kalkulator');
+    } else {
+      alert('Tidak ada menu untuk nomor tersebut');
+    }
+    if (!confirm('Apakah anda ingin kembali ke menu utama')) {
+      alert('Terima kasih sudah berkunjung ke aplikasi kami');
+      break;
+    }
+  }
+</script>

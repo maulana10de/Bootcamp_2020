@@ -1,0 +1,15 @@
+<script>
+  let imt = 67 / Math.pow(1.78, 2);
+  console.log(imt);
+  if (imt < 18.5) {
+    alert('Berat badan anda kurang');
+  } else if (imt > 18.5 && imt < 24.9) {
+    alert('Berat badan ideal');
+  } else if (imt > 25.0 && imt < 29.9) {
+    alert('BB berlebih ');
+  } else if (imt > 30.0 && imt < 39.9) {
+    alert('BB sangat berlebih');
+  } else if (imt > 39.9) {
+    alert('Obesitas');
+  }
+</script>

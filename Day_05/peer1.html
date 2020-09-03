@@ -1,0 +1,129 @@
+<script>
+  let menu = parseInt(
+    prompt(`
+    Silahkan dipilih :
+    1. Segitiga siku
+    2. Segitiga siku terbalik
+    3. Segitiga siku double
+    4. Segitiga sama sisi
+    5. Segitiga sama sisi terbalik
+    6. Segitiga piramid`)
+  );
+
+  if (menu == 1) {
+    let x = '';
+    for (let i = 1; i <= 5; i++) {
+      for (let j = 1; j <= i; j++) {
+        if (j % 2 == 0) {
+          x += '&nbsp;#&nbsp;';
+        } else {
+          x += '&nbsp;*&nbsp;';
+        }
+      }
+      x += '<br/>';
+    }
+
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else if (menu == 2) {
+    let x = '';
+    for (let i = 5; i >= 1; i--) {
+      for (let j = 1; j <= i; j++) {
+        if (j % 2 == 0) {
+          x += '&nbsp;#&nbsp;';
+        } else {
+          x += '&nbsp;*&nbsp;';
+        }
+      }
+      x += '<br/>';
+    }
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else if (menu == 3) {
+    let x = '';
+    for (let i = 1; i < 2; i++) {
+      for (let j = 5; j >= 1; j--) {
+        for (let k = 1; k <= j; k++) {
+          x += '&nbsp;#&nbsp;';
+        }
+        x += '<br/>';
+      }
+      for (let m = 1; m <= 4; m++) {
+        for (let n = 1; n <= m + 1; n++) {
+          x += '&nbsp;#&nbsp;';
+        }
+        x += '<br/>';
+      }
+    }
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else if (menu == 4) {
+    let x = '';
+    for (let i = 1; i <= 10; i++) {
+      // print space
+      for (let j = i; j < 10; j++) {
+        x += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+      }
+
+      // print *
+      for (let k = 1; k < i * 2; k += 1) {
+        x += '&nbsp;&nbsp;#&nbsp;&nbsp;';
+      }
+      x += '<br/>';
+    }
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else if (menu == 5) {
+    let x = '';
+    for (let i = 10; i >= 1; i--) {
+      // print space
+      for (let j = i; j < 10; j++) {
+        x += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+      }
+
+      // print *
+      for (let k = 1; k < i * 2; k += 1) {
+        x += '&nbsp;&nbsp;#&nbsp;&nbsp;';
+      }
+      x += '<br/>';
+    }
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else if (menu == 6) {
+    let x = '';
+    for (i = 1; i <= 5; i++) {
+      for (j = i; j < 5; j++) {
+        x += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+      }
+      for (k = 1; k < i * 2; k++) {
+        x += '&nbsp;&nbsp;#&nbsp;&nbsp;';
+      }
+      x += '<br/>';
+    }
+    for (i = 5; i >= 1; i--) {
+      for (j = 5; j > i; j--) {
+        x += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+      }
+      for (k = 1; k < i * 2; k++) {
+        x += '&nbsp;&nbsp;#&nbsp;&nbsp;';
+      }
+      x += '<br/>';
+    }
+    document.write(`
+        <div style='background-color: #f3f3f3; width: 500px; margin: 200px auto; padding: 20px; border-radius: 5px'>
+        ${x}
+        </div>`);
+  } else {
+    alert('Maaf menu tersebut belum tersedia');
+  }
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purwadhika</title>
+  </head>
+  <body>
+    <center>
+      <form action="">
+        <table>
+          <tr>
+            <td><input type="text" name="kata" id="kata" /><br /></td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button" onclick="vowel()">
+                Check
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <h1 id="hasil"></h1>
+    </center>
+
+    <script>
+      function vowel() {
+        let kata = document.getElementById('kata').value;
+        let printText = '';
+        let vokal = '';
+        let konsonan = '';
+        for (let i = 0; i < kata.length; i++) {
+          if (
+            kata.charAt(i).toLowerCase() == 'a' ||
+            kata.charAt(i).toLowerCase() == 'i' ||
+            kata.charAt(i).toLowerCase() == 'u' ||
+            kata.charAt(i).toLowerCase() == 'e' ||
+            kata.charAt(i).toLowerCase() == 'o'
+          ) {
+            if (!vokal.includes(kata.charAt(i).toLowerCase())) {
+              vokal += kata.charAt(i).toLowerCase();
+            }
+          } else {
+            if (!konsonan.includes(kata.charAt(i).toLowerCase())) {
+              konsonan += kata.charAt(i).toLowerCase();
+            }
+          }
+        }
+        printText = `
+        <p>Hurup vokal = ${vokal.length}</p>
+        <p>Huruf konsonan = ${konsonan.length}</p>
+      `;
+        document.getElementById('hasil').innerHTML = printText;
+      }
+    </script>
+  </body>
+</html>

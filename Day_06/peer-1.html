@@ -1,0 +1,80 @@
+<script>
+  let siswa = [
+    { nama: 'nabil', kelas: 1, asal_sekolah: 'SMPN 1', nilai: [70, 80, 90] },
+    { nama: 'zandi', kelas: 2, asal_sekolah: 'SMPN 2', nilai: [90, 80, 90] },
+    { nama: 'zico', kelas: 3, asal_sekolah: 'SMPN 3', nilai: [100, 90, 90] },
+  ];
+
+  while (true) {
+    // membuat function cetak list siswa
+    let cetakListSiswa = () => {
+      let listSiswa = '';
+      for (let i = 0; i < siswa.length; i++) {
+        listSiswa += `${i + 1}. ${siswa[i].nama} - Kelas ${
+          siswa[i].kelas
+        } - Asal ${siswa[i].asal_sekolah} - Nilai :${siswa[i].nilai.join(
+          '-'
+        )}\n`;
+      }
+      return listSiswa;
+    };
+
+    let pilihMenu = parseInt(
+      prompt(
+        `Selamat Datang di SMAN 1 Jakarta\nDaftar Menu :\n1. Registrasi Siswa\n2. Check Siswa\n3. Delete Siswa`
+      )
+    );
+
+    if (pilihMenu == 1) {
+      let inNama = prompt(`Masukan nama siswa :`).toLowerCase();
+      let inKelas = prompt(`Masukan kelas siswa :`).toLowerCase();
+      let inAsalSekolah = prompt(`Masukan asal sekolah siswa :`).toLowerCase();
+      let inNilai1 = parseFloat(prompt(`Masukan Nilai 1 :`));
+      let inNilai2 = parseFloat(prompt(`Masukan Nilai 2 :`));
+      let inNilai3 = parseFloat(prompt(`Masukan Nilai 3 :`));
+      let allNilai = [inNilai1, inNilai2, inNilai3];
+      // menambahkan siswa
+      siswa.push({
+        nama: inNama,
+        kelas: inKelas,
+        asal_sekolah: inAsalSekolah,
+        nilai: allNilai,
+      });
+      // memanggil fungsi cetak list
+      cetakListSiswa();
+      // output list
+      alert(
+        `Siswa atas nama ${inNama.toUpperCase()} sudah terdaftar\n${cetakListSiswa()}`
+      );
+    } else if (pilihMenu == 2) {
+      let inputSiswa = prompt(`Silahkan cek No Absen siswa :`).toLowerCase();
+      let listAbsen = '';
+      for (let i = 0; i < siswa.length; i++) {
+        if (siswa[i].nama === inputSiswa) {
+          listAbsen += `${inputSiswa} urutan absen ke-${i + 1}`;
+        }
+      }
+      // menampilkan absen siswa
+      alert(listAbsen.length > 0 ? listAbsen : 'Siswa belum terdaftar');
+    } else if (pilihMenu === 3) {
+      let inputSiswa = prompt(
+        `Silahkan masukan nama siswa :\n-----------------------------\n${cetakListSiswa()}`
+      ).toLowerCase();
+      // check jika tidak terdaftar
+      let alertHapus = '';
+      let count = 0;
+      for (let i = 0; i < siswa.length; i++) {
+        if (siswa[i].nama === inputSiswa) {
+          siswa.splice(siswa.indexOf(siswa[i]), 1);
+          alertHapus += `Berhasil menghapus :${inputSiswa.toUpperCase()}\n}`;
+          count = i + 1;
+        }
+      }
+      alert(count > 0 ? alertHapus : 'Siswa tidak terdaftar');
+    }
+
+    if (!confirm('Kembali ke menu utama ')) {
+      break;
+    }
+  }
+</script>

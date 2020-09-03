@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrianglePattern</title>
+  </head>
+  <body>
+    <fieldset style="width: 250px">
+      <legend>Triangle Pattern</legend>
+      <input type="number" id="inNumberLooping" /><br /><br />
+      <button type="button" onclick="btTrianglePattern()">Tampilkan</button>
+      <p id="printLooping"></p>
+    </fieldset>
+
+    <script>
+      function btTrianglePattern() {
+        let inNumber = document.getElementById('inNumberLooping').value;
+        let x = '';
+        for (let i = inNumber; i >= 1; i--) {
+          for (let j = i; j <= inNumber; j++) {
+            x += `${j}&nbsp;`;
+          }
+          x += '<br />';
+        }
+        return (document.getElementById('printLooping').innerHTML = x);
+      }
+    </script>
+  </body>
+</html>

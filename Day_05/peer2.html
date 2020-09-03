@@ -1,0 +1,131 @@
+<script>
+  let belanja = true;
+  while (belanja) {
+    let pilihMenu = parseInt(
+      prompt(`
+  Selamat Datang di Toko Buah
+  -------------------------------------------
+  Berikut buah yang tersedia saat ini :
+  1. Apel
+  2. Mangga
+  3. Jeruk
+  -------------------------------------------`)
+    );
+
+    let hargaApel = 20000;
+    let hargaMangga = 15000;
+    let hargaJeruk = 10000;
+    let qtyApel = 5;
+    let qtyMangga = 5;
+    let qtyJeruk = 5;
+
+    if (pilihMenu == 1) {
+      let qty = parseInt(prompt(`Masukan jumlah buah yang dibeli :`));
+      if (qty > qtyApel) {
+        alert(`Maaf qty yang tersedia hanya = ${qtyApel} Kg`);
+        qty = parseInt(prompt(`Silahkan masukan jumlah buah yang dibeli :`));
+      }
+
+      let totalBelanja = hargaApel * qty;
+      let jumlahBayar = parseInt(
+        prompt(`
+  Total belanja anda yaitu ${totalBelanja.toLocaleString('id')}
+  ----------------------------------------
+  Silahkan masukan uang pembayaran :`)
+      );
+
+      if (jumlahBayar < totalBelanja) {
+        confirm(`Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+        jumlahBayar = parseInt(
+          prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+        );
+      }
+
+      let jumlahKembalian = jumlahBayar - totalBelanja;
+      alert(`
+  Rincian Order Anda :
+  ---------------------------------------------
+  Item                     => Apel
+  Qty                      => ${qty} Kg
+  Total Belanja            => ${totalBelanja.toLocaleString('id')}
+  ---------------------------------
+  Cash                     => ${jumlahBayar.toLocaleString('id')}
+  Change                   => ${jumlahKembalian.toLocaleString('id')}
+  ----------------------------------------------`);
+    } else if (pilihMenu == 2) {
+      //   pilihan 2
+      let qty = parseInt(prompt(`Masukan jumlah buah yang dibeli :`));
+      if (qty > qtyMangga) {
+        alert(`Maaf qty yang tersedia hanya =  + ${qtyMangga} Kg`);
+        qty = parseInt(prompt(`Silahkan masukan jumlah buah yang dibeli :`));
+      }
+      let totalBelanja = hargaMangga * qty;
+
+      let jumlahBayar = parseInt(
+        prompt(`
+  Total belanja anda yaitu ${totalBelanja.toLocaleString('id')}
+  ----------------------------------------
+  Silahkan masukan uang pembayaran :`)
+      );
+
+      if (jumlahBayar < totalBelanja) {
+        confirm(`Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+        jumlahBayar = parseInt(
+          prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+        );
+      }
+
+      let jumlahKembalian = jumlahBayar - totalBelanja;
+      alert(`
+  Rincian Order Anda :
+  ---------------------------------------------
+  Item                     => Mangga
+  Qty                      => ${qty} Kg
+  Total Belanja            => ${totalBelanja.toLocaleString('id')}
+  ---------------------------------
+  Cash                     => ${jumlahBayar.toLocaleString('id')}
+  Change                   => ${jumlahKembalian.toLocaleString('id')}
+  ----------------------------------------------`);
+    } else if (pilihMenu == 3) {
+      //   pilihan 3
+      let qty = parseInt(prompt(`Masukan jumlah buah yang dibeli :`));
+      if (qty > qtyJeruk) {
+        alert(`Maaf qty yang tersedia hanya = ${qtyJeruk} Kg`);
+        qty = parseInt(prompt(`Silahkan masukan jumlah buah yang dibeli :`));
+      }
+      let totalBelanja = hargaJeruk * qty;
+
+      let jumlahBayar = parseInt(
+        prompt(`
+  Total belanja anda yaitu ${totalBelanja.toLocaleString('id')}
+  ----------------------------------------
+  Silahkan masukan uang pembayaran :`)
+      );
+
+      if (jumlahBayar < totalBelanja) {
+        confirm(`Uang yang anda masukan masih kurang, silahkan bayar kembali`);
+        jumlahBayar = parseInt(
+          prompt(`Silahkan masukan senilai ${totalBelanja}  :`)
+        );
+      }
+
+      let jumlahKembalian = jumlahBayar - totalBelanja;
+      alert(`
+  Rincian Order Anda :
+  ---------------------------------------------
+  Item                     => Jeruk
+  Qty                      => ${qty} Kg
+  Total Belanja            => ${totalBelanja.toLocaleString('id')}
+  ---------------------------------
+  Cash                     => ${jumlahBayar.toLocaleString('id')}
+  Change                   => ${jumlahKembalian.toLocaleString('id')}
+  ----------------------------------------------`);
+    }
+
+    let confirmBelanja = confirm('Apakah anda ingin belanja kembali');
+    if (!confirmBelanja) {
+      alert('Terima kasih');
+      belanja = false;
+    }
+  }
+</script>

@@ -1,0 +1,22 @@
+<script>
+  let randomAngka = Math.floor(Math.random() * 10);
+  if (randomAngka == 0) {
+    alert(`Angka adan adalah ${randomAngka}Silahkan refresh kembali`);
+  } else {
+    alert(randomAngka);
+  }
+
+  console.log(randomAngka);
+  let hasil = '';
+  for (let i = 1; i <= randomAngka; i++) {
+    for (let j = 1; j <= 5; j++) {
+      if (j % 2 == 0) {
+        hasil += '*';
+      } else {
+        hasil += '#';
+      }
+    }
+    hasil += '<br/>';
+  }
+  document.write(hasil);
+</script>

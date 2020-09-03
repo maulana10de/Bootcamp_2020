@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milan Store</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="box">
+      <!-- Start form input -->
+      <div class="box__section">
+        <h2>Table Product</h2>
+        <form autocomplete="off" id="form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" />
+          </div>
+          <div>
+            <label for="desc">Description</label>
+            <input type="text" name="desc" id="desc" />
+          </div>
+          <div>
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price" />
+          </div>
+          <div>
+            <label for="qty">Qty</label>
+            <input type="number" name="qty" id="qty" />
+          </div>
+          <div>
+            <label for="image">Image</label>
+            <input type="text" name="image" id="image" />
+          </div>
+        </form>
+        <button type="button" onclick="btSubmit()">Submit</button>
+      </div>
+      <!--  -->
+      <div class="box__section">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <div>
+                  <input
+                    style="display: inline-block"
+                    type="number"
+                    id="inMinPrice"
+                    placeholder="5.000"
+                  />
+                  <input
+                    style="display: inline-block"
+                    type="number"
+                    id="inMaxPrice"
+                    placeholder="1.000.000"
+                  />
+                  <button type="button" onclick="btSearchPrice()">
+                    Search
+                  </button>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <select id="sortBy" name="sortBy" onclick="btSortBy()">
+                    <option value="defValue">-</option>
+                    <option value="minPrice">Harga Terendah</option>
+                    <option value="maxPrice">Harga Tertinggi</option>
+                  </select>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <input
+                    style="display: inline-block"
+                    type="text"
+                    id="inSearch"
+                    placeholder="search"
+                  />
+                  <button type="button" onclick="btSearch()">Search</button>
+                  <button type="button" onclick="btReset()">Reset</button>
+                </div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <!--  -->
+      <div class="box__section">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbDataProduct"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

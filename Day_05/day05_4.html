@@ -1,0 +1,20 @@
+<script>
+  let kalimat = prompt('Masukan kalimatnya');
+  let upper = 0;
+  let lower = 0;
+  let space = 0;
+  let angka = 0;
+  for (let i = 0; i < kalimat.length; i++) {
+    if (kalimat.charAt(i) == ' ') {
+      space++;
+    } else if (kalimat.charAt(i) === kalimat.charAt(i).toLowerCase()) {
+      lower++;
+    } else if (kalimat.charAt(i) === kalimat.charAt(i).toUpperCase()) {
+      upper++;
+    }
+  }
+
+  alert(
+    `Huruf uppercase = ${upper}, huruf lowecase =  ${lower}, spasi = ${space}`
+  );
+</script>

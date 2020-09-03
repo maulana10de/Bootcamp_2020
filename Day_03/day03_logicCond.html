@@ -1,0 +1,41 @@
+<!-- <script>
+  let nilai = parseInt(prompt('Silahkan masukan nilai anda :'));
+
+  if (nilai == 100) {
+    alert(`Great Job`);
+  } else if (nilai < 100 && nilai >= 90) {
+    alert(`Good job`);
+  } else if (nilai <= 89 && nilai >= 80) {
+    alert(`Good`);
+  } else if (nilai <= 79 && nilai >= 60) {
+    alert(`Get it better`);
+  } else if (nilai < 60) {
+    alert(`learn againt`);
+  } else {
+    alert(`Silahkan check kembali angka yang anda masukan`);
+  }
+</script> -->
+
+<script>
+  let nilai = parseInt(prompt('Silahkan masukan nilai anda :'));
+
+  switch (true) {
+    case nilai == 100:
+      alert(`Excellent`);
+      break;
+    case nilai < 100 && nilai >= 90:
+      alert(`Great Job`);
+      break;
+    case nilai <= 89 && nilai >= 80:
+      alert(`Good`);
+      break;
+    case nilai <= 79 && nilai >= 60:
+      alert(`Get it better`);
+      break;
+    case nilai < 60:
+      alert(`Learn again`);
+      break;
+    default:
+      alert(`Silahkan check kembali angka yang anda masukan`);
+  }
+</script>

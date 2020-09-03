@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TicketDotCom</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container-menu">
+      <fieldset id="menu-page">
+        <legend>Menu</legend>
+        <button type="button" onclick="btMenu('login')">Login</button>
+        <button type="button" onclick="btMenu('regis')">Registrasi</button>
+      </fieldset>
+
+      <fieldset id="regis-page">
+        <legend>Register</legend>
+        <form id="formRegister">
+          <input type="text" id="regisName" placeholder="Username" /><br />
+          <input
+            type="email"
+            id="regisEmail"
+            placeholder="Email"
+          /><br />
+          <input
+            type="password"
+            id="regisPass"
+            placeholder="Password"
+          /><br />
+          <button type="button" onclick="btRegis()">Daftar</button>
+        </form>
+      </fieldset>
+
+      <fieldset id="login-page">
+        <legend>Login</legend>
+        <form id="formLogin">
+          <input type="text" id="loginName" placeholder="Username" />
+          <input
+            type="password"
+            id="loginPass"
+            placeholder="Password"
+          />
+          <button type="button" onclick="btLogin()" id='bt-login'>Login</button>
+          <button type="button" onclick="btLogout()" id='bt-logout'>Logout</button>
+        </form>
+      </fieldset>
+
+      <fieldset id="addProduct-page">
+        <legend>Tambah Produk</legend>
+        <form id="dataFormProduct">
+          <input type="date" name="date" id="date" placeholder="" />
+          <input
+            type="text"
+            name="airlineLogo"
+            id="airlineLogo"
+            placeholder="Airline Logo"
+          />
+          <input
+            type="text"
+            name="airlineName"
+            id="airlineName"
+            placeholder="Airline Name"
+          />
+          <input
+            type="text"
+            name="departure"
+            id="departure"
+            placeholder="Departure"
+          />
+          <input
+            type="text"
+            name="arrival"
+            id="arrival"
+            placeholder="Arrival"
+          />
+          <input
+            type="time"
+            name="departureTime"
+            id="departureTime"
+            placeholder="Departure Time"
+          />
+          <input
+            type="time"
+            name="arrivalTime"
+            id="arrivalTime"
+            placeholder="Arrival Time"
+          />
+          <input type="number" name="price" id="price" placeholder="Price" />
+          <input
+            type="number"
+            name="seatAvailable"
+            id="seatAvailable"
+            placeholder="Seat Available"
+          />
+          <button type="button" onclick="btTambah()">Tambah Produk</button>
+        </form>
+      </fieldset>
+      <fieldset id="list-produk">
+        <legend>List Produk</legend>
+        </table>
+        <table>
+          <thead id="filter-content">
+            <th>
+              <input
+                style="display: inline-block"
+                type="number"
+                id="inMinSeat"
+                placeholder="0"
+              />
+              <input
+                style="display: inline-block"
+                type="number"
+                id="inMaxSeat"
+                placeholder="500"
+              />
+              <button type="button" onclick="btSearchSeat()">
+                Search Seat Available
+              </button>
+            </th>
+            <th>
+              <input
+                style="display: inline-block"
+                type="number"
+                id="inMinPrice"
+                placeholder="0"
+              />
+              <input
+                style="display: inline-block"
+                type="number"
+                id="inMaxPrice"
+                placeholder="100.000.000"
+              />
+              <button type="button" onclick="btSearchPrice()">
+                Filter by Price
+              </button>
+            </th>
+            <th>
+              <input type="date" id="cariProduk" onchange="btCariProduk()" />
+              <button type="button" >Cari</button>
+              <button type="button" onclick="btResetProduk()">Reset</button>
+            </th>
+          </thead>
+        </table>
+        <label for="sortBy" style="font-style: 20px; font-weight: bold; letter-spacing: 2px;">Sort By :</label><br>
+        <select id="sortBy" name="sortBy" onclick="btSortBy()">
+          <option value="defaultValue">-</option>
+          <option value="minPrice">Harga Terendah</option>
+          <option value="maxPrice">Harga Tertinggi</option>
+          <option value="departure">Kota Keberangkatan</option>
+          <option value="arrival">Kota Kedatangan</option>
+        </select>
+        <table>
+          <thead>
+            <th>No</th>
+            <th>Airline</th>
+            <th>Date</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+            <th>Seat Available</th>
+            <th>Action</th>
+          </thead>
+          <tbody id="listProduk"></tbody>
+        </table>
+      </fieldset>
+      <fieldset id="cart-page">
+        <legend>Keranjang Belanja</legend>
+        <table>
+          <thead>
+            <th>No</th>
+            <th>Airline</th>
+            <th>Date</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Booking Seat</th>
+            <th>Price</th>
+            <th>Price Total</th>
+            <th>Action</th>
+          </thead>
+          <tbody id="listKeranjang"></tbody>
+        </table>
+        <table id="listCheckout">
+          <thead>
+            
+          </thead>
+        </table>
+      </fieldset>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

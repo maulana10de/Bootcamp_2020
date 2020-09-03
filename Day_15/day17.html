@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrianglePattern</title>
+  </head>
+  <body>
+    <fieldset style="width: 250px">
+      <legend>Triangle Pattern</legend>
+      <input type="number" id="inNumberLooping" /><br /><br />
+      <button type="button" onclick="btTrianglePattern()">Tampil 1</button>
+      <button type="button" onclick="btTrianglePattern2()">Tampil 2</button>
+      <p id="printLooping"></p>
+    </fieldset>
+
+    <script>
+      function btTrianglePattern() {
+        let inNumber = document.getElementById('inNumberLooping').value;
+        let x = '';
+        let arr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        for (let i = 0; i <= inNumber; i++) {
+          for (let j = 0; j <= i; j++) {
+            x += `${arr[j]}&nbsp;`;
+          }
+          x += '<br />';
+        }
+        return (document.getElementById('printLooping').innerHTML = x);
+      }
+
+      function btTrianglePattern2() {
+        let inNumber = document.getElementById('inNumberLooping').value;
+        let x = '';
+        let space = '&nbsp;&nbsp;';
+        let count = 1;
+        for (let i = 1; i <= inNumber; i++) {
+          for (let j = 1; j <= inNumber; j++) {
+            if (j <= inNumber - i) {
+              x += space;
+            } else {
+              x += `${count}`;
+              count++;
+            }
+          }
+          x += `<br />`;
+          count = 1;
+        }
+        return (document.getElementById('printLooping').innerHTML = x);
+      }
+    </script>
+  </body>
+</html>

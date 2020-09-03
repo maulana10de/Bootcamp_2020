@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Generator</title>
+    <style>
+      body {
+        font-size: 14px;
+        letter-spacing: 1px;
+        background-color: #c0c0c0;
+      }
+      #box {
+        width: 350px;
+        margin: 50px auto;
+        border: 1px solid #c3c3c3;
+        border-radius: 7px;
+        background-color: white;
+      }
+
+      #box_input {
+        padding: 5px 10px;
+      }
+      #box_input p {
+        margin: 10px 0;
+      }
+
+      #box_input input {
+        width: 200px;
+        margin-right: 15px;
+        padding: 5px 10px;
+      }
+
+      #box_input button {
+        padding: 5px;
+        width: 80px;
+        letter-spacing: 1px;
+      }
+
+      #box_result {
+        margin: 10px;
+        border: 1px solid #c3c3c3;
+        border-radius: 5px;
+      }
+
+      #box_result ul {
+        padding-left: 25px;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <div id="box_input">
+        <form action="POST">
+          <p>Berapa yang ingin dirender?</p>
+          <input
+            type="number"
+            name="kata"
+            id="kata"
+            placeholder="isi dengan angka"
+          />
+          <button type="button" onclick="random()">Generate</button>
+        </form>
+      </div>
+      <div id="box_result"></div>
+    </div>
+
+    <script>
+      function random() {
+        let rendemNum = document.getElementById('kata').value;
+        const kata = '2#A4$'.split('');
+        let text = '';
+        let arrText = [];
+        let list = '';
+        // validasi inputan
+        rendemNum == '' || rendemNum <= 0
+          ? alert('Tidak boleh kosong atau 0')
+          : false;
+
+        for (let i = 0; i < rendemNum; i++) {
+          kata.map(
+            () => (text += kata[Math.floor(Math.random() * kata.length)])
+          );
+          let cutText = text.substr(i * 5, 5);
+          cutText = arrText.push(cutText);
+        }
+        // membuat list text
+        arrText.map((item, i) => {
+          list += `<ul><li>${item}</li></ul>`;
+        });
+        document.getElementById('box_result').innerHTML = list;
+      }
+    </script>
+  </body>
+</html>

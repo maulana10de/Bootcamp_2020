@@ -1,0 +1,15 @@
+<script>
+  let randomAngka = alert(Math.floor(Math.random() * 10));
+  let hasil = '';
+  for (let i = 1; i <= randomAngka; i++) {
+    for (let j = 1; j <= 5; j++) {
+      if (j % 2 == 0) {
+        hasil += '*';
+      } else {
+        hasil += '#';
+      }
+    }
+    hasil += '<br/>';
+  }
+  document.write(hasil);
+</script>

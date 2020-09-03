@@ -1,0 +1,92 @@
+<script>
+  let game = true;
+  while (game) {
+    let playerA = parseInt(
+      prompt(`silahkan pilih batu kertas atau gunting :
+      1. batu
+      2. kertas
+      3. gunting
+  `)
+    );
+
+    let arr = ['batu', 'kertas', 'gunting'];
+    let randArr = arr[Math.floor(Math.random() * arr.length)];
+    let playerCom = randArr;
+
+    if (playerA == 1) {
+      if (playerCom === 'batu') {
+        alert(` 
+        Kamu : Batu
+        komputer : ${playerCom}
+        -------------------------
+        Draw
+        `);
+      } else if (playerCom === 'gunting') {
+        alert(` 
+        Kamu : Batu
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Menang
+        `);
+      } else if (playerCom === 'kertas') {
+        alert(` 
+        Kamu : Batu
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Kalah
+        `);
+      }
+    } else if (playerA == 2) {
+      if (playerCom === 'kertas') {
+        alert(` 
+        Kamu : Kertas
+        komputer : ${playerCom}
+        -------------------------
+        Draw
+        `);
+      } else if (playerCom === 'batu') {
+        alert(` 
+        Kamu : Kertas
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Menang
+        `);
+      } else if (playerCom === 'gunting') {
+        alert(` 
+        Kamu : Kertas
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Kalah
+        `);
+      }
+    } else if (playerA == 3) {
+      if (playerCom === 'gunting') {
+        alert(` 
+        Kamu : Gunting
+        komputer : ${playerCom}
+        -------------------------
+        Draw
+        `);
+      } else if (playerCom === 'kertas') {
+        alert(` 
+        Kamu : Gunting
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Menang
+        `);
+      } else if (playerCom === 'batu') {
+        alert(` 
+        Kamu : Gunting
+        komputer : ${playerCom}
+        -------------------------
+        Kamu Kalah
+        `);
+      }
+    }
+
+    let confGame = confirm('Mau main lagi');
+    if (!confGame) {
+      game = false;
+    }
+  }
+</script>

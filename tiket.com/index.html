@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiket.com</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- start menu -->
+    <div id="container">
+      <fieldset id="homepage">
+        <legend>Homepage</legend>
+        <button type="button" onclick="btMenu('login')">Login</button>
+        <button type="button" onclick="btMenu('register')">Register</button>
+      </fieldset>
+      <fieldset id="register-page">
+        <legend>Register</legend>
+        <form id="dataFormRegister">
+          <input
+            type="text"
+            name="usernameRegister"
+            id="inUsernameRegister"
+            placeholder="Username"
+          />
+          <input
+            type="email"
+            name="emailRegister"
+            id="inEmailRegister"
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            name="passwordRegister"
+            id="inPasswordRegister"
+            placeholder="Password"
+          />
+          <button type="button" onclick="btRegister()">Register</button>
+        </form>
+      </fieldset>
+      <fieldset id="login-page">
+        <legend>Login</legend>
+        <form id="dataFormLogin">
+          <input
+            type="text"
+            name="usernameLogin"
+            id="inUsernameLogin"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            name="passwordLogin"
+            id="inPasswordLogin"
+            placeholder="Password"
+          />
+          <button type="button" id="login" onclick="btLogin()">Login</button>
+          <button type="button" id="logout" onclick="btLogout()">Logout</button>
+        </form>
+      </fieldset>
+      <!-- Input Product -->
+      <fieldset id="form-product">
+        <legend>Form Tambah Produk</legend>
+        <form id="dataFormProduct">
+          <input type="date" name="date" id="date" placeholder="" />
+          <input
+            type="text"
+            name="airlineLogo"
+            id="airlineLogo"
+            placeholder="Airline Logo"
+          />
+          <input
+            type="text"
+            name="airlineName"
+            id="airlineName"
+            placeholder="Airline Name"
+          />
+          <input
+            type="text"
+            name="departure"
+            id="departure"
+            placeholder="Departure"
+          />
+          <input
+            type="text"
+            name="arrival"
+            id="arrival"
+            placeholder="Arrival"
+          />
+          <input
+            type="time"
+            name="departureTime"
+            id="departureTime"
+            placeholder="Departure Time"
+          />
+          <input
+            type="time"
+            name="arrivalTime"
+            id="arrivalTime"
+            placeholder="Arrival Time"
+          />
+          <input type="number" name="price" id="price" placeholder="Price" />
+          <input
+            type="number"
+            name="seatAvailable"
+            id="seatAvailable"
+            placeholder="Seat Available"
+          />
+          <button type="button" onclick="btSubmitAddProduct()">Submit</button>
+        </form>
+      </fieldset>
+      <fieldset id="list-product">
+        <legend></legend>
+        <table>
+          <tr>
+            <td style="margin: 0px; display: flex; flex-direction: row">
+              <!-- <select name="" id="" style="width: 150px; margin-right: 5px">
+                <option value="">Harga Tertinggi</option>
+              </select> -->
+              <input
+                style="width: 300px"
+                type="date"
+                name="getSearchDate"
+                id="getSearchDate"
+              />
+              <button
+                style="width: 100px; margin-left: 5px"
+                type="button"
+                onclick="btSearchByDate()"
+              >
+                Cari
+              </button>
+            </td>
+          </tr>
+        </table>
+        <table id="tblProductList">
+          <thead>
+            <th>No</th>
+            <th>Airline</th>
+            <th>Date</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+            <th>Seat Available</th>
+            <th>Action</th>
+          </thead>
+          <tbody id="tbListProduct"></tbody>
+        </table>
+        <table>
+          <caption
+            style="
+              font-size: 16px;
+              font-weight: bold;
+              letter-spacing: 2px;
+              text-align: left;
+              margin: 20px 0 5px 0;
+            "
+          >
+            Keranjang Belanja
+          </caption>
+          <thead>
+            <th>No</th>
+            <th>Airline</th>
+            <th>Date</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Booking Seat</th>
+            <th>Price</th>
+            <th>Price Total</th>
+            <th>Action</th>
+          </thead>
+          <tbody id="tbListCart"></tbody>
+        </table>
+      </fieldset>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

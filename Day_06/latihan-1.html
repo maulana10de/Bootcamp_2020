@@ -1,0 +1,26 @@
+<script>
+  let daftarSiswa = [
+    'ade',
+    'alex',
+    'adi',
+    'ado',
+    'angga',
+    'alex',
+    'anda',
+    'ari',
+    'ale',
+    'andre',
+  ];
+
+  let inputSiswa = prompt('Silahkan masukan nama siswa :').toLowerCase();
+
+  let allSiswa = [];
+  for (let i = 0; i < daftarSiswa.length; i++) {
+    if (daftarSiswa[i] === inputSiswa) {
+      alert(`${daftarSiswa[i]} absen ke ${i + 1}`);
+    }
+    allSiswa += `${daftarSiswa[i]} absen ke-${i + 1} \n`;
+  }
+
+  alert(`${allSiswa}`);
+</script>

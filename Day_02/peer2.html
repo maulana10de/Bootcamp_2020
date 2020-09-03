@@ -1,0 +1,17 @@
+<script>
+  let date = new Date();
+  let tanggal = date.getDate();
+  let bulan = date.getMonth() + 1;
+  let tahun = date.getFullYear();
+
+  let today = `Hari ini tanggal : ${tanggal} - ${bulan} - ${tahun}`;
+  tanggal += 1;
+  let tomorrow = `Besok tanggal : ${tanggal} - ${bulan} - ${tahun}`;
+  tanggal -= 2;
+  let yesterday = `Kemarin tanggal : ${tanggal} - ${bulan} - ${tahun}`;
+
+  alert(`
+  ${today}
+  ${tomorrow}
+  ${yesterday}`);
+</script>
