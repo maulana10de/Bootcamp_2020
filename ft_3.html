@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="number"
+      id="inCount"
+      onchange="getResult()"
+      placeholder="Masukan jumlah yang ingin dirender"
+    />
+
+    <p id="result"></p>
+
+    <script>
+      getResult = () => {
+        let arr = document.getElementById('inCount').value;
+        let elem = '';
+        for (let i = 1; i <= arr; i++) {
+          for (let j = 1; j <= arr; j++) {
+            elem += '*' + ' ';
+          }
+          i < arr ? (elem += '<br/>') : null;
+        }
+        document.getElementById('result').innerHTML = elem;
+      };
+    </script>
+  </body>
+</html>

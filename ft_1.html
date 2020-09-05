@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="result"></p>
+    <script>
+      checkEven = (num) => {
+        for (let i = 1; i <= num; i++) {
+          if (num % 2 != 0) {
+            return 1;
+          }
+        }
+      };
+      // Looping bilangan Ganjil
+      let rows = 4;
+      let count = 1;
+      let elem = '';
+      for (let i = 1; i <= rows; i++) {
+        for (let j = 1; j <= i; j++) {
+          while (!checkEven(count)) {
+            count++;
+          }
+          elem += ` ${count} `;
+          count++;
+        }
+        elem += `<br />`;
+      }
+
+      document.getElementById('result').innerHTML = elem;
+    </script>
+  </body>
+</html>
