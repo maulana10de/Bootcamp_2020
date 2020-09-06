@@ -488,10 +488,13 @@ btEditCart = (i) => {
 btBayar = () => {
   while (true) {
     let bayar = parseInt(prompt('Silahkan bayar:')) - totalBayar;
+
     if (bayar < 0) {
       alert('Maaf uang anda kurang');
     } else {
-      alert(`Kembalian anda Rp${bayar.toLocaleString()}\nTerima kasih`);
+      alert(`
+      Hallo ${dbUser[userLogin].keranjang[userLogin].nama},
+      Kembalian anda Rp${bayar.toLocaleString()}\nTerima kasih`);
       dbUser[userLogin].keranjang = [];
       totalBayar = 0;
       printAddToCart();
