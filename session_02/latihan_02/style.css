@@ -1,0 +1,92 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+}
+
+#container {
+  width: 595px;
+  height: 98vh;
+  margin: auto;
+  background-color: #d5d4d0;
+  display: flex;
+  color: black;
+}
+
+.left,
+.right {
+  height: 100%;
+}
+
+.left {
+  width: 45%;
+}
+
+.right {
+  width: 75%;
+}
+
+.header-left {
+  height: 25%;
+  background-color: #e5e3e6;
+  padding-top: 60px;
+  box-sizing: border-box;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.header-right {
+  height: 25%;
+  background-color: #353336;
+}
+
+.header-right > h3 {
+  margin-top: 20%;
+  display: inline-block;
+  margin: 0;
+}
+
+.image {
+  height: 35%;
+  background-image: url('./images/avatar1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.main-content {
+  height: 65%;
+  background-color: #e5e3e6;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.main-content > h4 {
+  margin: 0;
+  color: azure;
+  background-color: #353336;
+  padding: 10px;
+  width: 90px;
+}
+
+.bottom-left {
+  height: 40%;
+  background-color: #e5e3e6;
+}
+
+.bottom-right {
+  height: 10%;
+  background-color: #353336;
+}
+
+#name {
+  color: azure;
+  margin-left: 10px;
+  padding: 20px;
+}
+
+#job {
+  float: right;
+  background-color: #ca9625;
+  font-size: 14px;
+  padding: 20px;
+  font-style: italic;
+}

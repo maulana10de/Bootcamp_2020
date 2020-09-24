@@ -1,0 +1,32 @@
+.container {
+  width: 50vw;
+  height: 30vh;
+  background-color: darkgray;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.box1,
+.box2,
+.box3,
+.box4 {
+  width: 10%;
+  height: 10%;
+}
+
+.box1 {
+  background-color: red;
+}
+
+.box2 {
+  background-color: blue;
+}
+
+.box3 {
+  background-color: green;
+}
+
+.box4 {
+  background-color: yellow;
+}

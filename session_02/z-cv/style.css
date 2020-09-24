@@ -1,0 +1,353 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* start style */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+#container {
+  width: 800px;
+  background-color: #e5e4e9;
+  margin: 10px auto;
+}
+header {
+  width: 100%;
+  display: flex;
+}
+
+.header-left {
+  width: 35%;
+  background-color: #e5e4e9;
+  display: flex;
+  padding: 50px 0 50px 20px;
+  box-sizing: border-box;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.header-left ul li {
+  padding: 3px;
+}
+
+.header-left .title {
+  border-right: 3px solid yellow;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.header-right {
+  width: 65%;
+  background-color: #363437;
+  color: azure;
+  letter-spacing: 2px;
+}
+
+.header-right ul {
+  display: flex;
+  justify-content: center;
+  margin-top: 12%;
+}
+
+.header-right ul li {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.header-right ul li:nth-of-type(2) {
+  background-color: #ce9823;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* main */
+
+main {
+  width: 100%;
+  display: flex;
+}
+
+section {
+  width: 35%;
+}
+
+section img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+section .description {
+  margin: 30px;
+  box-sizing: border-box;
+}
+
+.description p {
+  text-align: justify;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+aside {
+  box-sizing: border-box;
+  width: 65%;
+  padding: 30px 10px 0 30px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+aside h3 {
+  padding: 10px;
+  background-color: black;
+  width: 150px;
+  color: azure;
+  margin-bottom: 20px;
+}
+
+aside .content-education p:first-child {
+  color: rgb(107, 99, 99);
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+aside .content-education p:nth-of-type(2) {
+  color: rgb(107, 99, 99);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+aside .content-education p:nth-of-type(3) {
+  color: rgb(107, 99, 99);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+aside .content-experience p:first-child {
+  color: rgb(107, 99, 99);
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+aside .content-experience p:nth-of-type(2) {
+  color: rgb(107, 99, 99);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+aside .content-experience p:nth-of-type(3) {
+  color: rgb(107, 99, 99);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* footer style */
+footer {
+  width: 100%;
+  display: flex;
+}
+
+.footer-left {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+
+.footer-left ul li {
+  font-size: 12px;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+.footer-left .sosmed-name ul li {
+  margin: 3px 0 10px 0;
+}
+
+.footer-left ul li i {
+  background-color: yellow;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.footer-left .sosmed-icon {
+  margin-right: 10px;
+}
+
+.footer-right {
+  width: 65%;
+  background-color: #363437;
+  box-sizing: border-box;
+  padding: 50px;
+}
+.footer-right h3 {
+  color: azure;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: -30px 0 15px 0;
+}
+
+.footer-right ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-right ul li {
+  color: rgb(175, 166, 166);
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.footer-right .title-skill ul li {
+  color: rgb(175, 166, 166);
+  font-size: 12px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.footer-right .icon-skill p {
+  padding: 7px;
+  border-radius: 50%;
+  border: 3px solid azure;
+  font-weight: bold;
+}
+
+.footer-right .icon-skill ul li {
+  padding: 7px;
+  border-radius: 50%;
+  border: 3px solid azure;
+  font-weight: bold;
+}

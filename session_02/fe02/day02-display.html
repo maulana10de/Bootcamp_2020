@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS - Layout & Position</title>
+    <style>
+      /* membuat variabel di css */
+      :root {
+        --merah: red;
+        --biru: blue;
+        --lebar: 400px;
+      }
+
+      /* tag selector */
+      h1 {
+        color: var(--merah);
+        background-color: var(--biru);
+      }
+
+      div {
+        width: var(--lebar);
+      }
+
+      /* child selector */
+      div > p {
+        background-color: coral;
+      }
+      div > p > span {
+        color: yellow;
+      }
+
+      /* descendant selector */
+      body h2 {
+        color: brown;
+      }
+
+      /* pseudo class */
+      div > p > span:hover {
+        color: cornflowerblue;
+      }
+
+      input:focus {
+        background-color: blue;
+      }
+      input:active {
+        background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Selamat datang!!</h1>
+      <h2>Dikelas FrontEnd</h2>
+    </div>
+    <div>
+      <h2>Dikelas FrontEnd</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus quia
+        culpa pariatur rerum numquam obcaecati ab porro id veniam fugiat
+        voluptatibus quae, doloribus dolorem voluptates dicta laborum delectus
+        vitae libero ullam in consequuntur at assumenda amet quos! Sapiente,
+        dolorum quos? In, quibusdam exercitationem dolorem possimus at placeat
+        cupiditate, ad nostrum beatae, <span>sunt eos nobis magni</span>.
+        Voluptate ratione mollitia commodi ipsam accusantium soluta vitae sit
+        praesentium architecto nisi aliquam, quis unde repudiandae sed nam
+        explicabo iusto alias! Omnis hic, expedita minus quia necessitatibus
+        magnam itaque possimus delectus perspiciatis quis placeat aspernatur
+        provident? Accusamus repellat pariatur deleniti. Sunt iusto cupiditate
+        consequatur illo.
+      </p>
+      <input type="text" placeholder="input data" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nama</th>
+          <th>TTL</th>
+          <th>Alamat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th rowspan="3">Data</th>
+          <td style="color: red">Galih</td>
+          <td style="color: blue">Jepara, 25 Jan 1992</td>
+          <td style="color: green">Soditan 02 VI Karmat Jati</td>
+        </tr>
+        <tr>
+          <td style="color: red">Ratna</td>
+          <td style="color: blue">Bandung, 4 April 1994</td>
+          <td style="color: green">SGeger kalong No 45</td>
+        </tr>
+        <tr>
+          <td style="background-color: white; text-align: center" colspan="3">
+            Data Biodata
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

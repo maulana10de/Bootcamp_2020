@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.navbar {
+  background-color: #e3f2fd;
+  height: 10vh;
+  display: flex;
+}
+
+.navbar > ul {
+  display: flex;
+  padding: 10px;
+  width: 50%;
+  justify-content: space-evenly;
+  flex: 1;
+}
+
+.navbar a {
+  color: #5e6368;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.navbar a:hover {
+  color: #343a40;
+}
+
+.navbar > ul li {
+  padding: 10px;
+}
+
+.right-navbar {
+  background-color: yellow;
+  width: 50%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right-navbar > button,
+input {
+  height: 50%;
+  border: none;
+  padding: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.right-navbar > button {
+  cursor: pointer;
+}
+
+.right-navbar > button:hover {
+  color: yellow;
+}
+
+.container1 {
+  height: 80vh;
+  background-color: grey;
+  margin: auto;
+  display: flex;
+}
+
+p {
+  text-align: justify;
+}
+
+.side-navigation {
+  padding: 30px;
+  flex: 1;
+  order: 2;
+}
+
+.main {
+  flex: 4;
+  padding: 20px;
+  order: 1;
+  overflow: auto;
+}
+
+/* container 2 */
+.container2 {
+  width: 75vw;
+  margin: 10px auto;
+}
+
+.card-1,
+.card-2,
+.card-3,
+.card-4 {
+  padding: 10px;
+}
+
+.card-1 {
+  background-color: blueviolet;
+}
+
+.card-2 {
+  background-color: blue;
+}
+
+.card-3 {
+  background-color: red;
+}
+
+.card-4 {
+  background-color: yellow;
+}
+
+/* media query */
+
+@media only screen and (min-width: 750px) {
+  .container2 {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .card-1,
+  .card-2,
+  .card-3,
+  .card-4 {
+    width: 20%;
+  }
+}

@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.img-1 {
+  background-image: url('https://images.unsplash.com/photo-1599388088656-14ba1c97933d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: 50% 50%;
+}
+
+.img-2 {
+  background-image: url('https://autonetmagz.com/wp-content/uploads/2019/11/harga-toyota-raize-860x474.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: 50% 50%;
+}
+.img-3 {
+  background-image: url('https://images.unsplash.com/photo-1598858064884-57a638e5f9c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: 50% 50%;
+}
