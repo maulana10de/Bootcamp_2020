@@ -27,10 +27,6 @@ class Home extends React.Component {
     this.getNews();
   }
 
-  // componentDidUpdate() {
-  //   this.getNews();
-  // }
-
   getNews = () => {
     Axios.get(
       API_URL +

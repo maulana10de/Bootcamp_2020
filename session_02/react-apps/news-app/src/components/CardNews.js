@@ -16,7 +16,7 @@ class CardNews extends React.Component {
               <div className='col-12 col-md-8'>
                 <div className='card-body'>
                   <h4 className='card-title font-weight-bold'>
-                    {this.props.kategori}
+                    {this.props.kategori.toUpperCase()}
                   </h4>
                   {this.props.berita[0] ? (
                     <div>
@@ -64,7 +64,7 @@ class CardNews extends React.Component {
               <div className='col-12 col-md-8'>
                 <div className='card-body'>
                   <h4 className='card-title font-weight-bold'>
-                    {this.props.kategori}
+                    {this.props.kategori.toUpperCase()}
                   </h4>
                   {this.props.berita[1] ? (
                     <div>

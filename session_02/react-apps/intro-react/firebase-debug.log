@@ -1,0 +1,50 @@
+[debug] [2020-09-24T04:49:02.316Z] ----------------------------------------------------------------------
+[debug] [2020-09-24T04:49:02.318Z] Command:       /home/maulana/.nvm/versions/node/v12.13.1/bin/node /home/maulana/.nvm/versions/node/v12.13.1/bin/firebase init
+[debug] [2020-09-24T04:49:02.319Z] CLI Version:   8.11.0
+[debug] [2020-09-24T04:49:02.319Z] Platform:      linux
+[debug] [2020-09-24T04:49:02.319Z] Node Version:  v12.13.1
+[debug] [2020-09-24T04:49:02.319Z] Time:          Thu Sep 24 2020 11:49:02 GMT+0700 (Western Indonesia Time)
+[debug] [2020-09-24T04:49:02.320Z] ----------------------------------------------------------------------
+[debug] [2020-09-24T04:49:02.320Z] 
+[debug] [2020-09-24T04:49:02.325Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-24T04:49:02.325Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/maulana/Bootcamp_2020/session_02/react-apps/intro-react
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2020-09-24T04:49:25.679Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects  
+ {"projectId":"intro-reactjs","name":"y"}
+[debug] [2020-09-24T04:49:27.283Z] <<< HTTP RESPONSE 400 {"vary":"X-Origin, Referer, Origin,Accept-Encoding","content-type":"application/json; charset=UTF-8","date":"Thu, 24 Sep 2020 04:49:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=952","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-24T04:49:27.284Z] <<< HTTP RESPONSE BODY {"error":{"code":400,"message":"field [display_name] has issue [project display name must be at least 4 characters]","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"display_name","description":"project display name must be at least 4 characters"}]},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"url":"https://cloud.google.com/resource-manager/reference/rest/v1/projects"}]}]}}
+[debug] [2020-09-24T04:49:28.099Z] FirebaseError: HTTP Error: 400, field [display_name] has issue [project display name must be at least 4 characters]
+    at module.exports (/home/maulana/.nvm/versions/node/v12.13.1/lib/node_modules/firebase-tools/lib/responseToError.js:38:12)
+    at Request._callback (/home/maulana/.nvm/versions/node/v12.13.1/lib/node_modules/firebase-tools/lib/api.js:41:35)
+    at Request.self.callback (/home/maulana/.nvm/versions/node/v12.13.1/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:475:20)
+    at Request.<anonymous> (/home/maulana/.nvm/versions/node/v12.13.1/lib/node_modules/firebase-tools/node_modules/request/request.js:1154:10)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:475:20)
+    at IncomingMessage.<anonymous> (/home/maulana/.nvm/versions/node/v12.13.1/lib/node_modules/firebase-tools/node_modules/request/request.js:1076:12)
+    at Object.onceWrapper (events.js:299:28)
+    at IncomingMessage.emit (events.js:215:7)
+    at IncomingMessage.EventEmitter.emit (domain.js:475:20)
+    at endReadableNT (_stream_readable.js:1184:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
