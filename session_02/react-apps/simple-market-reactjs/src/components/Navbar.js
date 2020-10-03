@@ -129,13 +129,28 @@ class NavbarCom extends React.Component {
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem>
-                        <Link to='product-admin'>Products Management</Link>
+                        <Link
+                          to='product-admin'
+                          style={{ textDecoration: 'none', color: '#16181B' }}
+                        >
+                          Products Management
+                        </Link>
                       </DropdownItem>
                       <DropdownItem>
-                        <Link to=''>Transaction Management</Link>
+                        <Link
+                          to=''
+                          style={{ textDecoration: 'none', color: '#16181B' }}
+                        >
+                          Transaction Management
+                        </Link>
                       </DropdownItem>
                       <DropdownItem>
-                        <Link to=''>Slide Management</Link>
+                        <Link
+                          to='/slide-admin'
+                          style={{ textDecoration: 'none', color: '#16181B' }}
+                        >
+                          Slide Management
+                        </Link>
                       </DropdownItem>
                       <DropdownItem onClick={this.btLogout}>
                         Logout

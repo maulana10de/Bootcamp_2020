@@ -10,7 +10,6 @@ import {
   ModalFooter,
   ModalHeader,
   Input,
-  CustomInput,
 } from 'reactstrap';
 import swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
@@ -94,9 +93,6 @@ class AddProduct extends React.Component {
           console.log('error user register:', err);
         });
     }
-
-    // console.table(stock);
-    // console.table(images);
   };
 
   renderInputStock = () => {
@@ -146,6 +142,7 @@ class AddProduct extends React.Component {
                   {this.state.listGambar.map((item, index) => {
                     return (
                       <Input
+                        key={index}
                         style={{ width: '30%' }}
                         type='text'
                         innerRef={(value) => (this[item] = value)}
@@ -215,7 +212,9 @@ class AddProduct extends React.Component {
                 <Label>Price</Label>
                 <Input
                   type='number'
-                  onChange={(e) => this.handleChange('price', e.target.value)}
+                  onChange={(e) =>
+                    this.handleChange('price', parseInt(e.target.value))
+                  }
                 />
               </FormGroup>
             </Form>

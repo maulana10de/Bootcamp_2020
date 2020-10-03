@@ -308,7 +308,7 @@
       "category": "Clothing",
       "colour": "White",
       "description": "Sporty style from the archives inspires this iconic track jacket. A stand-up collar and the signature sheen of tricot give it a retro vibe. Made for relaxing between sessions, the full-zip jacket has a recycled polyester build.",
-      "price": "500000",
+      "price": 500000,
       "stock": [
         {
           "code": "S",
@@ -338,112 +338,7 @@
         "https://assets.adidas.com/images/w_85,h_85,f_auto,q_auto:sensitive,fl_lossy/a8e9497972714ba5917ea93800f2142b_9366/essentials-3-stripes-tricot-track-jacket.jpg",
         "https://assets.adidas.com/images/w_85,h_85,f_auto,q_auto:sensitive,fl_lossy/a8e9497972714ba5917ea93800f2142b_9366/essentials-3-stripes-tricot-track-jacket.jpg"
       ],
-      "id": 9
-    },
-    {
-      "name": "adsada",
-      "brand": "adas",
-      "category": "Clothing",
-      "colour": "dasda",
-      "description": "dasda",
-      "price": "324234",
-      "stock": [
-        {
-          "code": "S",
-          "total": 2
-        },
-        {
-          "code": "M",
-          "total": 0
-        },
-        {
-          "code": "L",
-          "total": 0
-        },
-        {
-          "code": "XL",
-          "total": 0
-        },
-        {
-          "code": "XXL",
-          "total": 0
-        }
-      ],
-      "images": [
-        "dasdas",
-        "dasda"
-      ],
-      "id": 10
-    },
-    {
-      "name": "asd",
-      "brand": "das",
-      "category": "Clothing",
-      "colour": "ads",
-      "description": "das",
-      "price": "333",
-      "stock": [
-        {
-          "code": "S",
-          "total": 3
-        },
-        {
-          "code": "M",
-          "total": 0
-        },
-        {
-          "code": "L",
-          "total": 0
-        },
-        {
-          "code": "XL",
-          "total": 0
-        },
-        {
-          "code": "XXL",
-          "total": 0
-        }
-      ],
-      "images": [
-        "asd",
-        "das"
-      ],
-      "id": 11
-    },
-    {
-      "name": "dasda",
-      "brand": "dasada",
-      "category": "Clothing",
-      "colour": "dadsad",
-      "description": "dasdas",
-      "price": "444",
-      "stock": [
-        {
-          "code": "S",
-          "total": 4
-        },
-        {
-          "code": "M",
-          "total": 5
-        },
-        {
-          "code": "L",
-          "total": 5
-        },
-        {
-          "code": "XL",
-          "total": 0
-        },
-        {
-          "code": "XXL",
-          "total": 0
-        }
-      ],
-      "images": [
-        "dasda",
-        "dasda"
-      ],
-      "id": 12
+      "id": 7
     }
   ]
 }

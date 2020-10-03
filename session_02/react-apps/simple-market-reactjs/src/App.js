@@ -12,6 +12,7 @@ import ProductPage from './pages/product';
 import ProductDetail from './pages/productDetail';
 import ProductManagement from './pages/productManagement';
 import RegisterPage from './pages/register';
+import SlideManagement from './pages/slideManagement';
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +58,10 @@ class App extends React.Component {
           <Route path='/about' component={AboutPage} />
 
           {dataUser.role && dataUser.role === 'admin' ? (
-            <Route path='/product-admin' component={ProductManagement} />
+            <>
+              <Route path='/product-admin' component={ProductManagement} />
+              <Route path='/slide-admin' component={SlideManagement} />
+            </>
           ) : null}
 
           <Route path='*' component={Notfound} />

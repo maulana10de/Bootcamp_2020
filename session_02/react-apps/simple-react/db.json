@@ -1,19 +1,12 @@
 {
-  "posts": [
+  "staff": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "Ade m",
+      "phone": "081287928317",
+      "email": "maulana@gmail.com",
+      "password": "ade123",
+      "position": "Senior Programmer",
+      "id": 1
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

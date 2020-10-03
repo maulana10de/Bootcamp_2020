@@ -30,6 +30,15 @@ class ProductManagement extends React.Component {
       });
   };
 
+  btDelete = (id) => {
+    console.log('GET ID DELETE:', id);
+    Axios.delete(API_URL + `/products/${id}`)
+      .then((res) => this.getProduct())
+      .catch((err) => {
+        console.log('ERR FROM DELETE:', err);
+      });
+  };
+
   renderProduct = () => {
     return this.state.dbProducts.map((item, index) => {
       return (
@@ -54,10 +63,13 @@ class ProductManagement extends React.Component {
                   selectedIdx: index,
                 })
               }
+              style={{ marginBottom: '5px', padding: '7px 20px' }}
             >
               Edit
             </Button>
-            <Button>Delete</Button>
+            <Button color='danger' onClick={() => this.btDelete(item.id)}>
+              Delete
+            </Button>
           </td>
         </tr>
       );
@@ -67,7 +79,10 @@ class ProductManagement extends React.Component {
   renderStock = (stock) => {
     return stock.map((item, index) => {
       return (
-        <Badge key={index}>
+        <Badge
+          key={index}
+          style={{ fontSize: '14px', width: '5vw', marginBottom: '2px' }}
+        >
           {item.code} = Stock : {item.total}
         </Badge>
       );
@@ -99,6 +114,7 @@ class ProductManagement extends React.Component {
         </Table>
         {this.state.selectedIdx !== null && (
           <EditProduct
+            getProduct={this.getProduct}
             editOpen={this.state.editOpen}
             editClose={() =>
               this.setState({
