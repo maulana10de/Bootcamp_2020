@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 import {
   Modal,
   ModalBody,
@@ -12,8 +11,9 @@ import {
   Label,
   Alert,
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import { login, Login } from '../redux/actions';
 
-const API_URL = 'http://localhost:3004';
 class ModalLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -46,34 +46,34 @@ class ModalLogin extends React.Component {
         isOpenTrigger: !this.state.isOpenTrigger,
       });
     } else {
-      let url =
-        username.includes('@') || username.includes('.')
-          ? `?email=${username}`
-          : `?username=${username}`;
-      Axios.get(API_URL + `/users` + url + `&password=${password}`)
-        .then((res) => {
-          console.log('username in axios get', res.data.length);
-          if (res.data.length === 0) {
-            this.setState({
-              message: 'Your username or password is wrong',
-              color: 'danger',
-              isOpenTrigger: !this.state.isOpenTrigger,
-              success: false,
-            });
-          } else {
-            localStorage.setItem('id', res.data[0].id);
-            this.setState({
-              message: 'Your login has been successful',
-              color: 'success',
-              isOpenTrigger: !this.state.isOpenTrigger,
-              success: true,
-            });
-            this.props.keep();
-          }
-        })
-        .catch((err) => {
-          console.log('error user login:', err);
-        });
+      let query =
+        username.includes('@') || username.includes('.') ? `email` : `username`;
+      this.props.Login(query, username, password);
+      // Axios.get(API_URL + `/users` + url + `&password=${password}`)
+      //   .then((res) => {
+      //     console.log('username in axios get', res.data.length);
+      //     if (res.data.length === 0) {
+      //       this.setState({
+      //         message: 'Your username or password is wrong',
+      //         color: 'danger',
+      //         isOpenTrigger: !this.state.isOpenTrigger,
+      //         success: false,
+      //       });
+      //     } else {
+      //       localStorage.setItem('id', res.data[0].id);
+      //       this.props.login(res.data[0]);
+      //       this.setState({
+      //         message: 'Your login has been successful',
+      //         color: 'success',
+      //         isOpenTrigger: !this.state.isOpenTrigger,
+      //         success: true,
+      //       });
+      //       // this.props.keep();
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log('error user login:', err);
+      //   });
     }
   };
 
@@ -151,4 +151,4 @@ class ModalLogin extends React.Component {
   }
 }
 
-export default ModalLogin;
+export default connect(null, { login, Login })(ModalLogin);

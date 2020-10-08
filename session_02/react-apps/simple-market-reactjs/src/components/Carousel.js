@@ -39,7 +39,7 @@ export default ({ carousel }) => {
           alt={`slide-${idx}`}
           style={{ maxWidth: '100%', height: 'auto' }}
         />
-        <CarouselCaption captionHeader={item.title} />
+        <CarouselCaption captionText='' captionHeader={item.title} />
       </CarouselItem>
     );
   });

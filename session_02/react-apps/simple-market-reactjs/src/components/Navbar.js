@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Collapse,
@@ -16,7 +17,7 @@ import {
 
 import logo from '../assets/img/logo.png';
 import ModalLogin from './ModalLogin';
-import './Navbar.css';
+import { logout } from '../redux/actions';
 
 class NavbarCom extends React.Component {
   constructor(props) {
@@ -29,12 +30,12 @@ class NavbarCom extends React.Component {
 
   btLogout = () => {
     localStorage.removeItem('id');
-    this.props.keep();
-    this.props.state();
+    this.props.logout();
   };
 
   render() {
-    let { user, keep } = this.props;
+    let { user } = this.props;
+
     return (
       <Navbar
         color='faded'
@@ -45,7 +46,7 @@ class NavbarCom extends React.Component {
       >
         <NavbarBrand>
           <Link to='/' className='nav-link'>
-            <img src={logo} width='80px' />
+            <img src={logo} width='80px' alt='logo' />
           </Link>
         </NavbarBrand>
         <NavbarToggler
@@ -104,6 +105,22 @@ class NavbarCom extends React.Component {
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem>Profile</DropdownItem>
+                      <DropdownItem>
+                        <Link
+                          to='/cart'
+                          style={{ textDecoration: 'none', color: '#16181B' }}
+                        >
+                          Cart
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link
+                          to='/transaction'
+                          style={{ textDecoration: 'none', color: '#16181B' }}
+                        >
+                          Transaction
+                        </Link>
+                      </DropdownItem>
                       <DropdownItem onClick={this.btLogout}>
                         Logout
                       </DropdownItem>
@@ -138,7 +155,7 @@ class NavbarCom extends React.Component {
                       </DropdownItem>
                       <DropdownItem>
                         <Link
-                          to=''
+                          to='/transaction-admin'
                           style={{ textDecoration: 'none', color: '#16181B' }}
                         >
                           Transaction Management
@@ -152,6 +169,7 @@ class NavbarCom extends React.Component {
                           Slide Management
                         </Link>
                       </DropdownItem>
+
                       <DropdownItem onClick={this.btLogout}>
                         Logout
                       </DropdownItem>
@@ -160,7 +178,7 @@ class NavbarCom extends React.Component {
                 )
               ) : (
                 <>
-                  <ModalLogin keep={keep} />
+                  <ModalLogin />
                   <Button
                     color='secondary'
                     style={{
@@ -190,4 +208,4 @@ class NavbarCom extends React.Component {
   }
 }
 
-export default NavbarCom;
+export default connect(null, { logout })(NavbarCom);

@@ -1,8 +1,9 @@
 import Axios from 'axios';
 import React from 'react';
-import { Button, ButtonGroup, Jumbotron } from 'reactstrap';
+import { Button, ButtonGroup, Input, Jumbotron } from 'reactstrap';
 import { API_URL } from '../assets/path/urls';
-// import '../App.css';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -11,6 +12,9 @@ class ProductDetail extends React.Component {
       detail: {},
       thumbnail: 0,
       total: 0,
+      qty: 0,
+      disabled: false,
+      totalHarga: 0,
     };
   }
 
@@ -34,11 +38,12 @@ class ProductDetail extends React.Component {
     return images.map((item, index) => {
       return (
         <div
+          key={index}
           className='flex-grow-1 select-image'
           onClick={() => this.setState({ thumbnail: index })}
           style={{ padding: '0 1px' }}
         >
-          <img src={item} key={index} width='100%' />
+          <img src={item} width='100%' alt={item.title} />
         </div>
       );
     });
@@ -53,7 +58,7 @@ class ProductDetail extends React.Component {
           }}
           disabled={item.total === 0 && true}
           key={index}
-          onClick={() => this.setState({ total: item.total })}
+          onClick={() => this.setState({ total: item.total, size: item.code })}
         >
           {item.code}
         </Button>
@@ -61,8 +66,51 @@ class ProductDetail extends React.Component {
     });
   };
 
+  btIncrement = () => {
+    if (this.state.qty < this.state.total) {
+      this.setState({
+        qty: (this.state.qty += 1),
+        totalHarga: this.state.qty * this.state.detail.price,
+      });
+    } else {
+      alert('out of stock');
+    }
+  };
+
+  btAddToCart = () => {
+    console.log(
+      '=> ADD TO CART :',
+      this.state.detail.id,
+      this.state.detail.price,
+      this.state.qty
+    );
+    let id = localStorage.getItem('id');
+
+    this.props.cart.push({
+      idproduct: this.state.detail.id,
+      image: this.state.detail.images[0],
+      name: this.state.detail.name,
+      category: this.state.detail.category,
+      size: this.state.size,
+      price: this.state.detail.price,
+      qty: this.state.qty,
+      total: this.state.qty * this.state.detail.price,
+    });
+    Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ redirect: true });
+      })
+      .catch((err) => console.log('ERROR ADD TO CART :', err));
+  };
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect to='/cart' />;
+    }
+
     let { detail, thumbnail } = this.state;
+    console.log('GET DETAIL PRODUCT :', detail);
     return (
       <div className='container'>
         {detail.id && (
@@ -71,7 +119,7 @@ class ProductDetail extends React.Component {
             style={{ borderRadius: 0, backgroundColor: '#fff' }}
           >
             <div className='col-12 col-md-5 pr-3 border-right'>
-              <img src={detail.images[thumbnail]} width='100%' />
+              <img src={detail.images[thumbnail]} width='100%' alt='images' />
               <div className='d-flex mt-1'>
                 {this.renderThumbnail(detail.images)}
               </div>
@@ -144,6 +192,45 @@ class ProductDetail extends React.Component {
                     Stock : {this.state.total}
                   </p>
                 </div>
+                <div className='d-flex justify-content-center m-1'>
+                  <Button
+                    onClick={() =>
+                      this.setState({
+                        qty: this.state.qty > 0 ? (this.state.qty -= 1) : 0,
+                        totalHarga: this.state.qty * this.state.detail.price,
+                      })
+                    }
+                  >
+                    -
+                  </Button>
+                  <Input
+                    value={this.state.qty}
+                    style={{ width: '4vw' }}
+                    className='text-center m-1'
+                  />
+                  <Button onClick={this.btIncrement}>+</Button>
+                </div>
+                <div className='row'>
+                  <div className='col-md-6'>
+                    <h3
+                      style={{
+                        fontSize: '28px',
+                        letterSpacing: '1.5px',
+                        fontWeight: 700,
+                      }}
+                    >
+                      Rp. {this.state.totalHarga.toLocaleString()}
+                    </h3>
+                  </div>
+                  <div className='col-md-6'>
+                    <Button
+                      style={{ float: 'right', width: '8vw' }}
+                      onClick={this.btAddToCart}
+                    >
+                      Add to Cart
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </Jumbotron>
@@ -153,6 +240,12 @@ class ProductDetail extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  console.log('CHECK DATA :', state.authReducer);
+  return {
+    cart: state.authReducer.cart,
+  };
+};
 // nama, harga, kategori, warna, brand dan deskripsi
 
-export default ProductDetail;
+export default connect(mapStateToProps)(ProductDetail);

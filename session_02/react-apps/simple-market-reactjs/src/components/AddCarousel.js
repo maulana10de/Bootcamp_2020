@@ -48,7 +48,7 @@ class AddCarousel extends React.Component {
             title: 'Congratulations',
             text: 'Your submit form has been successful',
           });
-          this.props.getCarousel();
+          this.props.getSlide();
           this.setState({ modalOpen: false });
         })
         .catch((err) => console.log('ERR SUBMIT CAROUSEL :', err));

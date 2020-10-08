@@ -18,9 +18,9 @@ class EditCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: props.data.id,
       title: props.data.title,
       image: props.data.image,
-      closeModal: !this.props.editOpen,
     };
   }
 
@@ -28,20 +28,21 @@ class EditCarousel extends React.Component {
     this.setState({ [property]: value });
   };
 
-  btSave = (id) => {
-    let { title, image } = this.state;
+  btSave = () => {
+    let { title, image, id } = this.state;
     console.log('GET SAVE DATA CAROUSEL', title);
     console.log('GET SAVE DATA CAROUSEL', image);
 
-    Axios.put(API_URL + `/carousels/${id}`, { title, image })
+    Axios.patch(API_URL + `/carousels/${id}`, { title, image })
       .then((res) => {
         Swal.fire({
           icon: 'success',
           title: 'Congratulations',
           text: 'Your Update form has been successful',
         });
-        this.props.getCarousel();
-        this.setState({ closeModal: !this.state.closeModal });
+        this.props.getSlide();
+        this.props.editClose();
+        // this.setState({ closeModal: !this.state.closeModal });
         console.log('close modal status :', this.state.closeModal);
       })
       .catch((err) => console.log('ERROR SAVE CAROUSEL :', err));
@@ -51,9 +52,7 @@ class EditCarousel extends React.Component {
     let { title, image } = this.state;
     return (
       <div>
-        <Modal
-          isOpen={this.props.editOpen !== this.state.closeModal ? true : false}
-        >
+        <Modal isOpen={this.props.editOpen}>
           <ModalHeader>Edit Carousel</ModalHeader>
           <ModalBody>
             <Form>
@@ -76,9 +75,7 @@ class EditCarousel extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => this.btSave(this.props.data.id)}>
-              Save
-            </Button>
+            <Button onClick={this.btSave}>Save</Button>
             <Button onClick={this.props.editClose}>Cancel</Button>
           </ModalFooter>
         </Modal>

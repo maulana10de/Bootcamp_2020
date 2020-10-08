@@ -152,6 +152,7 @@ class RegisterPage extends React.Component {
               email,
               phone,
               password,
+              cart: [],
               role: 'user',
             })
               .then((res) => {
@@ -163,6 +164,7 @@ class RegisterPage extends React.Component {
                   title: 'Congratulations',
                   text: 'Your registration has been successful',
                 });
+
                 Axios.get(API_URL + `/users?id=${res.data.id}`)
                   .then((res) => localStorage.setItem('id', res.data.id))
                   .catch((err) => {

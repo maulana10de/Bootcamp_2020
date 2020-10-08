@@ -1,34 +1,18 @@
-import Axios from 'axios';
 import React from 'react';
-import { API_URL } from '../assets/path/urls';
 import CardProduct from '../components/CardProduct';
+import { connect } from 'react-redux';
+import { getProducts } from '../redux/actions';
 
 class ProductPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dbProducts: [],
-    };
+    this.state = {};
   }
-
-  componentDidMount() {
-    this.getProducts();
-  }
-
-  getProducts = () => {
-    Axios.get(API_URL + `/products`)
-      .then((res) => {
-        console.log('get products', res.data);
-        this.setState({ dbProducts: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   renderProduct = () => {
-    return this.state.dbProducts.map((item, index) => {
-      return <CardProduct data={item} />;
+    let { products } = this.props;
+    return products.map((item, index) => {
+      return <CardProduct key={index} data={item} />;
     });
   };
 
@@ -37,4 +21,10 @@ class ProductPage extends React.Component {
   }
 }
 
-export default ProductPage;
+const mapStateToProps = (state) => {
+  return {
+    products: state.productReducer,
+  };
+};
+
+export default connect(mapStateToProps, { getProducts })(ProductPage);

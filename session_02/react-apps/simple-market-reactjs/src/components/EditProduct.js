@@ -78,7 +78,8 @@ class EditProduct extends React.Component {
 
     listGambar.forEach((item, index) => {
       console.log(`GET IMAGE ${index} :`, item);
-      newImages.push(this[item].value);
+      // newImages.push(this[item].value);
+      images.splice(index, 1, this[item].value);
     });
 
     console.log('GET STATE', name);
@@ -91,7 +92,7 @@ class EditProduct extends React.Component {
     console.log('GET IMAGE', newImages);
     console.log('GET STATE', this.state.images);
 
-    Axios.put(API_URL + `/products/${id}`, {
+    Axios.patch(API_URL + `/products/${id}`, {
       name,
       brand,
       category,
@@ -99,7 +100,7 @@ class EditProduct extends React.Component {
       description,
       price,
       stock: newStock,
-      images: newImages,
+      images,
     })
       .then((res) => {
         Swal.fire({

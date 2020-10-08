@@ -1,15 +1,15 @@
 import React from 'react';
-import { Jumbotron, Button, CarouselCaption } from 'reactstrap';
+import { Jumbotron, Button } from 'reactstrap';
 import CarouselCom from '../components/Carousel';
 import Axios from 'axios';
 import { API_URL } from '../assets/path/urls';
+import { getSlides } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      carousel: [],
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -19,10 +19,8 @@ class Homepage extends React.Component {
   getCarousel = () => {
     Axios.get(API_URL + '/carousels')
       .then((res) => {
-        console.log('Get Data Carousel :', res.data);
-        this.setState({
-          carousel: res.data,
-        });
+        console.log('GET MAP STATE TO PROPS :', res.data);
+        this.props.getSlides(res.data);
       })
       .catch((err) => {
         console.log('error: ', err);
@@ -44,10 +42,14 @@ class Homepage extends React.Component {
             <Button color='primary'>Shop Now</Button>
           </p>
         </Jumbotron>
-        <CarouselCom carousel={this.state.carousel} />
+        <CarouselCom carousel={this.props.slides} />
       </div>
     );
   }
 }
 
-export default Homepage;
+const mapStateToProps = ({ slideReducer }) => ({
+  slides: slideReducer,
+});
+
+export default connect(mapStateToProps, { getSlides })(Homepage);
