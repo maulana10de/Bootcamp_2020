@@ -41,38 +41,7 @@
       "email": "ade@mail.com",
       "phone": "08127982317",
       "password": "ade123!",
-      "cart": [
-        {
-          "idproduct": 2,
-          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
-          "name": "JORDAN WESTBROOK ONE TAKE",
-          "category": "Shoes",
-          "size": "41",
-          "price": 1500000,
-          "qty": 4,
-          "total": 6000000
-        },
-        {
-          "idproduct": 2,
-          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
-          "name": "JORDAN WESTBROOK ONE TAKE",
-          "category": "Shoes",
-          "size": "42",
-          "price": 1500000,
-          "qty": 4,
-          "total": 1500000
-        },
-        {
-          "idproduct": 2,
-          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
-          "name": "JORDAN WESTBROOK ONE TAKE",
-          "category": "Shoes",
-          "size": "41",
-          "price": 1500000,
-          "qty": 1,
-          "total": 1500000
-        }
-      ],
+      "cart": [],
       "role": "user",
       "id": 5
     }
@@ -156,7 +125,7 @@
         },
         {
           "code": "41",
-          "total": 8
+          "total": 1
         },
         {
           "code": "42",
@@ -529,6 +498,25 @@
       ],
       "status": "paid",
       "id": 6
+    },
+    {
+      "idUser": 5,
+      "username": "ade4",
+      "date": "11/9/2020",
+      "cart": [
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "41",
+          "price": 1500000,
+          "qty": 7,
+          "total": 10500000
+        }
+      ],
+      "status": "unpaid",
+      "id": 7
     }
   ]
 }

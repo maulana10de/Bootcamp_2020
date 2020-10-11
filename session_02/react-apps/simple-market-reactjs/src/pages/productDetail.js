@@ -87,9 +87,19 @@ class ProductDetail extends React.Component {
 
     this.props.cart.forEach((item) => {
       if (
-        item.size !== this.state.size &&
+        item.size === this.state.size &&
         item.idproduct === this.state.detail.id
       ) {
+        console.log(item.qty, this.state.qty);
+        item.qty += this.state.qty;
+        item.total = item.qty * this.state.detail.price;
+        // Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
+        //   .then((response) => {
+        //     console.log(response.data);
+        //     this.setState({ redirect: true });
+        //   })
+        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
+      } else {
         this.props.cart.push({
           idproduct: this.state.detail.id,
           image: this.state.detail.images[0],
@@ -101,15 +111,6 @@ class ProductDetail extends React.Component {
           total: this.state.qty * this.state.detail.price,
         });
 
-        // Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
-        //   .then((response) => {
-        //     console.log(response.data);
-        //     this.setState({ redirect: true });
-        //   })
-        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
-      } else {
-        console.log(item.qty, this.state.qty);
-        item.qty = item.qty + this.state.qty;
         // this.props.cart.push({
         //   idproduct: this.state.detail.id,
         //   image: this.state.detail.images[0],
