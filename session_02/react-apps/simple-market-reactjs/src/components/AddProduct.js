@@ -116,7 +116,7 @@ class AddProduct extends React.Component {
 
   render() {
     return (
-      <div style={{ float: 'right', marginBottom: '5px' }}>
+      <div style={{ marginBottom: '5px' }}>
         <Button
           onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
         >

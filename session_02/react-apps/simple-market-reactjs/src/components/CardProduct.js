@@ -11,24 +11,20 @@ function CardProduct({ data }) {
         <CardImg top width='100%' src={data.images[0]} alt='Card image cap' />
         <Link
           to={`/product-detail?id=${data.id}`}
-          style={{ textDecoration: 'none' }}
-        >
+          style={{ textDecoration: 'none' }}>
           <CardBody className='card-body-hover'>
             <CardSubtitle
               className='text-muted'
-              style={{ letterSpacing: '2px' }}
-            >
+              style={{ letterSpacing: '2px' }}>
               {data.category}
             </CardSubtitle>
             <CardTitle
               style={{ letterSpacing: '1.3px', fontWeight: 700, color: '#000' }}
-              className='card-body-hover'
-            >
+              className='card-body-hover'>
               {data.name}
             </CardTitle>
             <CardSubtitle
-              style={{ letterSpacing: '1px', fontWeight: 800, color: '#000' }}
-            >
+              style={{ letterSpacing: '1px', fontWeight: 800, color: '#000' }}>
               {' '}
               Rp. {data.price.toLocaleString()}
             </CardSubtitle>

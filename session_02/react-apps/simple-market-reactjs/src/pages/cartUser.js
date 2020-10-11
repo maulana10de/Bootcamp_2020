@@ -12,6 +12,7 @@ class CartPage extends React.Component {
     this.state = {
       selectedIdx: null,
       redirect: false,
+      totalOrder: 0,
     };
   }
 
@@ -43,6 +44,7 @@ class CartPage extends React.Component {
     this.props.cart[index].total =
       this.props.cart[index].qty * this.props.cart[index].price;
     console.log('GET INDEX', this.props.cart[index]);
+    this.setState({ totalQty: this.totalQty() });
     this.refreshCart();
   };
 
@@ -50,6 +52,7 @@ class CartPage extends React.Component {
     let { cart } = this.props;
     cart[index].qty -= 1;
     cart[index].total = cart[index].qty * cart[index].price;
+    this.setState({ totalQty: this.totalQty() });
     this.refreshCart();
   };
 
@@ -128,7 +131,9 @@ class CartPage extends React.Component {
           <td>
             <img src={item.image} width='120vw' alt={item.title} />
           </td>
-          <td>{item.name}</td>
+          <td>
+            {item.name} - {this.state.totalOrder}
+          </td>
           <td>{item.category}</td>
           <td>{item.size}</td>
           <td>{item.price.toLocaleString()}</td>
@@ -156,8 +161,16 @@ class CartPage extends React.Component {
     cart.forEach((element) => {
       payment += element.total;
     });
-
     return payment;
+  };
+
+  totalQty = () => {
+    let { cart } = this.props;
+    let qty = 0;
+    cart.forEach((element) => {
+      qty += element.qty;
+    });
+    return qty;
   };
 
   render() {
@@ -185,8 +198,11 @@ class CartPage extends React.Component {
           <tbody>{this.renderCart()}</tbody>
           <tfoot>
             <tr>
-              <th colSpan='7' className='text-center'>
+              <th colSpan='6' className='text-center'>
                 Total Payment
+              </th>
+              <th className='text-center'>
+                {this.totalQty().toLocaleString()}
               </th>
               <th>{this.totalPayment().toLocaleString()}</th>
               <th>

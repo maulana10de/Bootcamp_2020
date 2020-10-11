@@ -1,6 +1,16 @@
 import Axios from 'axios';
 import React from 'react';
-import { Table, Button, Form, FormGroup, Input } from 'reactstrap';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardFooter,
+} from 'reactstrap';
 import { API_URL } from '../assets/path/urls';
 import AddCarousel from '../components/AddCarousel';
 import EditCarousel from '../components/EditCarousel';
@@ -57,8 +67,7 @@ class SlideManagement extends React.Component {
                   selectedIdx: index,
                 })
               }
-              style={{ marginRight: '5px' }}
-            >
+              style={{ marginRight: '5px' }}>
               Edit
             </Button>
             <Button color='danger' onClick={() => this.btDelete(item.id)}>
@@ -66,6 +75,38 @@ class SlideManagement extends React.Component {
             </Button>
           </td>
         </tr>
+      );
+    });
+  };
+
+  renderSlider = () => {
+    console.log('test');
+    return this.state.dbSlide.map((item, index) => {
+      return (
+        <div className='col-12 col-md-4'>
+          <Card key={index}>
+            <CardImg src={item.image} />
+            <CardBody>
+              <CardTitle>{item.title}</CardTitle>
+            </CardBody>
+            <CardFooter>
+              <Button
+                color='warning'
+                onClick={() =>
+                  this.setState({
+                    editOpen: !this.state.editOpen,
+                    selectedIdx: index,
+                  })
+                }
+                style={{ marginRight: '5px' }}>
+                Edit
+              </Button>
+              <Button color='danger' onClick={() => this.btDelete(item.id)}>
+                Delete
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
       );
     });
   };
@@ -81,23 +122,28 @@ class SlideManagement extends React.Component {
 
   render() {
     return (
-      <div>
-        <br />
-        <h3 className='text-center'>Master Slider</h3>
-        <AddCarousel getSlide={this.getSlide} />
-        <Form>
-          <FormGroup className='col-md-4 p-0'>
-            <Input
-              type='select'
-              innerRef={(value) => (this.order = value)}
-              onClick={this.getFilter}
-            >
-              <option value='Asc'>Sort by Asc</option>
-              <option value='Desc'>Sort by Desc</option>
-            </Input>
-          </FormGroup>
-        </Form>
-        <Table dark>
+      <div className='row'>
+        <div className='col-md-12'>
+          <br />
+          <h3 className='text-center'>Master Slider</h3>
+          <AddCarousel getSlide={this.getSlide} />
+          <Form>
+            <FormGroup className='col-md-4 p-0'>
+              <Input
+                type='select'
+                innerRef={(value) => (this.order = value)}
+                onClick={this.getFilter}>
+                <option value='Asc'>Sort by Asc</option>
+                <option value='Desc'>Sort by Desc</option>
+              </Input>
+            </FormGroup>
+          </Form>
+        </div>
+
+        {/* form sorting */}
+
+        {/* start card slider */}
+        {/* <Table dark>
           <thead>
             <tr>
               <th>#</th>
@@ -106,8 +152,9 @@ class SlideManagement extends React.Component {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>{this.renderSlide()}</tbody>
-        </Table>
+          <tbody>{this.renderSlider()}</tbody>
+        </Table> */}
+        {this.renderSlider()}
         {this.state.selectedIdx !== null && (
           <EditCarousel
             editOpen={this.state.editOpen}

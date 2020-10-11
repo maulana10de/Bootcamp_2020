@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   phone: '',
   role: '',
   cart: [],
+  totalOrder: 5,
 };
 
 export default (state = INITIAL_STATE, action) => {

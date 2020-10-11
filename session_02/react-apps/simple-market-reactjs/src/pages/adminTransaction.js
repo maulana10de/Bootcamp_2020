@@ -19,7 +19,6 @@ class TransactionAdmin extends React.Component {
     Axios.get(API_URL + `/userTransactions`)
       .then((res) => {
         this.setState({ dbTransaction: res.data });
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -38,8 +37,7 @@ class TransactionAdmin extends React.Component {
               disabled={item.status !== 'paid' ? true : false}
               onClick={() => {
                 this.btConfirm(item.id);
-              }}
-            >
+              }}>
               Confirm
             </Button>
           </td>
@@ -59,7 +57,9 @@ class TransactionAdmin extends React.Component {
   render() {
     return (
       <div>
-        <Table>
+        <br />
+        <h3 className='text-center'>Order Managements</h3>
+        <Table dark>
           <thead className='text-center'>
             <th>No</th>
             <th>Date</th>

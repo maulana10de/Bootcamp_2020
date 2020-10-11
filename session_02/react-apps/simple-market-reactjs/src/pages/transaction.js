@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { Button, Table } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
+import { connect } from 'react-redux';
+import { KeepLogin } from '../redux/actions/authAction';
 
 class Transaction extends React.Component {
   constructor(props) {
@@ -25,6 +27,7 @@ class Transaction extends React.Component {
       .then((res) => {
         console.log('GET SUCCESS GET_TRANSACTION:', res.data);
         this.setState({ dbTransaction: res.data });
+        this.props.KeepLogin();
       })
       .catch((err) => {
         console.log('GET ERROR GET_TRANSACTION:', err);
@@ -60,8 +63,7 @@ class Transaction extends React.Component {
             <Button className='mr-1'>Detail</Button>
             <Button
               disabled={item.status !== 'unpaid' ? true : false}
-              onClick={() => this.btPayment(item.id)}
-            >
+              onClick={() => this.btPayment(item.id)}>
               Payment
             </Button>
           </td>
@@ -92,4 +94,4 @@ class Transaction extends React.Component {
   }
 }
 
-export default Transaction;
+export default connect(null, { KeepLogin })(Transaction);

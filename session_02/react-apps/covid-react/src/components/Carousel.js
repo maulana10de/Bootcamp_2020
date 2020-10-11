@@ -4,7 +4,7 @@ import banner2 from '../assets/img/img-banner-2.jpg';
 import banner3 from '../assets/img/img-banner-3.jpg';
 
 class CarouselComp extends React.Component {
-  constructor(props) {
+        constructor(props) {
     super(props);
     this.state = {
       info: [banner1, banner2, banner3],

@@ -21,8 +21,7 @@ export const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
             <li
               key={number}
               className='page-item'
-              style={{ cursor: 'pointer' }}
-            >
+              style={{ cursor: 'pointer' }}>
               <a onClick={() => paginate(number)} className='page-link'>
                 {number}
               </a>

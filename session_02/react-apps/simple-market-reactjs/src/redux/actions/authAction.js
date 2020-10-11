@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import { API_URL } from '../../assets/path/urls';
+// import cartUser from '../../pages/cartUser';
 
 export const login = (data) => {
   return {
@@ -20,7 +21,7 @@ export const checkout = () => {
   };
 };
 
-// redux-thunk way
+// redux thunk
 export const Login = (query, username, password) => {
   return (dispatch) => {
     Axios.get(API_URL + `/users?${query}=${username}&password=${password}`)
@@ -56,3 +57,16 @@ export const KeepLogin = () => {
     }
   };
 };
+
+// export const KeepLogin = () => {
+//   return async(dispatch) => {
+//     try {
+//       let get = await Axios.get(API_URL + `/users/${localStorage.getItem('id')}`)
+//       dispatch({
+//         type: "LOGIN",
+//         payload: get.data
+//       })
+//     } catch (error) {
+//       console.log("KEEPLOGIN", error)
+//     }
+// }

@@ -13,6 +13,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  Badge,
 } from 'reactstrap';
 
 import logo from '../assets/img/logo.png';
@@ -33,17 +34,24 @@ class NavbarCom extends React.Component {
     this.props.logout();
   };
 
+  totalQty = () => {
+    let { cart } = this.props;
+    let qty = 0;
+    cart.forEach((element) => {
+      qty += element.qty;
+    });
+    return qty;
+  };
+
   render() {
     let { user } = this.props;
-
     return (
       <Navbar
         color='faded'
         light
         expand='md'
         className='navbar sticky-top navbar-light bg-light border-bottom mb-2 shadow-sm'
-        style={{ paddingLeft: 0 }}
-      >
+        style={{ paddingLeft: 0 }}>
         <NavbarBrand>
           <Link to='/' className='nav-link'>
             <img src={logo} width='80px' alt='logo' />
@@ -64,8 +72,7 @@ class NavbarCom extends React.Component {
                   letterSpacing: '2px',
                   fontWeight: 700,
                   color: '#000',
-                }}
-              >
+                }}>
                 Products
               </Link>
             </NavItem>
@@ -78,8 +85,7 @@ class NavbarCom extends React.Component {
                   letterSpacing: '2px',
                   fontWeight: 700,
                   color: '#000',
-                }}
-              >
+                }}>
                 About
               </Link>
             </NavItem>
@@ -90,8 +96,7 @@ class NavbarCom extends React.Component {
                     isOpen={this.state.dropOpen}
                     toggle={() =>
                       this.setState({ dropOpen: !this.state.dropOpen })
-                    }
-                  >
+                    }>
                     <DropdownToggle
                       style={{
                         padding: `5px 30px`,
@@ -99,8 +104,7 @@ class NavbarCom extends React.Component {
                         textTransform: 'uppercase',
                         letterSpacing: '3px',
                         backgroundColor: '#363738',
-                      }}
-                    >
+                      }}>
                       {user.username}
                     </DropdownToggle>
                     <DropdownMenu>
@@ -108,16 +112,17 @@ class NavbarCom extends React.Component {
                       <DropdownItem>
                         <Link
                           to='/cart'
-                          style={{ textDecoration: 'none', color: '#16181B' }}
-                        >
+                          style={{ textDecoration: 'none', color: '#16181B' }}>
                           Cart
+                          <Badge className='ml-1' color='danger'>
+                            {this.totalQty()}
+                          </Badge>
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
                         <Link
                           to='/transaction'
-                          style={{ textDecoration: 'none', color: '#16181B' }}
-                        >
+                          style={{ textDecoration: 'none', color: '#16181B' }}>
                           Transaction
                         </Link>
                       </DropdownItem>
@@ -131,8 +136,7 @@ class NavbarCom extends React.Component {
                     isOpen={this.state.dropOpen}
                     toggle={() =>
                       this.setState({ dropOpen: !this.state.dropOpen })
-                    }
-                  >
+                    }>
                     <DropdownToggle
                       style={{
                         padding: `5px 30px`,
@@ -140,32 +144,28 @@ class NavbarCom extends React.Component {
                         textTransform: 'uppercase',
                         letterSpacing: '3px',
                         backgroundColor: '#363738',
-                      }}
-                    >
+                      }}>
                       {user.username}
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem>
                         <Link
                           to='product-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}
-                        >
+                          style={{ textDecoration: 'none', color: '#16181B' }}>
                           Products Management
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
                         <Link
                           to='/transaction-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}
-                        >
+                          style={{ textDecoration: 'none', color: '#16181B' }}>
                           Transaction Management
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
                         <Link
                           to='/slide-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}
-                        >
+                          style={{ textDecoration: 'none', color: '#16181B' }}>
                           Slide Management
                         </Link>
                       </DropdownItem>
@@ -186,15 +186,13 @@ class NavbarCom extends React.Component {
                       textTransform: 'uppercase',
                       letterSpacing: '1px',
                       backgroundColor: '#363738',
-                    }}
-                  >
+                    }}>
                     <Link
                       to='/register'
                       style={{
                         textDecoration: 'none',
                         color: 'white',
-                      }}
-                    >
+                      }}>
                       Register
                     </Link>
                   </Button>
@@ -208,4 +206,12 @@ class NavbarCom extends React.Component {
   }
 }
 
-export default connect(null, { logout })(NavbarCom);
+const mapStateToProps = (state) => {
+  console.log('GET DATA CARTUSER :', state.authReducer.cart);
+  console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
+  return {
+    cart: state.authReducer.cart,
+  };
+};
+
+export default connect(mapStateToProps, { logout })(NavbarCom);
