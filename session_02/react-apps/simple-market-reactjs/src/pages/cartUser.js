@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
+import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
 import { login, checkout } from '../redux/actions/';
 
@@ -81,46 +82,56 @@ class CartPage extends React.Component {
       status: 'unpaid',
     };
 
-    this.props.cart.forEach((item, index) => {
-      // let indexProduct = this.props.product.findIndex(
-      //   (value) => value.id === item.idproduct
-      // );
-      // let indexStock = this.props.product[indexProduct].stock.findIndex(
-      //   (value) => value.code === item.size
-      // );
-      // this.props.product[indexProduct].stock[indexStock].total -= item.qty;
-      // this.decrementStock(item.idproduct, {
-      //   stock: this.props.product[indexProduct].stock,
-      // });
+    if (this.props.cart.length > 0) {
+      this.props.cart.forEach((item, index) => {
+        // let indexProduct = this.props.product.findIndex(
+        //   (value) => value.id === item.idproduct
+        // );
+        // let indexStock = this.props.product[indexProduct].stock.findIndex(
+        //   (value) => value.code === item.size
+        // );
+        // this.props.product[indexProduct].stock[indexStock].total -= item.qty;
+        // this.decrementStock(item.idproduct, {
+        //   stock: this.props.product[indexProduct].stock,
+        // });
 
-      // Cara 1
-      this.props.product.forEach((value, idx) => {
-        if (item.idproduct === value.id) {
-          console.log('sama', item.idproduct, value.id);
-          let indexStock = value.stock.findIndex(
-            (element) => element.code === item.size
-          );
-          value.stock[indexStock].total -= item.qty;
-          this.decrementStock(value.id, { stock: value.stock });
-          console.log('GET ==>', value.stock[indexStock]);
-        }
+        // Cara 1
+        this.props.product.forEach((value, idx) => {
+          if (item.idproduct === value.id) {
+            console.log('sama', item.idproduct, value.id);
+            let indexStock = value.stock.findIndex(
+              (element) => element.code === item.size
+            );
+            value.stock[indexStock].total -= item.qty;
+            this.decrementStock(value.id, { stock: value.stock });
+            console.log('GET ==>', value.stock[indexStock]);
+          }
+        });
       });
-    });
 
-    Axios.post(API_URL + `/userTransactions`, obj)
-      .then((res) => {
-        Axios.patch(API_URL + `/users/${this.props.id}`, { cart: [] })
-          .then((response) => {
-            this.setState({ redirect: true });
-            this.props.checkout();
-            console.log('GET SUCCESS UPDATE PRODUCT REDUCER :', response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        console.log('GET SUCCESS USER_TRANSACTION :', res.data);
-      })
-      .catch((err) => console.log(err));
+      Axios.post(API_URL + `/userTransactions`, obj)
+        .then((res) => {
+          Axios.patch(API_URL + `/users/${this.props.id}`, { cart: [] })
+            .then((response) => {
+              this.setState({ redirect: true });
+              this.props.checkout();
+              console.log(
+                'GET SUCCESS UPDATE PRODUCT REDUCER :',
+                response.data
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          console.log('GET SUCCESS USER_TRANSACTION :', res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Sorry, your shopping cart is empty',
+      });
+    }
   };
 
   renderCart = () => {

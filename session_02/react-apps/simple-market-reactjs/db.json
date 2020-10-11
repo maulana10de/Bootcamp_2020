@@ -41,7 +41,38 @@
       "email": "ade@mail.com",
       "phone": "08127982317",
       "password": "ade123!",
-      "cart": [],
+      "cart": [
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "41",
+          "price": 1500000,
+          "qty": 4,
+          "total": 6000000
+        },
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "42",
+          "price": 1500000,
+          "qty": 4,
+          "total": 1500000
+        },
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "41",
+          "price": 1500000,
+          "qty": 1,
+          "total": 1500000
+        }
+      ],
       "role": "user",
       "id": 5
     }
@@ -125,11 +156,11 @@
         },
         {
           "code": "41",
-          "total": 9
+          "total": 8
         },
         {
           "code": "42",
-          "total": 10
+          "total": 5
         }
       ],
       "images": [
@@ -460,6 +491,44 @@
       ],
       "status": "paid",
       "id": 4
+    },
+    {
+      "idUser": 5,
+      "username": "ade4",
+      "date": "11/9/2020",
+      "cart": [
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "42",
+          "price": 1500000,
+          "qty": 5,
+          "total": 7500000
+        }
+      ],
+      "status": "paid",
+      "id": 5
+    },
+    {
+      "idUser": 5,
+      "username": "ade4",
+      "date": "11/9/2020",
+      "cart": [
+        {
+          "idproduct": 2,
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "name": "JORDAN WESTBROOK ONE TAKE",
+          "category": "Shoes",
+          "size": "41",
+          "price": 1500000,
+          "qty": 1,
+          "total": 1500000
+        }
+      ],
+      "status": "paid",
+      "id": 6
     }
   ]
 }

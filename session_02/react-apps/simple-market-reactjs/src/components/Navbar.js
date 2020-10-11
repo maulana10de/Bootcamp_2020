@@ -14,6 +14,11 @@ import {
   DropdownMenu,
   DropdownToggle,
   Badge,
+  Card,
+  CardBody,
+  CardFooter,
+  CardImg,
+  CardText,
 } from 'reactstrap';
 
 import logo from '../assets/img/logo.png';
@@ -26,6 +31,7 @@ class NavbarCom extends React.Component {
     this.state = {
       collapsed: false,
       dropOpen: false,
+      dropdownOpen: false,
     };
   }
 
@@ -92,89 +98,177 @@ class NavbarCom extends React.Component {
             <div style={{ marginLeft: '30vw' }}>
               {user.id ? (
                 user.role === 'user' ? (
-                  <Dropdown
-                    isOpen={this.state.dropOpen}
-                    toggle={() =>
-                      this.setState({ dropOpen: !this.state.dropOpen })
-                    }>
-                    <DropdownToggle
-                      style={{
-                        padding: `5px 30px`,
-                        fontSize: '14px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '3px',
-                        backgroundColor: '#363738',
-                      }}>
-                      {user.username}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Profile</DropdownItem>
-                      <DropdownItem>
-                        <Link
-                          to='/cart'
-                          style={{ textDecoration: 'none', color: '#16181B' }}>
+                  <div className='d-flex'>
+                    <div>
+                      <Dropdown
+                        isOpen={this.state.dropdownOpen}
+                        toggle={() =>
+                          this.setState({
+                            dropdownOpen: !this.state.dropdownOpen,
+                          })
+                        }>
+                        <DropdownToggle
+                          style={{
+                            padding: `5px 30px`,
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '3px',
+                            backgroundColor: '#363738',
+                            marginRight: '2px',
+                          }}>
                           Cart
                           <Badge className='ml-1' color='danger'>
                             {this.totalQty()}
                           </Badge>
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Link
-                          to='/transaction'
-                          style={{ textDecoration: 'none', color: '#16181B' }}>
-                          Transaction
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem onClick={this.btLogout}>
-                        Logout
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                ) : (
-                  <Dropdown
-                    isOpen={this.state.dropOpen}
-                    toggle={() =>
-                      this.setState({ dropOpen: !this.state.dropOpen })
-                    }>
-                    <DropdownToggle
-                      style={{
-                        padding: `5px 30px`,
-                        fontSize: '14px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '3px',
-                        backgroundColor: '#363738',
-                      }}>
-                      {user.username}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>
-                        <Link
-                          to='product-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}>
-                          Products Management
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Link
-                          to='/transaction-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}>
-                          Transaction Management
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Link
-                          to='/slide-admin'
-                          style={{ textDecoration: 'none', color: '#16181B' }}>
-                          Slide Management
-                        </Link>
-                      </DropdownItem>
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <Card
+                            style={{
+                              width: '400px',
+                              fontSize: '14px',
+                              border: 'none',
+                            }}>
+                            {this.props.cart.length <= 0 ? (
+                              <CardBody>Cart is Empy</CardBody>
+                            ) : (
+                              this.props.cart.map((item, index) => (
+                                <div className='row'>
+                                  <div
+                                    className='col-md-6'
+                                    style={{ width: '5vw' }}>
+                                    <CardImg
+                                      src={item.image}
+                                      alt={item.name}
+                                      width='2vw'
+                                    />
+                                  </div>
+                                  <div
+                                    className='col-md-6'
+                                    style={{ width: '15vw' }}>
+                                    <CardBody>
+                                      <CardText>{item.name}</CardText>
+                                      <CardText>Size : {item.size}</CardText>
+                                      <CardText>Qty : {item.qty}</CardText>
+                                      <CardText>
+                                        Price : Rp.{item.price.toLocaleString()}
+                                      </CardText>
+                                    </CardBody>
+                                  </div>
+                                </div>
+                              ))
+                            )}
 
-                      <DropdownItem onClick={this.btLogout}>
-                        Logout
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
+                            <CardFooter>
+                              <Link to='/cart'>Go To Cart</Link>
+                            </CardFooter>
+                          </Card>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </div>
+                    <div>
+                      {/* User Profile */}
+                      <Dropdown
+                        isOpen={this.state.dropOpen}
+                        toggle={() =>
+                          this.setState({ dropOpen: !this.state.dropOpen })
+                        }>
+                        <DropdownToggle
+                          style={{
+                            padding: `5px 30px`,
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '3px',
+                            backgroundColor: '#363738',
+                          }}>
+                          {user.username}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem>Profile</DropdownItem>
+                          <DropdownItem>
+                            <Link
+                              to='/cart'
+                              style={{
+                                textDecoration: 'none',
+                                color: '#16181B',
+                              }}>
+                              Cart
+                              <Badge className='ml-1' color='danger'>
+                                {this.totalQty()}
+                              </Badge>
+                            </Link>
+                          </DropdownItem>
+                          <DropdownItem>
+                            <Link
+                              to='/transaction'
+                              style={{
+                                textDecoration: 'none',
+                                color: '#16181B',
+                              }}>
+                              Transaction
+                            </Link>
+                          </DropdownItem>
+                          <DropdownItem onClick={this.btLogout}>
+                            Logout
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <Dropdown
+                      isOpen={this.state.dropOpen}
+                      toggle={() =>
+                        this.setState({ dropOpen: !this.state.dropOpen })
+                      }>
+                      <DropdownToggle
+                        style={{
+                          padding: `5px 30px`,
+                          fontSize: '14px',
+                          textTransform: 'uppercase',
+                          letterSpacing: '3px',
+                          backgroundColor: '#363738',
+                        }}>
+                        {user.username}
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem>
+                          <Link
+                            to='product-admin'
+                            style={{
+                              textDecoration: 'none',
+                              color: '#16181B',
+                            }}>
+                            Products Management
+                          </Link>
+                        </DropdownItem>
+                        <DropdownItem>
+                          <Link
+                            to='/transaction-admin'
+                            style={{
+                              textDecoration: 'none',
+                              color: '#16181B',
+                            }}>
+                            Transaction Management
+                          </Link>
+                        </DropdownItem>
+                        <DropdownItem>
+                          <Link
+                            to='/slide-admin'
+                            style={{
+                              textDecoration: 'none',
+                              color: '#16181B',
+                            }}>
+                            Slide Management
+                          </Link>
+                        </DropdownItem>
+
+                        <DropdownItem onClick={this.btLogout}>
+                          Logout
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </>
                 )
               ) : (
                 <>

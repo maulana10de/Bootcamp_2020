@@ -41,8 +41,7 @@ class ProductDetail extends React.Component {
           key={index}
           className='flex-grow-1 select-image'
           onClick={() => this.setState({ thumbnail: index })}
-          style={{ padding: '0 1px' }}
-        >
+          style={{ padding: '0 1px' }}>
           <img src={item} width='100%' alt={item.title} />
         </div>
       );
@@ -58,8 +57,7 @@ class ProductDetail extends React.Component {
           }}
           disabled={item.total === 0 && true}
           key={index}
-          onClick={() => this.setState({ total: item.total, size: item.code })}
-        >
+          onClick={() => this.setState({ total: item.total, size: item.code })}>
           {item.code}
         </Button>
       );
@@ -84,18 +82,59 @@ class ProductDetail extends React.Component {
       this.state.detail.price,
       this.state.qty
     );
+
     let id = localStorage.getItem('id');
 
-    this.props.cart.push({
-      idproduct: this.state.detail.id,
-      image: this.state.detail.images[0],
-      name: this.state.detail.name,
-      category: this.state.detail.category,
-      size: this.state.size,
-      price: this.state.detail.price,
-      qty: this.state.qty,
-      total: this.state.qty * this.state.detail.price,
+    this.props.cart.forEach((item) => {
+      if (
+        item.size !== this.state.size &&
+        item.idproduct === this.state.detail.id
+      ) {
+        this.props.cart.push({
+          idproduct: this.state.detail.id,
+          image: this.state.detail.images[0],
+          name: this.state.detail.name,
+          category: this.state.detail.category,
+          size: this.state.size,
+          price: this.state.detail.price,
+          qty: this.state.qty,
+          total: this.state.qty * this.state.detail.price,
+        });
+
+        // Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
+        //   .then((response) => {
+        //     console.log(response.data);
+        //     this.setState({ redirect: true });
+        //   })
+        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
+      } else {
+        console.log(item.qty, this.state.qty);
+        item.qty = item.qty + this.state.qty;
+        // this.props.cart.push({
+        //   idproduct: this.state.detail.id,
+        //   image: this.state.detail.images[0],
+        //   name: this.state.detail.name,
+        //   category: this.state.detail.category,
+        //   size: this.state.size,
+        //   price: this.state.detail.price,
+        //   qty: this.state.qty,
+        //   total: this.state.qty * this.state.detail.price,
+        // });
+
+        // Axios.patch(API_URL + `/users/${id}`, {
+        //   qty: (this.state.qty += 1),
+        //   total: this.state.qty * this.state.detail.price,
+        // })
+        //   .then((response) => {
+        //     console.log(response.data);
+        //     this.setState({ redirect: true });
+        //   })
+        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
+
+        // alert('Product dan Size Sama');
+      }
     });
+
     Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
       .then((response) => {
         console.log(response.data);
@@ -116,8 +155,7 @@ class ProductDetail extends React.Component {
         {detail.id && (
           <Jumbotron
             className='row p-3'
-            style={{ borderRadius: 0, backgroundColor: '#fff' }}
-          >
+            style={{ borderRadius: 0, backgroundColor: '#fff' }}>
             <div className='col-12 col-md-5 pr-3 border-right'>
               <img src={detail.images[thumbnail]} width='100%' alt='images' />
               <div className='d-flex mt-1'>
@@ -131,8 +169,7 @@ class ProductDetail extends React.Component {
                     fontSize: '16px',
                     letterSpacing: '2px',
                     textTransform: 'uppercase',
-                  }}
-                >
+                  }}>
                   {detail.brand} / {detail.category}
                 </h5>
                 <br />
@@ -144,8 +181,7 @@ class ProductDetail extends React.Component {
                     textTransform: 'uppercase',
                     fontWeight: 500,
                     fontStyle: 'italic',
-                  }}
-                >
+                  }}>
                   {detail.name}
                 </h1>
                 <br />
@@ -154,8 +190,7 @@ class ProductDetail extends React.Component {
                     fontSize: '11px',
                     letterSpacing: '2px',
                     textTransform: 'uppercase',
-                  }}
-                >
+                  }}>
                   {detail.colour}
                 </h5>
                 <br />
@@ -165,8 +200,7 @@ class ProductDetail extends React.Component {
                     fontSize: '16px',
                     letterSpacing: '1.5px',
                     fontWeight: 700,
-                  }}
-                >
+                  }}>
                   Rp.{detail.price.toLocaleString()}
                 </h4>
                 <h4
@@ -174,8 +208,7 @@ class ProductDetail extends React.Component {
                     fontSize: '16px',
                     letterSpacing: '1.5px',
                     lineHeight: '30px',
-                  }}
-                >
+                  }}>
                   {detail.description}
                 </h4>
                 <br />
@@ -187,8 +220,7 @@ class ProductDetail extends React.Component {
                       letterSpacing: '1px',
                       textTransform: 'uppercase',
                       marginTop: '5px',
-                    }}
-                  >
+                    }}>
                     Stock : {this.state.total}
                   </p>
                 </div>
@@ -199,8 +231,7 @@ class ProductDetail extends React.Component {
                         qty: this.state.qty > 0 ? (this.state.qty -= 1) : 0,
                         totalHarga: this.state.qty * this.state.detail.price,
                       })
-                    }
-                  >
+                    }>
                     -
                   </Button>
                   <Input
@@ -217,16 +248,14 @@ class ProductDetail extends React.Component {
                         fontSize: '28px',
                         letterSpacing: '1.5px',
                         fontWeight: 700,
-                      }}
-                    >
+                      }}>
                       Rp. {this.state.totalHarga.toLocaleString()}
                     </h3>
                   </div>
                   <div className='col-md-6'>
                     <Button
                       style={{ float: 'right', width: '8vw' }}
-                      onClick={this.btAddToCart}
-                    >
+                      onClick={this.btAddToCart}>
                       Add to Cart
                     </Button>
                   </div>
