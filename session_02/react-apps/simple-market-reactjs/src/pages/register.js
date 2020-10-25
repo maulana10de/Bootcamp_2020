@@ -143,48 +143,46 @@ class RegisterPage extends React.Component {
       });
     } else {
       if (password === confpassword && userValid && mailValid) {
-        Axios.get(API_URL + `/users?username=${username}`).then((res) => {
-          if (res.data.length > 0 && username) {
-            alert('username already registered');
-          } else {
-            Axios.post(API_URL + `/users`, {
-              username,
-              email,
-              phone,
-              password,
-              cart: [],
-              role: 'user',
-            })
-              .then((res) => {
-                localStorage.setItem('id', res.data.id);
-                this.setState({ redirect: true });
+        // Axios.get(API_URL + `/users?username=${username}`).then((res) => {
+        //   if (res.data.length > 0 && username) {
+        //     alert('username already registered');
+        //   } else {
+        Axios.post(API_URL + `/users/regis`, {
+          username,
+          email,
+          phone,
+          password,
+        })
+          .then((res) => {
+            localStorage.setItem('id', res.data.iduser);
+            this.setState({ redirect: true });
 
-                swal.fire({
-                  icon: 'success',
-                  title: 'Congratulations',
-                  text: 'Your registration has been successful',
-                });
+            // swal.fire({
+            //   icon: 'success',
+            //   title: 'Congratulations',
+            //   text: 'Your registration has been successful',
+            // });
 
-                Axios.get(API_URL + `/users?id=${res.data.id}`)
-                  .then((res) => localStorage.setItem('id', res.data.id))
-                  .catch((err) => {
-                    console.log(err);
-                  });
-                // this.refreshPage();
-                // this.props.redirectLogin();
-              })
-              .catch((err) => {
-                console.log('error user register:', err);
-              });
-          }
-        });
-      } else {
-        swal.fire({
-          icon: 'error',
-          title: 'Oops ....',
-          text: 'Your password not Match',
-        });
+            // Axios.get(API_URL + `/users?id=${res.data.id}`)
+            //   .then((res) => localStorage.setItem('id', res.data.id))
+            //   .catch((err) => {
+            //     console.log(err);
+            //   });
+            // this.refreshPage();
+            // this.props.redirectLogin();
+          })
+          .catch((err) => {
+            console.log('error user register:', err);
+          });
       }
+      // });
+      // } else {
+      //   swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops ....',
+      //     text: 'Your password not Match',
+      //   });
+      // }
     }
   };
 
@@ -201,8 +199,7 @@ class RegisterPage extends React.Component {
       <div className='container'>
         <Jumbotron
           className='my-2'
-          style={{ borderRadius: 0, backgroundColor: '#fff' }}
-        >
+          style={{ borderRadius: 0, backgroundColor: '#fff' }}>
           <div className='row'>
             <div className='col-12 col-sm-7 p-0 '>
               <img
@@ -269,8 +266,7 @@ class RegisterPage extends React.Component {
                   {this.state.password.length > 5 && (
                     <Progress
                       value={this.state.passValue}
-                      color={this.state.passNotif}
-                    >
+                      color={this.state.passNotif}>
                       {this.state.passLvl}
                     </Progress>
                   )}
@@ -294,8 +290,7 @@ class RegisterPage extends React.Component {
                   padding: '7px 27px',
                   textTransform: 'uppercase',
                   letterSpacing: '1.5px',
-                }}
-              >
+                }}>
                 Register
               </Button>
             </div>

@@ -30,22 +30,8 @@ class App extends React.Component {
     this.getProducts();
   }
 
-  // keepLogin = () => {
-  //   // let id = localStorage.getItem('id');
-  //   // if (id) {
-  //   // Axios.get(API_URL + `/users?id=${id}`)
-  //   //   .then((res) => {
-  //   //     // this.setState({ dataUser: res.data[0] });
-  //   //     this.props.login(res.data[0]);
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log('keep login error :', err);
-  //   //   });
-  //   // }
-  // };
-
   getProducts = () => {
-    Axios.get(API_URL + `/products`)
+    Axios.get(API_URL + `/product/getProducts`)
       .then((res) => {
         this.props.getProducts(res.data);
       })

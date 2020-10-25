@@ -13,6 +13,8 @@ import {
 } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
+import { getSlides } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class AddCarousel extends React.Component {
   constructor(props) {
@@ -38,7 +40,7 @@ class AddCarousel extends React.Component {
         text: 'Fill in the form',
       });
     } else {
-      Axios.post(API_URL + `/carousels`, {
+      Axios.post(API_URL + `/carousel`, {
         title,
         image,
       })
@@ -48,7 +50,7 @@ class AddCarousel extends React.Component {
             title: 'Congratulations',
             text: 'Your submit form has been successful',
           });
-          this.props.getSlide();
+          this.props.getSlides(res.data);
           this.setState({ modalOpen: false });
         })
         .catch((err) => console.log('ERR SUBMIT CAROUSEL :', err));
@@ -59,8 +61,7 @@ class AddCarousel extends React.Component {
     return (
       <div style={{ float: 'right', marginBottom: '5px' }}>
         <Button
-          onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
-        >
+          onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}>
           Add Carousel
         </Button>
 
@@ -93,8 +94,7 @@ class AddCarousel extends React.Component {
             <Button
               onClick={() =>
                 this.setState({ modalOpen: !this.state.modalOpen })
-              }
-            >
+              }>
               Cancel
             </Button>
           </ModalFooter>
@@ -104,4 +104,4 @@ class AddCarousel extends React.Component {
   }
 }
 
-export default AddCarousel;
+export default connect(null, { getSlides })(AddCarousel);

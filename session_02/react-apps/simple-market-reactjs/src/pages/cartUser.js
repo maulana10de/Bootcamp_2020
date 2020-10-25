@@ -18,11 +18,12 @@ class CartPage extends React.Component {
   }
 
   refreshCart = () => {
-    Axios.patch(API_URL + `/users/${this.props.id}`, {
+    console.log('GET CART PROPS ==>', this.props.cart);
+    Axios.patch(API_URL + `/user/refreshCart/${this.props.id}`, {
       cart: this.props.cart,
     })
       .then((res) => {
-        localStorage.setItem('id', res.data.id);
+        localStorage.setItem('id', res.data);
         this.props.login(res.data);
       })
       .catch((err) => {
@@ -31,20 +32,10 @@ class CartPage extends React.Component {
   };
 
   btIncrement = (index) => {
-    // console.log('GET PRODUCT ID ++', this.props.cart[index].idproduct);
-    // let id_product_cart = this.props.cart[index].idproduct;
-    // let id_product = this.props.product.filter(
-    //   (item) => item.id === id_product_cart
-    // );
-    // console.log(id_product, this.props.cart[index].size);
-
-    // let index_product = this.props.product.indexOf(id_product_cart);
-    // console.log('INDEX PRODUCT :', index_product);
-
     this.props.cart[index].qty += 1;
     this.props.cart[index].total =
       this.props.cart[index].qty * this.props.cart[index].price;
-    console.log('GET INDEX', this.props.cart[index]);
+    // console.log('GET INDEX', this.props.cart[index]);
     this.setState({ totalQty: this.totalQty() });
     this.refreshCart();
   };
@@ -63,7 +54,7 @@ class CartPage extends React.Component {
   };
 
   decrementStock = (id, stock) => {
-    Axios.patch(API_URL + `/products/${id}`, stock)
+    Axios.patch(API_URL + `/product/updateStock/${id}`, stock)
       .then((res) => {
         console.log(res.data);
       })
@@ -109,9 +100,11 @@ class CartPage extends React.Component {
         });
       });
 
-      Axios.post(API_URL + `/userTransactions`, obj)
+      Axios.post(API_URL + `/transaction`, obj)
         .then((res) => {
-          Axios.patch(API_URL + `/users/${this.props.id}`, { cart: [] })
+          Axios.patch(API_URL + `/user/refreshCart/${this.props.id}`, {
+            cart: [],
+          })
             .then((response) => {
               this.setState({ redirect: true });
               this.props.checkout();
@@ -231,7 +224,7 @@ class CartPage extends React.Component {
 
 const mapStateToProps = (state) => {
   console.log('GET DATA CARTUSER :', state.authReducer.cart);
-  console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
+  // console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
   return {
     user: state.authReducer,
     cart: state.authReducer.cart,

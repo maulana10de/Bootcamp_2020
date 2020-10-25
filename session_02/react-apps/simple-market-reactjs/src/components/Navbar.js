@@ -40,14 +40,14 @@ class NavbarCom extends React.Component {
     this.props.logout();
   };
 
-  totalQty = () => {
-    let { cart } = this.props;
-    let qty = 0;
-    cart.forEach((element) => {
-      qty += element.qty;
-    });
-    return qty;
-  };
+  // totalQty = () => {
+  //   let { cart } = this.props;
+  //   let qty = 0;
+  //   cart.forEach((element) => {
+  //     qty += element.qty;
+  //   });
+  //   return qty;
+  // };
 
   render() {
     let { user } = this.props;
@@ -96,7 +96,7 @@ class NavbarCom extends React.Component {
               </Link>
             </NavItem>
             <div style={{ marginLeft: '30vw' }}>
-              {user.id ? (
+              {user.iduser ? (
                 user.role === 'user' ? (
                   <div className='d-flex'>
                     <div>
@@ -118,11 +118,11 @@ class NavbarCom extends React.Component {
                           }}>
                           Cart
                           <Badge className='ml-1' color='danger'>
-                            {this.totalQty()}
+                            {/* {this.totalQty()} */}
                           </Badge>
                         </DropdownToggle>
                         <DropdownMenu>
-                          <Card
+                          {/* <Card
                             style={{
                               width: '400px',
                               fontSize: '14px',
@@ -161,7 +161,7 @@ class NavbarCom extends React.Component {
                             <CardFooter>
                               <Link to='/cart'>Go To Cart</Link>
                             </CardFooter>
-                          </Card>
+                          </Card> */}
                         </DropdownMenu>
                       </Dropdown>
                     </div>
@@ -193,7 +193,7 @@ class NavbarCom extends React.Component {
                               }}>
                               Cart
                               <Badge className='ml-1' color='danger'>
-                                {this.totalQty()}
+                                {/* {this.totalQty()} */}
                               </Badge>
                             </Link>
                           </DropdownItem>
@@ -301,8 +301,8 @@ class NavbarCom extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('GET DATA CARTUSER :', state.authReducer.cart);
-  console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
+  // console.log('GET DATA CARTUSER :', state.authReducer.cart);
+  // console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
   return {
     cart: state.authReducer.cart,
   };

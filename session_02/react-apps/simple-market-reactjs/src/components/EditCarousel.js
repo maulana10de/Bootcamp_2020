@@ -13,6 +13,8 @@ import {
 } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
+import { getSlides } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class EditCarousel extends React.Component {
   constructor(props) {
@@ -30,17 +32,17 @@ class EditCarousel extends React.Component {
 
   btSave = () => {
     let { title, image, id } = this.state;
-    console.log('GET SAVE DATA CAROUSEL', title);
-    console.log('GET SAVE DATA CAROUSEL', image);
+    // console.log('GET SAVE DATA CAROUSEL', title);
+    // console.log('GET SAVE DATA CAROUSEL', image);
 
-    Axios.patch(API_URL + `/carousels/${id}`, { title, image })
+    Axios.patch(API_URL + `/carousel/${id}`, { title, image })
       .then((res) => {
         Swal.fire({
           icon: 'success',
           title: 'Congratulations',
           text: 'Your Update form has been successful',
         });
-        this.props.getSlide();
+        this.props.getSlides(res.data);
         this.props.editClose();
         // this.setState({ closeModal: !this.state.closeModal });
         console.log('close modal status :', this.state.closeModal);
@@ -84,4 +86,4 @@ class EditCarousel extends React.Component {
   }
 }
 
-export default EditCarousel;
+export default connect(null, { getSlides })(EditCarousel);

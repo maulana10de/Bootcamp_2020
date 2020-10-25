@@ -13,6 +13,8 @@ import {
 import Swal from 'sweetalert2';
 import Axios from 'axios';
 import { API_URL } from '../assets/path/urls';
+import { getProducts } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class EditProduct extends React.Component {
   constructor(props) {
@@ -66,13 +68,20 @@ class EditProduct extends React.Component {
       listGambar,
     } = this.state;
 
-    let newStock = [],
-      newImages = [];
-    stock.forEach((item, index) => {
-      console.log(`GET STOCK TOTAL ${index} :`, item.code);
-      newStock.push({
-        code: item.code.toString(),
-        total: parseInt(this[`code${item.code}`].value),
+    // let newStock = [],
+    //   newImages = [];
+    // stock.forEach((item, index) => {
+    //   console.log(`GET STOCK TOTAL ${index} :`, item.code);
+    //   newStock.push({
+    //     code: item.code.toString(),
+    //     total: parseInt(this[`code${item.code}`].value),
+    //   });
+    // });
+
+    this.state[`size${category}`].forEach((item, index) => {
+      stock.splice(index, 1, {
+        code: item,
+        total: parseInt(this[`code${item}`].value),
       });
     });
 
@@ -82,24 +91,24 @@ class EditProduct extends React.Component {
       images.splice(index, 1, this[item].value);
     });
 
-    console.log('GET STATE', name);
-    console.log('GET STATE', brand);
-    console.log('GET STATE', category);
-    console.log('GET STATE', colour);
-    console.log('GET STATE', description);
-    console.log('GET STATE', price);
-    console.log('GET STOCK', newStock);
-    console.log('GET IMAGE', newImages);
-    console.log('GET STATE', this.state.images);
+    // console.log('GET STATE', name);
+    // console.log('GET STATE', brand);
+    // console.log('GET STATE', category);
+    // console.log('GET STATE', colour);
+    // console.log('GET STATE', description);
+    // console.log('GET STATE', price);
+    // console.log('GET STOCK', newStock);
+    // console.log('GET IMAGE', newImages);
+    // console.log('GET STATE', this.state.images);
 
-    Axios.patch(API_URL + `/products/${id}`, {
+    Axios.patch(API_URL + `/product/${id}`, {
       name,
       brand,
       category,
       colour,
       description,
       price,
-      stock: newStock,
+      stock,
       images,
     })
       .then((res) => {
@@ -108,13 +117,9 @@ class EditProduct extends React.Component {
           title: 'Congratulations',
           text: 'Your Update form has been successful',
         });
-        this.props.getProduct();
+        // diambil dari product action
+        this.props.getProducts(res.data);
         this.setState({ closeModal: !this.state.closeModal });
-        console.log(
-          '==>GET STATUS MODALCLOSE :',
-          this.props.editOpen,
-          this.state.closeModal
-        );
       })
       .catch((err) => console.log('ERROR SAVE PRODUCT :', err));
   };
@@ -134,8 +139,7 @@ class EditProduct extends React.Component {
     return (
       <div>
         <Modal
-          isOpen={this.props.editOpen !== this.state.closeModal ? true : false}
-        >
+          isOpen={this.props.editOpen !== this.state.closeModal ? true : false}>
           <ModalHeader>Edit Product</ModalHeader>
           <ModalBody>
             <Form>
@@ -180,8 +184,7 @@ class EditProduct extends React.Component {
                     type='select'
                     onChange={(e) =>
                       this.handleChange('category', e.target.value)
-                    }
-                  >
+                    }>
                     <option>Select ..</option>
                     <option value='Shoes'>Shoes</option>
                     <option value='Clothing'>Clothing</option>
@@ -236,4 +239,4 @@ class EditProduct extends React.Component {
   }
 }
 
-export default EditProduct;
+export default connect(null, { getProducts })(EditProduct);

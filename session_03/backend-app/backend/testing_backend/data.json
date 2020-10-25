@@ -1,0 +1,30 @@
+[
+  {
+    "idUser": 2,
+    "username": "ade1",
+    "date": "19/9/2020",
+    "cart": [
+      {
+        "idproduct": 4,
+        "image": "https://kickz.akamaized.net/en/media/images/p/1200/Air_Jordan_14_Retro-BLACK_GYM_RED_WHITE_OFF_WHITE-1.jpg",
+        "name": "JORDAN AIR JORDAN 14 RETRO",
+        "category": "Shoes",
+        "size": "41",
+        "price": 2680000,
+        "qty": 2,
+        "total": 5360000
+      },
+      {
+        "idproduct": 1,
+        "image": "https://kickz.akamaized.net/en/media/images/p/1200/adidas_performance-MARQUEE_MID_VEGAS-legend_ink_ftwr_white_flash_orange-1.jpg",
+        "name": "ADIDAS PERFORMANCE MARQUEE VEGAS",
+        "category": "Shoes",
+        "size": "41",
+        "price": 5000000,
+        "qty": 1,
+        "total": 5000000
+      }
+    ],
+    "status": "unpaid"
+  }
+]

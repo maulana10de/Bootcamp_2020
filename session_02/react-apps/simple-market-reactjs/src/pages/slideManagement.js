@@ -14,6 +14,8 @@ import {
 import { API_URL } from '../assets/path/urls';
 import AddCarousel from '../components/AddCarousel';
 import EditCarousel from '../components/EditCarousel';
+import { getSlides } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class SlideManagement extends React.Component {
   constructor(props) {
@@ -40,17 +42,18 @@ class SlideManagement extends React.Component {
   };
 
   getSlide = () => {
-    Axios.get(API_URL + `/carousels`)
+    Axios.get(API_URL + `/carousel`)
       .then((res) => {
-        console.log('GET CAROUSEL :', res.data);
-        this.setState({ dbSlide: res.data });
+        // console.log('GET CAROUSEL :', res.data);
+        // this.setState({ dbSlide: res.data });
+        this.props.getSlides(res.data);
         this.getFilter();
       })
       .catch((err) => console.log('ERR GET CAROUSEL :', err));
   };
 
   renderSlide = () => {
-    return this.state.dbSlide.map((item, index) => {
+    return this.props.slides.map((item, index) => {
       return (
         <tr key={index}>
           <th>{index + 1}</th>
@@ -81,7 +84,7 @@ class SlideManagement extends React.Component {
 
   renderSlider = () => {
     console.log('test');
-    return this.state.dbSlide.map((item, index) => {
+    return this.props.slides.map((item, index) => {
       return (
         <div className='col-12 col-md-4'>
           <Card key={index}>
@@ -113,8 +116,8 @@ class SlideManagement extends React.Component {
 
   btDelete = (id) => {
     console.log('GET ID DELETE:', id);
-    Axios.delete(API_URL + `/carousels/${id}`)
-      .then((res) => this.getSlide())
+    Axios.delete(API_URL + `/carousel/${id}`)
+      .then((res) => this.props.getSlides(res.data))
       .catch((err) => {
         console.log('ERR FROM DELETE:', err);
       });
@@ -164,7 +167,7 @@ class SlideManagement extends React.Component {
                 selectedIdx: null,
               })
             }
-            data={this.state.dbSlide[this.state.selectedIdx]}
+            data={this.props.slides[this.state.selectedIdx]}
             getSlide={this.getSlide}
           />
         )}
@@ -173,4 +176,8 @@ class SlideManagement extends React.Component {
   }
 }
 
-export default SlideManagement;
+const mapStateToProps = ({ slideReducer }) => ({
+  slides: slideReducer,
+});
+
+export default connect(mapStateToProps, { getSlides })(SlideManagement);

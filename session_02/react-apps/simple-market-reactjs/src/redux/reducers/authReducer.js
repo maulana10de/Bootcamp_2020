@@ -1,11 +1,10 @@
 const INITIAL_STATE = {
-  id: null,
+  iduser: null,
   username: '',
   email: '',
   phone: '',
   role: '',
-  cart: [],
-  totalOrder: 5,
+  totalOrder: 0,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,11 +13,10 @@ export default (state = INITIAL_STATE, action) => {
       // apa yang akan disimpan di global store
       return {
         ...state,
-        id: action.payload.id,
+        iduser: action.payload.iduser,
         username: action.payload.username,
         email: action.payload.email,
         phone: action.payload.phone,
-        cart: action.payload.cart,
         role: action.payload.role,
       };
     case 'LOGOUT':
@@ -26,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
       return INITIAL_STATE;
     case 'CHECKOUT':
       // reset state ke semula
-      return { ...state, cart: [] };
+      return { ...state };
     default:
       // data terakhir sebelum logout
       return state;

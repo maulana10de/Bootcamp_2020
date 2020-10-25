@@ -1,6 +1,5 @@
 import Axios from 'axios';
 import { API_URL } from '../../assets/path/urls';
-// import cartUser from '../../pages/cartUser';
 
 export const login = (data) => {
   return {
@@ -21,17 +20,23 @@ export const checkout = () => {
   };
 };
 
-// redux thunk
-export const Login = (query, username, password) => {
+export const Login = (username, password) => {
   return (dispatch) => {
-    Axios.get(API_URL + `/users?${query}=${username}&password=${password}`)
+    Axios.get(
+      API_URL + `/users/login?username=${username}&password=${password}`
+    )
       .then((res) => {
-        console.log('GET SUCCESS LOGIN', res.data);
-        localStorage.setItem('id', res.data[0].id);
-        dispatch({
-          type: 'LOGIN',
-          payload: res.data[0],
-        });
+        console.log(res.data);
+        console.log('test');
+        if (res.data.dataLogin) {
+          localStorage.setItem('id', res.data.dataLogin.iduser);
+
+          dispatch({
+            type: 'LOGIN',
+            payload: res.data.dataLogin,
+          });
+        }
+        alert(res.data.messages);
       })
       .catch((err) => {
         console.log('GET ERROR LOGIN :', err);
@@ -40,33 +45,19 @@ export const Login = (query, username, password) => {
 };
 
 export const KeepLogin = () => {
-  return (dispatch) => {
-    let id = localStorage.getItem('id');
-    if (id) {
-      Axios.get(API_URL + `/users?id=${id}`)
-        .then((res) => {
-          dispatch({
-            type: 'LOGIN',
-            payload: res.data[0],
-          });
-          console.log('GET SUCCESS KEEP_LOGIN:', res.data);
-        })
-        .catch((err) => {
-          console.log('keep login error :', err);
-        });
+  return async (dispatch) => {
+    try {
+      let get = await Axios.get(
+        API_URL + `/users/keepLogin/${localStorage.getItem('id')}`
+      );
+      // console.log('GET DATA KEEPLOGIN', get.data);
+      localStorage.setItem('id', get.data.iduser);
+      dispatch({
+        type: 'LOGIN',
+        payload: get.data,
+      });
+    } catch (error) {
+      console.log('KEEPLOGIN', error);
     }
   };
 };
-
-// export const KeepLogin = () => {
-//   return async(dispatch) => {
-//     try {
-//       let get = await Axios.get(API_URL + `/users/${localStorage.getItem('id')}`)
-//       dispatch({
-//         type: "LOGIN",
-//         payload: get.data
-//       })
-//     } catch (error) {
-//       console.log("KEEPLOGIN", error)
-//     }
-// }

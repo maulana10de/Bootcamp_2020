@@ -17,7 +17,7 @@ class Homepage extends React.Component {
   }
 
   getCarousel = () => {
-    Axios.get(API_URL + '/carousels')
+    Axios.get(API_URL + '/carousel/getCarousels')
       .then((res) => {
         console.log('GET MAP STATE TO PROPS :', res.data);
         this.props.getSlides(res.data);

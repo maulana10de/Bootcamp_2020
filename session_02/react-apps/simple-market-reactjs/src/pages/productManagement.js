@@ -13,6 +13,8 @@ import { API_URL } from '../assets/path/urls';
 import AddProduct from '../components/AddProduct';
 import EditProduct from '../components/EditProduct';
 import Paginate from '../components/Pagination';
+import { getProducts } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -28,9 +30,9 @@ class ProductManagement extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getProduct();
-  }
+  // componentDidMount() {
+  //   this.props.getProduct();
+  // }
 
   btSort = (param, order) => {
     Axios.get(API_URL + `/products?_sort=${param}&_order=${order}`)
@@ -43,21 +45,21 @@ class ProductManagement extends React.Component {
       });
   };
 
-  getProduct = () => {
-    Axios.get(API_URL + `/products`)
-      .then((res) => {
-        console.log('get product success:', res.data);
-        this.setState({ dbProducts: res.data });
-      })
-      .catch((err) => {
-        console.log('get error:', err);
-      });
-  };
+  // getProduct = () => {
+  //   Axios.get(API_URL + `/product/getProducts`)
+  //     .then((res) => {
+  //       console.log('get product success:', res.data);
+  //       this.setState({ dbProducts: res.data });
+  //     })
+  //     .catch((err) => {
+  //       console.log('get error:', err);
+  //     });
+  // };
 
   btDelete = (id) => {
     console.log('GET ID DELETE:', id);
-    Axios.delete(API_URL + `/products/${id}`)
-      .then((res) => this.getProduct())
+    Axios.delete(API_URL + `/product/${id}`)
+      .then((res) => this.props.getProducts(res.data))
       .catch((err) => {
         console.log('ERR FROM DELETE:', err);
       });
@@ -66,7 +68,7 @@ class ProductManagement extends React.Component {
   renderProduct = () => {
     const indexOfLastItem = this.state.currentPage * this.state.itemsPerPage;
     const indexOfFirstItems = indexOfLastItem - this.state.itemsPerPage;
-    const currentItems = this.state.dbProducts.slice(
+    const currentItems = this.props.products.slice(
       indexOfFirstItems,
       indexOfLastItem
     );
@@ -160,7 +162,7 @@ class ProductManagement extends React.Component {
             </DropdownMenu>
           </Dropdown>
           {/* button add product */}
-          <AddProduct getProduct={this.getProduct} />
+          <AddProduct getProduct={this.props.getProducts} />
         </div>
         <Table dark>
           <thead>
@@ -182,12 +184,11 @@ class ProductManagement extends React.Component {
         </Table>
         <Paginate
           paginate={paginate}
-          totalItems={this.state.dbProducts.length}
+          totalItems={this.props.products.length}
           itemsPerPage={this.state.itemsPerPage}
         />
         {this.state.selectedIdx !== null && (
           <EditProduct
-            getProduct={this.getProduct}
             editOpen={this.state.editOpen}
             editClose={() =>
               this.setState({
@@ -195,7 +196,7 @@ class ProductManagement extends React.Component {
                 selectedIdx: null,
               })
             }
-            data={this.state.dbProducts[this.state.selectedIdx]}
+            data={this.props.products[this.state.selectedIdx]}
           />
         )}
       </div>
@@ -203,4 +204,10 @@ class ProductManagement extends React.Component {
   }
 }
 
-export default ProductManagement;
+const mapStateToProps = (state) => {
+  return {
+    products: state.productReducer,
+  };
+};
+
+export default connect(mapStateToProps, { getProducts })(ProductManagement);

@@ -39,8 +39,7 @@ class ProductPage extends React.Component {
   };
 
   renderProduct = () => {
-    let { products } = this.props;
-    return products.map((item, index) => {
+    return this.props.products.map((item, index) => {
       return <CardProduct key={index} data={item} />;
     });
   };
@@ -105,6 +104,7 @@ class ProductPage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('GET PRODUCT ERROR ==>', state.productReducer);
   return {
     products: state.productReducer,
   };

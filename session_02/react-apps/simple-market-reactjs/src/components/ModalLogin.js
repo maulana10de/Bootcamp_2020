@@ -46,9 +46,8 @@ class ModalLogin extends React.Component {
         isOpenTrigger: !this.state.isOpenTrigger,
       });
     } else {
-      let query =
-        username.includes('@') || username.includes('.') ? `email` : `username`;
-      this.props.Login(query, username, password);
+      this.props.Login(username, password);
+
       // Axios.get(API_URL + `/users` + url + `&password=${password}`)
       //   .then((res) => {
       //     console.log('username in axios get', res.data.length);
@@ -103,8 +102,7 @@ class ModalLogin extends React.Component {
             textTransform: 'uppercase',
             backgroundColor: '#363738',
           }}
-          onClick={this.btToggle}
-        >
+          onClick={this.btToggle}>
           Login
         </Button>
 

@@ -24,7 +24,7 @@ class ProductDetail extends React.Component {
 
   getProductDetail = () => {
     console.log(this.props.location.search);
-    Axios.get(API_URL + `/products${this.props.location.search}`)
+    Axios.get(API_URL + `/product/detail${this.props.location.search}`)
       .then((res) => {
         console.log('get products:', res);
         this.setState({ detail: res.data[0] });
@@ -76,29 +76,31 @@ class ProductDetail extends React.Component {
   };
 
   btAddToCart = () => {
-    console.log(
-      '=> ADD TO CART :',
-      this.state.detail.id,
-      this.state.detail.price,
-      this.state.qty
-    );
-
     let id = localStorage.getItem('id');
+    // console.log('BEFORE', this.props.cart);
+
+    if (this.props.cart.length === 0) {
+      this.props.cart.push({
+        idproduct: this.state.detail.id,
+        image: this.state.detail.images[0],
+        name: this.state.detail.name,
+        category: this.state.detail.category,
+        size: this.state.size,
+        price: this.state.detail.price,
+        qty: this.state.qty,
+        total: this.state.qty * this.state.detail.price,
+      });
+    }
 
     this.props.cart.forEach((item) => {
+      // console.log('GET ITEM :', item);
       if (
         item.size === this.state.size &&
         item.idproduct === this.state.detail.id
       ) {
-        console.log(item.qty, this.state.qty);
+        // console.log(item.qty, this.state.qty);
         item.qty += this.state.qty;
         item.total = item.qty * this.state.detail.price;
-        // Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
-        //   .then((response) => {
-        //     console.log(response.data);
-        //     this.setState({ redirect: true });
-        //   })
-        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
       } else {
         this.props.cart.push({
           idproduct: this.state.detail.id,
@@ -110,35 +112,11 @@ class ProductDetail extends React.Component {
           qty: this.state.qty,
           total: this.state.qty * this.state.detail.price,
         });
-
-        // this.props.cart.push({
-        //   idproduct: this.state.detail.id,
-        //   image: this.state.detail.images[0],
-        //   name: this.state.detail.name,
-        //   category: this.state.detail.category,
-        //   size: this.state.size,
-        //   price: this.state.detail.price,
-        //   qty: this.state.qty,
-        //   total: this.state.qty * this.state.detail.price,
-        // });
-
-        // Axios.patch(API_URL + `/users/${id}`, {
-        //   qty: (this.state.qty += 1),
-        //   total: this.state.qty * this.state.detail.price,
-        // })
-        //   .then((response) => {
-        //     console.log(response.data);
-        //     this.setState({ redirect: true });
-        //   })
-        //   .catch((err) => console.log('ERROR ADD TO CART :', err));
-
-        // alert('Product dan Size Sama');
       }
     });
-
-    Axios.patch(API_URL + `/users/${id}`, { cart: this.props.cart })
+    // console.log('AFTER', this.props.cart);
+    Axios.patch(API_URL + `/user/addToCart/${id}`, { cart: this.props.cart })
       .then((response) => {
-        console.log(response.data);
         this.setState({ redirect: true });
       })
       .catch((err) => console.log('ERROR ADD TO CART :', err));
@@ -271,11 +249,10 @@ class ProductDetail extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('CHECK DATA :', state.authReducer);
+  // console.log('CHECK DATA :', state.authReducer);
   return {
     cart: state.authReducer.cart,
   };
 };
-// nama, harga, kategori, warna, brand dan deskripsi
 
 export default connect(mapStateToProps)(ProductDetail);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 function CardProduct({ data }) {
   return (
@@ -35,10 +35,10 @@ function CardProduct({ data }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.productReducer,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.productReducer,
+//   };
+// };
 
-export default connect(mapStateToProps)(CardProduct);
+export default CardProduct;
