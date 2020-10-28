@@ -26,8 +26,8 @@ export const Login = (username, password) => {
       API_URL + `/users/login?username=${username}&password=${password}`
     )
       .then((res) => {
-        console.log(res.data);
-        console.log('test');
+        // console.log(res.data);
+        // console.log('test');
         if (res.data.dataLogin) {
           localStorage.setItem('id', res.data.dataLogin.iduser);
 
@@ -58,6 +58,24 @@ export const KeepLogin = () => {
       });
     } catch (error) {
       console.log('KEEPLOGIN', error);
+    }
+  };
+};
+
+export const getCart = () => {
+  return async (dispatch) => {
+    try {
+      let get = await Axios.get(
+        API_URL + `/users/getCart/${localStorage.getItem('id')}`
+      );
+      console.log('GET CART ===>:', get.data);
+      // localStorage.setItem('id', get.data.iduser);
+      dispatch({
+        type: 'GET_CART',
+        payload: get.data,
+      });
+    } catch (error) {
+      console.log('GET CART ERROR :', error);
     }
   };
 };

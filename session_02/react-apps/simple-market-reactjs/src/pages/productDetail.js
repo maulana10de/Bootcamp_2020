@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Input, Jumbotron } from 'reactstrap';
 import { API_URL } from '../assets/path/urls';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -11,8 +12,8 @@ class ProductDetail extends React.Component {
     this.state = {
       detail: {},
       thumbnail: 0,
-      total: 0,
       qty: 0,
+      total: 0,
       disabled: false,
       totalHarga: 0,
     };
@@ -23,11 +24,11 @@ class ProductDetail extends React.Component {
   }
 
   getProductDetail = () => {
-    console.log(this.props.location.search);
-    Axios.get(API_URL + `/product/detail${this.props.location.search}`)
+    // console.log('GET ID PRODUCT =====>', this.props.location.search);
+    Axios.get(API_URL + `/products${this.props.location.search}`)
       .then((res) => {
-        console.log('get products:', res);
-        this.setState({ detail: res.data[0] });
+        // console.log('get products:', res.data);
+        this.setState({ detail: res.data });
       })
       .catch((err) => {
         console.log('get error products:', err);
@@ -42,7 +43,7 @@ class ProductDetail extends React.Component {
           className='flex-grow-1 select-image'
           onClick={() => this.setState({ thumbnail: index })}
           style={{ padding: '0 1px' }}>
-          <img src={item} width='100%' alt={item.title} />
+          <img src={item.image} width='100%' alt={item.title} />
         </div>
       );
     });
@@ -57,7 +58,13 @@ class ProductDetail extends React.Component {
           }}
           disabled={item.total === 0 && true}
           key={index}
-          onClick={() => this.setState({ total: item.total, size: item.code })}>
+          onClick={() =>
+            this.setState({
+              total: item.total,
+              size: item.code,
+              idstock: item.idstock,
+            })
+          }>
           {item.code}
         </Button>
       );
@@ -65,57 +72,63 @@ class ProductDetail extends React.Component {
   };
 
   btIncrement = () => {
-    if (this.state.qty < this.state.total) {
+    let { qty, total, detail } = this.state;
+
+    // console.log(qty, total, detail);
+    if (qty < total) {
       this.setState({
-        qty: (this.state.qty += 1),
-        totalHarga: this.state.qty * this.state.detail.price,
+        qty: (qty += 1),
+        totalHarga: qty * detail.price,
       });
     } else {
-      alert('out of stock');
+      Swal.fire({
+        html: `<h3>Stok tersisa < ${total}, beli segera!</h3>`,
+      });
     }
   };
 
   btAddToCart = () => {
-    let id = localStorage.getItem('id');
+    // let id = localStorage.getItem('id');
     // console.log('BEFORE', this.props.cart);
 
-    if (this.props.cart.length === 0) {
-      this.props.cart.push({
-        idproduct: this.state.detail.id,
-        image: this.state.detail.images[0],
-        name: this.state.detail.name,
-        category: this.state.detail.category,
-        size: this.state.size,
-        price: this.state.detail.price,
-        qty: this.state.qty,
-        total: this.state.qty * this.state.detail.price,
-      });
-    }
+    let cart = {
+      iduser: this.props.iduser,
+      idstock: this.state.idstock,
+      idproduct: this.state.detail.idproduct,
+      qty: this.state.qty,
+    };
 
-    this.props.cart.forEach((item) => {
-      // console.log('GET ITEM :', item);
-      if (
-        item.size === this.state.size &&
-        item.idproduct === this.state.detail.id
-      ) {
-        // console.log(item.qty, this.state.qty);
-        item.qty += this.state.qty;
-        item.total = item.qty * this.state.detail.price;
-      } else {
-        this.props.cart.push({
-          idproduct: this.state.detail.id,
-          image: this.state.detail.images[0],
-          name: this.state.detail.name,
-          category: this.state.detail.category,
-          size: this.state.size,
-          price: this.state.detail.price,
-          qty: this.state.qty,
-          total: this.state.qty * this.state.detail.price,
-        });
-      }
-    });
-    // console.log('AFTER', this.props.cart);
-    Axios.patch(API_URL + `/user/addToCart/${id}`, { cart: this.props.cart })
+    // let cart = {};
+    // if (this.props.cart.length === 0) {
+    //   cart = {
+    //     iduser: this.props.iduser,
+    //     idstock: this.state.idstock,
+    //     idproduct: this.state.detail.idproduct,
+    //     qty: this.state.qty,
+    //   };
+    // }
+
+    // console.log(this.state.detail.stock);
+
+    // this.props.cart.forEach((item) => {
+    //   if (
+    //     item.size === this.state.size &&
+    //     item.idproduct === this.state.detail.idproduct
+    //   ) {
+    //     item.qty += this.state.qty;
+    //     item.total = item.qty * this.state.detail.price;
+    //   } else {
+    //     cart = {
+    //       iduser: this.props.iduser,
+    //       idstock: this.state.idstock,
+    //       idproduct: this.state.detail.idproduct,
+    //       qty: this.state.qty,
+    //     };
+    //   }
+    //   console.log('GET ITEM :', item.size, item.idproduct, this.state.size);
+    // });
+    // // console.log('AFTER', this.props.cart);
+    Axios.post(API_URL + `/users/addToCart`, { cart })
       .then((response) => {
         this.setState({ redirect: true });
       })
@@ -123,20 +136,25 @@ class ProductDetail extends React.Component {
   };
 
   render() {
-    if (this.state.redirect) {
+    let { detail, thumbnail, redirect, qty, total, totalHarga } = this.state;
+
+    if (redirect) {
       return <Redirect to='/cart' />;
     }
 
-    let { detail, thumbnail } = this.state;
-    console.log('GET DETAIL PRODUCT :', detail);
+    // console.log('GET DETAIL PRODUCT :', detail);
     return (
       <div className='container'>
-        {detail.id && (
+        {detail.idproduct && (
           <Jumbotron
             className='row p-3'
             style={{ borderRadius: 0, backgroundColor: '#fff' }}>
             <div className='col-12 col-md-5 pr-3 border-right'>
-              <img src={detail.images[thumbnail]} width='100%' alt='images' />
+              <img
+                src={detail.images[thumbnail].image}
+                width='100%'
+                alt='images'
+              />
               <div className='d-flex mt-1'>
                 {this.renderThumbnail(detail.images)}
               </div>
@@ -200,24 +218,26 @@ class ProductDetail extends React.Component {
                       textTransform: 'uppercase',
                       marginTop: '5px',
                     }}>
-                    Stock : {this.state.total}
+                    Stock : {total}
                   </p>
                 </div>
                 <div className='d-flex justify-content-center m-1'>
                   <Button
                     onClick={() =>
                       this.setState({
-                        qty: this.state.qty > 0 ? (this.state.qty -= 1) : 0,
-                        totalHarga: this.state.qty * this.state.detail.price,
+                        qty: qty > 0 ? (qty -= 1) : 0,
+                        totalHarga: qty * detail.price,
                       })
                     }>
                     -
                   </Button>
                   <Input
-                    value={this.state.qty}
+                    value={qty}
                     style={{ width: '4vw' }}
                     className='text-center m-1'
+                    readOnly
                   />
+
                   <Button onClick={this.btIncrement}>+</Button>
                 </div>
                 <div className='row'>
@@ -228,7 +248,10 @@ class ProductDetail extends React.Component {
                         letterSpacing: '1.5px',
                         fontWeight: 700,
                       }}>
-                      Rp. {this.state.totalHarga.toLocaleString()}
+                      Rp.{' '}
+                      {qty > 0
+                        ? totalHarga.toLocaleString()
+                        : detail.price.toLocaleString()}
                     </h3>
                   </div>
                   <div className='col-md-6'>
@@ -252,6 +275,7 @@ const mapStateToProps = (state) => {
   // console.log('CHECK DATA :', state.authReducer);
   return {
     cart: state.authReducer.cart,
+    iduser: state.authReducer.iduser,
   };
 };
 

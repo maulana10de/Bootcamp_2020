@@ -121,8 +121,8 @@ class NavbarCom extends React.Component {
                             {/* {this.totalQty()} */}
                           </Badge>
                         </DropdownToggle>
-                        <DropdownMenu>
-                          {/* <Card
+                        {/* <DropdownMenu> */}
+                        {/* <Card
                             style={{
                               width: '400px',
                               fontSize: '14px',
@@ -162,7 +162,7 @@ class NavbarCom extends React.Component {
                               <Link to='/cart'>Go To Cart</Link>
                             </CardFooter>
                           </Card> */}
-                        </DropdownMenu>
+                        {/* </DropdownMenu> */}
                       </Dropdown>
                     </div>
                     <div>
@@ -183,7 +183,16 @@ class NavbarCom extends React.Component {
                           {user.username}
                         </DropdownToggle>
                         <DropdownMenu>
-                          <DropdownItem>Profile</DropdownItem>
+                          <DropdownItem>
+                            <Link
+                              to='/profile'
+                              style={{
+                                textDecoration: 'none',
+                                color: '#16181B',
+                              }}>
+                              Profile
+                            </Link>
+                          </DropdownItem>
                           <DropdownItem>
                             <Link
                               to='/cart'

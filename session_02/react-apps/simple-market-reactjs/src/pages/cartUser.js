@@ -1,11 +1,11 @@
 import Axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
-import { login, checkout } from '../redux/actions/';
+import { login, checkout, getCart } from '../redux/actions/';
 
 class CartPage extends React.Component {
   constructor(props) {
@@ -17,40 +17,83 @@ class CartPage extends React.Component {
     };
   }
 
-  refreshCart = () => {
-    console.log('GET CART PROPS ==>', this.props.cart);
-    Axios.patch(API_URL + `/user/refreshCart/${this.props.id}`, {
-      cart: this.props.cart,
+  componentDidMount() {
+    this.props.getCart();
+  }
+
+  refreshCart = (paramsidcart, paramsqty) => {
+    console.log('GET REFRESH CART ====>', paramsidcart, paramsqty);
+    Axios.patch(API_URL + `/users/updateCartQty/${paramsidcart}`, {
+      qty: paramsqty,
     })
       .then((res) => {
-        localStorage.setItem('id', res.data);
-        this.props.login(res.data);
+        this.props.getCart();
+        // localStorage.setItem('id', res.data);
+        // this.props.login(res.data);
       })
       .catch((err) => {
-        console.log('GET ERROR DELETE CART :', err);
+        console.log('GET ERROR CART', err);
       });
   };
 
-  btIncrement = (index) => {
-    this.props.cart[index].qty += 1;
-    this.props.cart[index].total =
-      this.props.cart[index].qty * this.props.cart[index].price;
-    // console.log('GET INDEX', this.props.cart[index]);
-    this.setState({ totalQty: this.totalQty() });
-    this.refreshCart();
+  btIncrement = (idcart, index) => {
+    let { cart, product } = this.props;
+    // console.log('GET STOCK  ====>', cart[index].idsize, product[index].stock);
+    let idstock = product[index].stock.findIndex(
+      (e) => e.code === cart[index].size
+    );
+    console.log('===>', product[index].stock[idstock].total, cart[index].qty);
+
+    if (cart[index].qty >= product[index].stock[idstock].total) {
+      Swal.fire({
+        html: `<h3>Stok tersisa < ${product[index].stock[idstock].total}, beli segera!</h3>`,
+      });
+    } else {
+      // if(product[index].stock[stock].qty)
+      cart[index].qty += 1;
+      // this.props.cart[index].total =
+      //   this.props.cart[index].qty * this.props.cart[index].price;
+      console.log('GET INDEX', cart[index].qty);
+      // this.setState({ totalQty: this.totalQty() });
+      this.refreshCart(idcart, cart[index].qty);
+    }
   };
 
-  btDecrement = (index) => {
+  btDecrement = (idcart, index) => {
     let { cart } = this.props;
-    cart[index].qty -= 1;
-    cart[index].total = cart[index].qty * cart[index].price;
-    this.setState({ totalQty: this.totalQty() });
-    this.refreshCart();
+    if (cart[index].qty > 1) {
+      cart[index].qty -= 1;
+      // cart[index].total = cart[index].qty * cart[index].price;
+      console.log('GET INDEX', cart[index].qty);
+      // this.setState({ totalQty: this.totalQty() });
+      this.refreshCart(idcart, cart[index].qty);
+    } else {
+      this.btDelete(idcart);
+    }
   };
 
-  btDelete = (index) => {
-    this.props.cart.splice(index, 1);
-    this.refreshCart();
+  btDelete = (idcart) => {
+    Swal.fire({
+      title: 'Hapus barang?',
+      text: 'Barang ini akan dihapus dari keranjangmu.',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus Barang!',
+      width: '30rem',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(API_URL + `/users/deleteCart/${idcart}`)
+          .then((res) => {
+            console.log(res);
+            this.props.getCart();
+          })
+          .catch((err) => {
+            console.log('GET ERROR CART', err);
+          });
+        this.refreshCart();
+      }
+    });
   };
 
   decrementStock = (id, stock) => {
@@ -66,6 +109,7 @@ class CartPage extends React.Component {
   btCheckout = () => {
     let date = new Date();
     let obj = {
+      idproduct: this.props.cart.idproduct,
       idUser: this.props.id,
       username: this.props.user.username,
       date: date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
@@ -116,7 +160,7 @@ class CartPage extends React.Component {
             .catch((error) => {
               console.log(error);
             });
-          console.log('GET SUCCESS USER_TRANSACTION :', res.data);
+          // console.log('GET SUCCESS USER_TRANSACTION :', res.data);
         })
         .catch((err) => console.log(err));
     } else {
@@ -143,14 +187,18 @@ class CartPage extends React.Component {
           <td>{item.price.toLocaleString()}</td>
           <td>
             <div className='d-flex'>
-              <Button onClick={() => this.btDecrement(index)}>-</Button>
+              <Button onClick={() => this.btDecrement(item.idcart, index)}>
+                -
+              </Button>
               <p className='m-3 text-center'>{item.qty}</p>
-              <Button onClick={() => this.btIncrement(index)}>+</Button>
+              <Button onClick={() => this.btIncrement(item.idcart, index)}>
+                +
+              </Button>
             </div>
           </td>
-          <td>{item.total.toLocaleString()}</td>
+          <td>{(item.qty * item.price).toLocaleString()}</td>
           <td>
-            <Button color='danger' onClick={() => this.btDelete(index)}>
+            <Button color='danger' onClick={() => this.btDelete(item.idcart)}>
               Delete
             </Button>
           </td>
@@ -163,7 +211,7 @@ class CartPage extends React.Component {
     let { cart } = this.props;
     let payment = 0;
     cart.forEach((element) => {
-      payment += element.total;
+      payment += element.qty * element.price;
     });
     return payment;
   };
@@ -188,7 +236,7 @@ class CartPage extends React.Component {
         <Table dark>
           <thead>
             <tr>
-              <th>#</th>
+              <th>No</th>
               <th>Image</th>
               <th>Name</th>
               <th>Category</th>
@@ -200,22 +248,49 @@ class CartPage extends React.Component {
             </tr>
           </thead>
           <tbody>{this.renderCart()}</tbody>
-          <tfoot>
-            <tr>
-              <th colSpan='6' className='text-center'>
-                Total Payment
-              </th>
-              <th className='text-center'>
-                {this.totalQty().toLocaleString()}
-              </th>
-              <th>{this.totalPayment().toLocaleString()}</th>
-              <th>
-                <Button color='success' onClick={this.btCheckout}>
-                  Checkout
-                </Button>
-              </th>
-            </tr>
-          </tfoot>
+          {this.props.cart.length === 0 ? (
+            <tfoot>
+              <tr>
+                <th
+                  colSpan='9'
+                  style={{
+                    textAlign: 'center',
+                    letterSpacing: '2px',
+                    padding: '50px',
+                  }}>
+                  <h5>Wah, keranjang belanjamu kosong</h5>
+                  <p>
+                    Daripada dianggurin, mending isi dengan barang-barang
+                    impianmu. Yuk, cek sekarang!
+                  </p>
+                  <Button color='success'>
+                    <Link
+                      to='/product'
+                      style={{ textDecoration: 'none', color: '#fff' }}>
+                      Mulai Belanja
+                    </Link>
+                  </Button>
+                </th>
+              </tr>
+            </tfoot>
+          ) : (
+            <tfoot>
+              <tr>
+                <th colSpan='6' className='text-center'>
+                  Total Payment
+                </th>
+                <th className='text-center'>
+                  {this.totalQty().toLocaleString()}
+                </th>
+                <th>{this.totalPayment().toLocaleString()}</th>
+                <th>
+                  <Button color='success' onClick={this.btCheckout}>
+                    Checkout
+                  </Button>
+                </th>
+              </tr>
+            </tfoot>
+          )}
         </Table>
       </div>
     );
@@ -223,14 +298,15 @@ class CartPage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('GET DATA CARTUSER :', state.authReducer.cart);
+  // console.log('GET DATA CARTUSER :', state.authReducer.cart);
   // console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
+  console.log('GET PRODUCT :', state.productReducer);
   return {
     user: state.authReducer,
     cart: state.authReducer.cart,
-    id: state.authReducer.id,
+    id: state.authReducer.iduser,
     product: state.productReducer,
   };
 };
 
-export default connect(mapStateToProps, { login, checkout })(CartPage);
+export default connect(mapStateToProps, { login, checkout, getCart })(CartPage);

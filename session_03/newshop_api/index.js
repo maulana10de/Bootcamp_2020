@@ -31,9 +31,17 @@ app.get('/', (req, res) => {
 });
 
 /* START ROUTES */
-const { usersRouter } = require('./routers');
+const {
+  usersRouter,
+  carouselRouter,
+  productRouter,
+  transactionRouter,
+} = require('./routers');
 
 app.use('/users', usersRouter);
+app.use('/carousel', carouselRouter);
+app.use('/products', productRouter);
+app.use('/transaction', transactionRouter);
 /* END ROUTES */
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

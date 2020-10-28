@@ -78,7 +78,7 @@ class ProductManagement extends React.Component {
         <tr key={index}>
           <th>{index + 1}</th>
           <td>
-            <img src={item.images[0]} width='90vw' alt={item.name} />
+            <img src={item.images[0].image} width='90vw' alt={item.name} />
           </td>
           <td>{item.name}</td>
           <td>{item.brand}</td>

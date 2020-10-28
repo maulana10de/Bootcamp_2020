@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   phone: '',
   role: '',
   totalOrder: 0,
+  cart: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +19,11 @@ export default (state = INITIAL_STATE, action) => {
         email: action.payload.email,
         phone: action.payload.phone,
         role: action.payload.role,
+      };
+    case 'GET_CART':
+      return {
+        ...state,
+        cart: action.payload,
       };
     case 'LOGOUT':
       // reset state ke semula

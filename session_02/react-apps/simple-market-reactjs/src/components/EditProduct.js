@@ -28,7 +28,7 @@ class EditProduct extends React.Component {
       price: props.data.price,
       stock: props.data.stock,
       images: props.data.images,
-      sizeShoes: [38, 39, 40, 41, 42],
+      sizeShoes: [38, 39, 40, 41, 42, 43],
       sizeClothing: ['S', 'M', 'L', 'XL', 'XXL'],
       listGambar: ['images1', 'images2', 'images3', 'images4', 'images5'],
       closeModal: !this.props.editOpen,
@@ -47,7 +47,7 @@ class EditProduct extends React.Component {
           <Label>{item}</Label>
           <Input
             type='number'
-            defaultValue={stock[index].total}
+            defaultValue={stock[index] && stock[index].total}
             innerRef={(value) => (this[`code${item}`] = value)}
           />
         </FormGroup>
@@ -101,7 +101,7 @@ class EditProduct extends React.Component {
     // console.log('GET IMAGE', newImages);
     // console.log('GET STATE', this.state.images);
 
-    Axios.patch(API_URL + `/product/${id}`, {
+    Axios.patch(API_URL + `/products/${id}`, {
       name,
       brand,
       category,
@@ -162,7 +162,7 @@ class EditProduct extends React.Component {
                         type='text'
                         innerRef={(value) => (this[item] = value)}
                         placeholder={`Images ${index + 1}`}
-                        defaultValue={images[index]}
+                        defaultValue={images[index].image}
                       />
                     );
                   })}

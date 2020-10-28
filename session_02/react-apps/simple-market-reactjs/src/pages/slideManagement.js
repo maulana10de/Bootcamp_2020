@@ -44,8 +44,6 @@ class SlideManagement extends React.Component {
   getSlide = () => {
     Axios.get(API_URL + `/carousel`)
       .then((res) => {
-        // console.log('GET CAROUSEL :', res.data);
-        // this.setState({ dbSlide: res.data });
         this.props.getSlides(res.data);
         this.getFilter();
       })
@@ -73,7 +71,9 @@ class SlideManagement extends React.Component {
               style={{ marginRight: '5px' }}>
               Edit
             </Button>
-            <Button color='danger' onClick={() => this.btDelete(item.id)}>
+            <Button
+              color='danger'
+              onClick={() => this.btDelete(item.idcarousel)}>
               Delete
             </Button>
           </td>
@@ -104,9 +104,18 @@ class SlideManagement extends React.Component {
                 style={{ marginRight: '5px' }}>
                 Edit
               </Button>
-              <Button color='danger' onClick={() => this.btDelete(item.id)}>
+              <Button
+                color='danger'
+                onClick={() => this.btDelete(item.idcarousel)}>
                 Delete
               </Button>
+              {item.status === 'on' ? (
+                <Button color='primary' style={{ float: 'right' }}>
+                  {item.status}
+                </Button>
+              ) : (
+                <Button style={{ float: 'right' }}>{item.status}</Button>
+              )}
             </CardFooter>
           </Card>
         </div>
@@ -116,7 +125,7 @@ class SlideManagement extends React.Component {
 
   btDelete = (id) => {
     console.log('GET ID DELETE:', id);
-    Axios.delete(API_URL + `/carousel/${id}`)
+    Axios.delete(API_URL + `/carousel/delete/${id}`)
       .then((res) => this.props.getSlides(res.data))
       .catch((err) => {
         console.log('ERR FROM DELETE:', err);

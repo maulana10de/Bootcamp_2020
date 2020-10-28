@@ -28,12 +28,12 @@ export default ({ carousel }) => {
   };
 
   const slides = carousel.map((item, idx) => {
+    console.log(item.status);
     return (
       <CarouselItem
         onExiting={() => setAnim(true)}
         onExited={() => setAnim(false)}
-        key={idx}
-      >
+        key={idx}>
         <img
           src={item.image}
           alt={`slide-${idx}`}

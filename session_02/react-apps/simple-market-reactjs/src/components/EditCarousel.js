@@ -20,9 +20,10 @@ class EditCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.data.id,
+      id: props.data.idcarousel,
       title: props.data.title,
       image: props.data.image,
+      status: props.data.status,
     };
   }
 
@@ -31,11 +32,11 @@ class EditCarousel extends React.Component {
   };
 
   btSave = () => {
-    let { title, image, id } = this.state;
+    let { title, image, status, id } = this.state;
     // console.log('GET SAVE DATA CAROUSEL', title);
     // console.log('GET SAVE DATA CAROUSEL', image);
 
-    Axios.patch(API_URL + `/carousel/${id}`, { title, image })
+    Axios.patch(API_URL + `/carousel/update/${id}`, { title, image, status })
       .then((res) => {
         Swal.fire({
           icon: 'success',
@@ -51,7 +52,7 @@ class EditCarousel extends React.Component {
   };
 
   render() {
-    let { title, image } = this.state;
+    let { title, image, status } = this.state;
     return (
       <div>
         <Modal isOpen={this.props.editOpen}>
@@ -72,6 +73,14 @@ class EditCarousel extends React.Component {
                   value={image}
                   type='text'
                   onChange={(e) => this.handleChange('image', e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Status</Label>
+                <Input
+                  value={status}
+                  type='text'
+                  onChange={(e) => this.handleChange('status', e.target.value)}
                 />
               </FormGroup>
             </Form>

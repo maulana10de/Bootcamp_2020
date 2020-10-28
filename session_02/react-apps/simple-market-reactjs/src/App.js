@@ -14,10 +14,11 @@ import Notfound from './pages/notfound';
 import ProductPage from './pages/product';
 import ProductDetail from './pages/productDetail';
 import ProductManagement from './pages/productManagement';
+import ProfilePage from './pages/profile';
 import RegisterPage from './pages/register';
 import SlideManagement from './pages/slideManagement';
 import Transaction from './pages/transaction';
-import { login, getProducts, KeepLogin } from './redux/actions';
+import { login, getProducts, KeepLogin, getCart } from './redux/actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,10 +29,11 @@ class App extends React.Component {
   componentDidMount() {
     this.props.KeepLogin();
     this.getProducts();
+    this.props.getCart();
   }
 
   getProducts = () => {
-    Axios.get(API_URL + `/product/getProducts`)
+    Axios.get(API_URL + `/products`)
       .then((res) => {
         this.props.getProducts(res.data);
       })
@@ -61,6 +63,7 @@ class App extends React.Component {
             <>
               <Route path='/cart' component={CartPage} />
               <Route path='/transaction' component={Transaction} />
+              <Route path='/profile' component={ProfilePage} />
             </>
           )}
 
@@ -82,4 +85,9 @@ const mapStateToProps = (state) => {
 
 // param 1 yaitu untuk mengambil data dari reducer
 // param 2 untuk menyimpan data
-export default connect(mapStateToProps, { login, getProducts, KeepLogin })(App);
+export default connect(mapStateToProps, {
+  login,
+  getProducts,
+  KeepLogin,
+  getCart,
+})(App);

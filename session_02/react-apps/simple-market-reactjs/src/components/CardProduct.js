@@ -7,10 +7,15 @@ import '../App.css';
 function CardProduct({ data }) {
   return (
     <div className='col-12 col-md-4 mb-2 '>
-      <Card key={data.id} style={{ borderRadius: 0, margin: '1px' }}>
-        <CardImg top width='100%' src={data.images[0]} alt='Card image cap' />
+      <Card key={data.idproduct} style={{ borderRadius: 0, margin: '1px' }}>
+        <CardImg
+          top
+          width='100%'
+          src={data.images[0].image}
+          alt='Card image cap'
+        />
         <Link
-          to={`/product-detail?id=${data.id}`}
+          to={`/product-detail?idproduct=${data.idproduct}`}
           style={{ textDecoration: 'none' }}>
           <CardBody className='card-body-hover'>
             <CardSubtitle
