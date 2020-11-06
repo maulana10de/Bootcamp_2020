@@ -1,10 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
-import { Button, Table, UncontrolledCollapse } from 'reactstrap';
+import { Button, Card, Table, UncontrolledCollapse } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { API_URL } from '../assets/path/urls';
 import { connect } from 'react-redux';
 import { KeepLogin } from '../redux/actions/authAction';
+import moment from 'moment';
 
 class Transaction extends React.Component {
   constructor(props) {
@@ -21,9 +22,12 @@ class Transaction extends React.Component {
   // fungsi getTransaction di filter berdasarkan user id,
   // jadi yang akan tampil hanya yang punya user id tersebut
   getTransaction = () => {
-    Axios.get(
-      API_URL + `/userTransactions?idUser=${localStorage.getItem('id')}`
-    )
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+    Axios.get(API_URL + `/transaction`, headers)
       .then((res) => {
         console.log('GET SUCCESS GET_TRANSACTION:', res.data);
         this.setState({ dbTransaction: res.data });
@@ -36,19 +40,15 @@ class Transaction extends React.Component {
 
   btPayment = (id) => {
     // update menggunakan metode patch, yang hanya mengganti "status" menjadi "paid"
-    Axios.patch(API_URL + `/userTransactions/${id}`, { status: 'paid' })
+    Axios.patch(API_URL + `/transaction/${id}`, { status: 'paid' })
       .then((res) => {
         Swal.fire({
           icon: 'success',
           text: 'Your payment has been successful',
         });
         this.getTransaction();
-
-        console.log('GET SUCCESS BT-PAYMENT:', res.data);
       })
-      .catch((err) => {
-        console.log('GET ERROR BT-PAYMENT:', err);
-      });
+      .catch((err) => console.log(err));
   };
 
   renderTransaction = () => {
@@ -57,52 +57,67 @@ class Transaction extends React.Component {
         <>
           <tr key={index} className='text-center'>
             <td>{index + 1}</td>
-            <td>{item.date}</td>
-            <td>{item.username.toUpperCase()}</td>
+            <td>{moment(item.date).format('L')}</td>
+            <td>{item.invoice}</td>
+            <td>{item.total_payment.toLocaleString()}</td>
             <td>{item.status.toUpperCase()}</td>
             <td>
               <Button className='mr-1' id={`toggler${index}`}>
                 Detail
               </Button>
               <Button
-                disabled={item.status !== 'unpaid' ? true : false}
-                onClick={() => this.btPayment(item.id)}>
+                disabled={item.status !== 'Unpaid' ? true : false}
+                onClick={() => this.btPayment(item.idtransaction)}>
                 Payment
               </Button>
             </td>
           </tr>
-          <UncontrolledCollapse toggler={`#toggler${index}`}>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Product</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Size</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Amount Price</th>
-              </tr>
-            </thead>
-            {item.cart.map((elem, idx) => {
-              return (
-                <tbody>
-                  <tr className='text-center'>
-                    <td>{idx + 1}</td>
-                    <td>
-                      <img src={elem.image} alt={elem.name} width='100vw' />
-                    </td>
-                    <td>{elem.name}</td>
-                    <td>{elem.category}</td>
-                    <td>{elem.size}</td>
-                    <td>{elem.qty}</td>
-                    <td>{elem.price}</td>
-                    <td>{elem.total}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </UncontrolledCollapse>
+          <tr className='text-center'>
+            <td colSpan='6'>
+              <UncontrolledCollapse toggler={`#toggler${index}`}>
+                <Card
+                  style={{
+                    backgroundColor: '#627282',
+                    padding: '20px',
+                    margin: '20px',
+                  }}>
+                  <table style={{ width: '100%' }}>
+                    <thead>
+                      <th>No</th>
+                      <th>Product</th>
+                      <th>Name</th>
+                      <th>Category</th>
+                      <th>Size</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                      {item.detail.map((elem, idx) => {
+                        console.log(elem);
+                        return (
+                          <tr key={idx} className='text-center'>
+                            <th>{idx + 1}</th>
+                            <th>
+                              <img
+                                src={elem.image}
+                                alt={elem.name}
+                                width='100vw'
+                              />
+                            </th>
+                            <th>{elem.name}</th>
+                            <th>{elem.category}</th>
+                            <th>{elem.size}</th>
+                            <th>{elem.qty}</th>
+                            <th>{elem.price.toLocaleString()}</th>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </Card>
+              </UncontrolledCollapse>
+            </td>
+          </tr>
         </>
       );
     });
@@ -146,7 +161,8 @@ class Transaction extends React.Component {
             <tr className='text-center'>
               <th>#</th>
               <th>Transaction Date</th>
-              <th>Name</th>
+              <th>Invoice</th>
+              <th>Total Payment</th>
               <th>Status</th>
               <th style={{ width: '10vw' }}>Action</th>
             </tr>

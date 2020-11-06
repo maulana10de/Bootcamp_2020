@@ -1,0 +1,55 @@
+-- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
+--
+-- Host: localhost    Database: dbshop
+-- ------------------------------------------------------
+-- Server version	5.7.31-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `transaction_detail`
+--
+
+DROP TABLE IF EXISTS `transaction_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transaction_detail` (
+  `idtransdetail` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice` varchar(45) NOT NULL,
+  `idproduct` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `idstock` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  PRIMARY KEY (`idtransdetail`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction_detail`
+--
+
+LOCK TABLES `transaction_detail` WRITE;
+/*!40000 ALTER TABLE `transaction_detail` DISABLE KEYS */;
+INSERT INTO `transaction_detail` VALUES (1,'INV/00335172020',1,3,2,3),(2,'INV/00365172020',1,3,2,3),(3,'INV/00365172020',3,3,16,3),(4,'INV/00337022020',1,3,6,3),(5,'INV/00334982020',1,3,6,3),(6,'INV/00338292020',2,3,12,3),(7,'INV/00369332020',3,3,18,5),(8,'INV/00369332020',2,3,12,10),(9,'INV/00166072020',3,1,18,1),(10,'INV/00166072020',2,1,12,1),(11,'INV/00339032020',1,3,5,1),(12,'INV/0033782020',2,3,12,4),(13,'INV/00332962020',2,3,10,2),(14,'INV/00332252020',3,3,18,1),(15,'INV/002938062020',3,29,18,1);
+/*!40000 ALTER TABLE `transaction_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-11-05 20:58:59

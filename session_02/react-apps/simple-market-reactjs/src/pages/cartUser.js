@@ -22,27 +22,25 @@ class CartPage extends React.Component {
   }
 
   refreshCart = (paramsidcart, paramsqty) => {
-    console.log('GET REFRESH CART ====>', paramsidcart, paramsqty);
     Axios.patch(API_URL + `/users/updateCartQty/${paramsidcart}`, {
       qty: paramsqty,
     })
       .then((res) => {
         this.props.getCart();
-        // localStorage.setItem('id', res.data);
-        // this.props.login(res.data);
       })
       .catch((err) => {
-        console.log('GET ERROR CART', err);
+        console.log(err);
       });
   };
 
   btIncrement = (idcart, index) => {
     let { cart, product } = this.props;
-    // console.log('GET STOCK  ====>', cart[index].idsize, product[index].stock);
+    // console.log('GET STOCK  ====>', product[index]);
     let idstock = product[index].stock.findIndex(
       (e) => e.code === cart[index].size
     );
-    console.log('===>', product[index].stock[idstock].total, cart[index].qty);
+    // console.log(idstock);
+    // console.log('===>', product[index].stock[idstock].total, cart[index].qty);
 
     if (cart[index].qty >= product[index].stock[idstock].total) {
       Swal.fire({
@@ -53,7 +51,7 @@ class CartPage extends React.Component {
       cart[index].qty += 1;
       // this.props.cart[index].total =
       //   this.props.cart[index].qty * this.props.cart[index].price;
-      console.log('GET INDEX', cart[index].qty);
+      // console.log('GET INDEX', cart[index].qty);
       // this.setState({ totalQty: this.totalQty() });
       this.refreshCart(idcart, cart[index].qty);
     }
@@ -107,72 +105,114 @@ class CartPage extends React.Component {
   };
 
   btCheckout = () => {
-    let date = new Date();
-    let obj = {
-      idproduct: this.props.cart.idproduct,
-      idUser: this.props.id,
-      username: this.props.user.username,
-      date: date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
+    // let date = new Date();
+    // let obj = {};
+    // let dataCart = [];
+    // let dataIdCart = [];
+    // let invoice = `INV/${date.getFullYear()}/${date.getMonth()}/${Math.floor(
+    //   Math.random() * 1000 + 1
+    // )}`;
+    // this.props.cart.forEach((item, idx) => {
+    //   obj = {
+    //     iduser: this.props.id,
+    //     idproduct: item.idproduct,
+    //     idstock: item.idstock,
+    //     idsize: item.idsize,
+    //     image: item.image,
+    //     name: item.name,
+    //     category: item.category,
+    //     size: item.size,
+    //     qty: item.qty,
+    //     price: item.price,
+    //     noinvoice: invoice,
+    //     status: 'unpaid',
+    //   };
+    //   dataIdCart.push(item.idcart);
+    //   dataCart.push(obj);
+    // });
+
+    // console.log('=====>', dataCart);
+    // console.log('=====>', this.props.cart);
+    console.log('====>', this.props.id);
+
+    Axios.post(API_URL + `/transaction`, {
       cart: this.props.cart,
-      status: 'unpaid',
-    };
+      iduser: this.props.id,
+    })
+      .then((res) => {
+        this.setState({ redirect: true });
+        // this.props.getCart();
+        // Axios.delete(API_URL + `/users/deleteMulti?idcart=${dataIdCart}`)
+        //   .then((res) => console.log(res))
+        //   .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
 
-    if (this.props.cart.length > 0) {
-      this.props.cart.forEach((item, index) => {
-        // let indexProduct = this.props.product.findIndex(
-        //   (value) => value.id === item.idproduct
-        // );
-        // let indexStock = this.props.product[indexProduct].stock.findIndex(
-        //   (value) => value.code === item.size
-        // );
-        // this.props.product[indexProduct].stock[indexStock].total -= item.qty;
-        // this.decrementStock(item.idproduct, {
-        //   stock: this.props.product[indexProduct].stock,
-        // });
+    // Axios.post(API_URL + `/transaction`, obj)
+    //   .then((res) => {
+    //     // this.setState({ redirect: true });
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
 
-        // Cara 1
-        this.props.product.forEach((value, idx) => {
-          if (item.idproduct === value.id) {
-            console.log('sama', item.idproduct, value.id);
-            let indexStock = value.stock.findIndex(
-              (element) => element.code === item.size
-            );
-            value.stock[indexStock].total -= item.qty;
-            this.decrementStock(value.id, { stock: value.stock });
-            console.log('GET ==>', value.stock[indexStock]);
-          }
-        });
-      });
+    // if (this.props.cart.length > 0) {
+    //   this.props.cart.forEach((item, index) => {
+    //     // let indexProduct = this.props.product.findIndex(
+    //     //   (value) => value.id === item.idproduct
+    //     // );
+    //     // let indexStock = this.props.product[indexProduct].stock.findIndex(
+    //     //   (value) => value.code === item.size
+    //     // );
+    //     // this.props.product[indexProduct].stock[indexStock].total -= item.qty;
+    //     // this.decrementStock(item.idproduct, {
+    //     //   stock: this.props.product[indexProduct].stock,
+    //     // });
 
-      Axios.post(API_URL + `/transaction`, obj)
-        .then((res) => {
-          Axios.patch(API_URL + `/user/refreshCart/${this.props.id}`, {
-            cart: [],
-          })
-            .then((response) => {
-              this.setState({ redirect: true });
-              this.props.checkout();
-              console.log(
-                'GET SUCCESS UPDATE PRODUCT REDUCER :',
-                response.data
-              );
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          // console.log('GET SUCCESS USER_TRANSACTION :', res.data);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        text: 'Sorry, your shopping cart is empty',
-      });
-    }
+    //     // Cara 1
+    //     this.props.product.forEach((value, idx) => {
+    //       if (item.idproduct === value.id) {
+    //         console.log('sama', item.idproduct, value.id);
+    //         let indexStock = value.stock.findIndex(
+    //           (element) => element.code === item.size
+    //         );
+    //         value.stock[indexStock].total -= item.qty;
+    //         this.decrementStock(value.id, { stock: value.stock });
+    //         console.log('GET ==>', value.stock[indexStock]);
+    //       }
+    //     });
+    //   });
+
+    //   Axios.post(API_URL + `/transaction`, obj)
+    //     .then((res) => {
+    //       Axios.patch(API_URL + `/user/refreshCart/${this.props.id}`, {
+    //         cart: [],
+    //       })
+    //         .then((response) => {
+    //           this.setState({ redirect: true });
+    //           this.props.checkout();
+    //           console.log(
+    //             'GET SUCCESS UPDATE PRODUCT REDUCER :',
+    //             response.data
+    //           );
+    //         })
+    //         .catch((error) => {
+    //           console.log(error);
+    //         });
+    //       // console.log('GET SUCCESS USER_TRANSACTION :', res.data);
+    //     })
+    //     .catch((err) => console.log(err));
+    // } else {
+    //   Swal.fire({
+    //     icon: 'warning',
+    //     text: 'Sorry, your shopping cart is empty',
+    //   });
+    // }
   };
 
   renderCart = () => {
+    console.log('=======> props :', this.props.cart);
     return this.props.cart.map((item, index) => {
+      console.log('=======> props index :', item.idcart, index);
       return (
         <tr key={index}>
           <th>{index + 1}</th>
@@ -300,7 +340,7 @@ class CartPage extends React.Component {
 const mapStateToProps = (state) => {
   // console.log('GET DATA CARTUSER :', state.authReducer.cart);
   // console.log('GET DATA CARTUSER PRODUCT :', state.productReducer);
-  console.log('GET PRODUCT :', state.productReducer);
+  // console.log('GET PRODUCT :', state.productReducer);
   return {
     user: state.authReducer,
     cart: state.authReducer.cart,

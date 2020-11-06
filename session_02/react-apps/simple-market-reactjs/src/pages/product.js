@@ -47,8 +47,8 @@ class ProductPage extends React.Component {
   getFilter = () => {
     let order = this.order.value;
     let sort = this.field.value;
-    console.log(sort);
-    console.log(order);
+    // console.log(sort);
+    // console.log(order);
     Axios.get(API_URL + `/products?_sort=${sort}&_order=${order}`)
       .then((res) => {
         console.log('GET PRODUCT :', res.data);
@@ -59,7 +59,7 @@ class ProductPage extends React.Component {
 
   render() {
     return (
-      <div className='d-flex row'>
+      <div className='row'>
         <div className='col-md-6'>
           <Dropdown
             isOpen={this.state.dropdownOpen}
@@ -82,21 +82,27 @@ class ProductPage extends React.Component {
         </div>
         <div className='col-md-6'>
           <Form>
-            <FormGroup className=' d-flex col-md-4 p-0 '>
-              <Input type='select' innerRef={(value) => (this.order = value)}>
+            <FormGroup className='d-flex'>
+              <Input
+                type='select'
+                innerRef={(value) => (this.order = value)}
+                className='mr-1'>
                 <option value='Asc'>Asc</option>
                 <option value='Desc'>Desc</option>
               </Input>
-              <Input type='select' innerRef={(value) => (this.field = value)}>
-                <option value='id'>ID</option>
+              <Input
+                type='select'
+                innerRef={(value) => (this.field = value)}
+                className='mr-1'>
                 <option value='name'>Name</option>
                 <option value='price'>Price</option>
               </Input>
-              <Button onClick={this.getFilter}>Ok</Button>
+              <Button style={{ width: '10vw' }} onClick={this.getFilter}>
+                Cari
+              </Button>
             </FormGroup>
           </Form>
         </div>
-        <hr />
         {this.renderProduct()}
       </div>
     );

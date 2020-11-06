@@ -36,18 +36,18 @@ class NavbarCom extends React.Component {
   }
 
   btLogout = () => {
-    localStorage.removeItem('id');
+    localStorage.removeItem('token');
     this.props.logout();
   };
 
-  // totalQty = () => {
-  //   let { cart } = this.props;
-  //   let qty = 0;
-  //   cart.forEach((element) => {
-  //     qty += element.qty;
-  //   });
-  //   return qty;
-  // };
+  totalQty = () => {
+    let { cart } = this.props;
+    let qty = 0;
+    cart.forEach((element) => {
+      qty += element.qty;
+    });
+    return qty;
+  };
 
   render() {
     let { user } = this.props;
@@ -109,7 +109,7 @@ class NavbarCom extends React.Component {
                         }>
                         <DropdownToggle
                           style={{
-                            padding: `5px 30px`,
+                            padding: `5px 40px`,
                             fontSize: '14px',
                             textTransform: 'uppercase',
                             letterSpacing: '3px',
@@ -117,34 +117,37 @@ class NavbarCom extends React.Component {
                             marginRight: '2px',
                           }}>
                           Cart
-                          <Badge className='ml-1' color='danger'>
-                            {/* {this.totalQty()} */}
+                          <Badge
+                            style={{ display: 'inline' }}
+                            className='ml-0'
+                            color='danger'>
+                            {this.totalQty()}
                           </Badge>
                         </DropdownToggle>
-                        {/* <DropdownMenu> */}
-                        {/* <Card
+                        <DropdownMenu>
+                          <Card
                             style={{
                               width: '400px',
-                              fontSize: '14px',
+                              fontSize: '12px',
                               border: 'none',
                             }}>
                             {this.props.cart.length <= 0 ? (
                               <CardBody>Cart is Empy</CardBody>
                             ) : (
                               this.props.cart.map((item, index) => (
-                                <div className='row'>
+                                <div className='row' key={index}>
                                   <div
                                     className='col-md-6'
-                                    style={{ width: '5vw' }}>
+                                    style={{ width: '4vw' }}>
                                     <CardImg
                                       src={item.image}
                                       alt={item.name}
-                                      width='2vw'
+                                      width='1px'
                                     />
                                   </div>
                                   <div
                                     className='col-md-6'
-                                    style={{ width: '15vw' }}>
+                                    style={{ width: '10vw' }}>
                                     <CardBody>
                                       <CardText>{item.name}</CardText>
                                       <CardText>Size : {item.size}</CardText>
@@ -161,8 +164,8 @@ class NavbarCom extends React.Component {
                             <CardFooter>
                               <Link to='/cart'>Go To Cart</Link>
                             </CardFooter>
-                          </Card> */}
-                        {/* </DropdownMenu> */}
+                          </Card>
+                        </DropdownMenu>
                       </Dropdown>
                     </div>
                     <div>
@@ -202,7 +205,7 @@ class NavbarCom extends React.Component {
                               }}>
                               Cart
                               <Badge className='ml-1' color='danger'>
-                                {/* {this.totalQty()} */}
+                                {this.totalQty()}
                               </Badge>
                             </Link>
                           </DropdownItem>

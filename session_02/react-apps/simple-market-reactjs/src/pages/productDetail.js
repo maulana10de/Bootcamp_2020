@@ -88,9 +88,6 @@ class ProductDetail extends React.Component {
   };
 
   btAddToCart = () => {
-    // let id = localStorage.getItem('id');
-    // console.log('BEFORE', this.props.cart);
-
     let cart = {
       iduser: this.props.iduser,
       idstock: this.state.idstock,
@@ -98,42 +95,96 @@ class ProductDetail extends React.Component {
       qty: this.state.qty,
     };
 
-    // let cart = {};
-    // if (this.props.cart.length === 0) {
-    //   cart = {
-    //     iduser: this.props.iduser,
-    //     idstock: this.state.idstock,
-    //     idproduct: this.state.detail.idproduct,
-    //     qty: this.state.qty,
-    //   };
-    // }
-
-    // console.log(this.state.detail.stock);
-
-    // this.props.cart.forEach((item) => {
-    //   if (
-    //     item.size === this.state.size &&
-    //     item.idproduct === this.state.detail.idproduct
-    //   ) {
-    //     item.qty += this.state.qty;
-    //     item.total = item.qty * this.state.detail.price;
-    //   } else {
-    //     cart = {
-    //       iduser: this.props.iduser,
-    //       idstock: this.state.idstock,
-    //       idproduct: this.state.detail.idproduct,
-    //       qty: this.state.qty,
-    //     };
-    //   }
-    //   console.log('GET ITEM :', item.size, item.idproduct, this.state.size);
-    // });
-    // // console.log('AFTER', this.props.cart);
     Axios.post(API_URL + `/users/addToCart`, { cart })
       .then((response) => {
         this.setState({ redirect: true });
       })
       .catch((err) => console.log('ERROR ADD TO CART :', err));
   };
+
+  // Versi II
+  // btAddToCart = () => {
+  //   let cart = {
+  //     iduser: this.props.iduser,
+  //     idstock: this.state.idstock,
+  //     idproduct: this.state.detail.idproduct,
+  //     qty: this.state.qty,
+  //   };
+
+  //   let newCart = this.props.cart.filter((item, index) => {
+  //     return (
+  //       item.size === this.state.size &&
+  //       item.idproduct === this.state.detail.idproduct
+  //     );
+  //   });
+
+  //   if (this.props.cart.length === 0) {
+  //     Axios.post(API_URL + `/users/addToCart`, { cart })
+  //       .then((response) => {
+  //         this.setState({ redirect: true });
+  //       })
+  //       .catch((err) => console.log('ERROR ADD TO CART :', err));
+  //   } else {
+  //     if (newCart.length === 0) {
+  //       Axios.post(API_URL + `/users/addToCart`, { cart })
+  //         .then((response) => {
+  //           this.setState({ redirect: true });
+  //         })
+  //         .catch((err) => console.log('ERROR ADD TO CART :', err));
+  //     }
+  //     newCart.forEach((item) => {
+  //       if (
+  //         item.size === this.state.size &&
+  //         item.idproduct === this.state.detail.idproduct
+  //       ) {
+  //         item.qty += this.state.qty;
+  //         item.total = item.qty * this.state.detail.price;
+  //         Axios.patch(API_URL + `/users/updateCartQty/${item.idcart}`, {
+  //           qty: item.qty,
+  //         })
+  //           .then((response) => {
+  //             this.setState({ redirect: true });
+  //           })
+  //           .catch((err) => console.log(err));
+  //       }
+  //     });
+  //   }
+
+  // this.props.cart.forEach((item, i) => {
+  //   let newCart = this.props.cart.filter((item, index) => {
+  //     return (
+  //       item.size === this.state.size &&
+  //       item.idproduct === this.state.detail.idproduct
+  //     );
+  //   });
+
+  //   if (
+  //     newCart[0].size === this.state.size &&
+  //     newCart[0].idproduct === this.state.detail.idproduct
+  //   ) {
+  //     item.qty += this.state.qty;
+  //     item.total = item.qty * this.state.detail.price;
+  //     Axios.patch(API_URL + `/users/updateCartQty/${item.idcart}`, {
+  //       qty: item.qty,
+  //     })
+  //       .then((response) => {
+  //         this.setState({ redirect: true });
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     cart = {
+  //       iduser: this.props.iduser,
+  //       idstock: this.state.idstock,
+  //       idproduct: this.state.detail.idproduct,
+  //       qty: this.state.qty,
+  //     };
+  //     Axios.post(API_URL + `/users/addToCart`, { cart })
+  //       .then((response) => {
+  //         this.setState({ redirect: true });
+  //       })
+  //       .catch((err) => console.log('ERROR ADD TO CART :', err));
+  //   }
+  // });
 
   render() {
     let { detail, thumbnail, redirect, qty, total, totalHarga } = this.state;

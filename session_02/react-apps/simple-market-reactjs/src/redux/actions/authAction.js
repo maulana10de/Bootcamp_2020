@@ -26,17 +26,17 @@ export const Login = (username, password) => {
       API_URL + `/users/login?username=${username}&password=${password}`
     )
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // console.log('test');
         if (res.data.dataLogin) {
-          localStorage.setItem('id', res.data.dataLogin.iduser);
+          localStorage.setItem('token', res.data.dataLogin.token);
 
           dispatch({
             type: 'LOGIN',
             payload: res.data.dataLogin,
           });
         }
-        alert(res.data.messages);
+        // alert(res.data.messages);
       })
       .catch((err) => {
         console.log('GET ERROR LOGIN :', err);
@@ -47,14 +47,17 @@ export const Login = (username, password) => {
 export const KeepLogin = () => {
   return async (dispatch) => {
     try {
-      let get = await Axios.get(
-        API_URL + `/users/keepLogin/${localStorage.getItem('id')}`
-      );
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+      let get = await Axios.get(API_URL + `/users/keepLogin`, headers);
       // console.log('GET DATA KEEPLOGIN', get.data);
-      localStorage.setItem('id', get.data.iduser);
+      localStorage.setItem('token', get.data.dataKeepLogin.token);
       dispatch({
         type: 'LOGIN',
-        payload: get.data,
+        payload: get.data.dataKeepLogin,
       });
     } catch (error) {
       console.log('KEEPLOGIN', error);
@@ -65,17 +68,21 @@ export const KeepLogin = () => {
 export const getCart = () => {
   return async (dispatch) => {
     try {
-      let get = await Axios.get(
-        API_URL + `/users/getCart/${localStorage.getItem('id')}`
-      );
-      console.log('GET CART ===>:', get.data);
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+
+      let get = await Axios.get(API_URL + `/users/getCart`, headers);
+      // console.log('GET CART ===>:', get.data);
       // localStorage.setItem('id', get.data.iduser);
       dispatch({
         type: 'GET_CART',
         payload: get.data,
       });
     } catch (error) {
-      console.log('GET CART ERROR :', error);
+      console.log(error);
     }
   };
 };

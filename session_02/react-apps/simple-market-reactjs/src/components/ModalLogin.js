@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { login, Login } from '../redux/actions';
+import Swal from 'sweetalert2';
 
 class ModalLogin extends React.Component {
   constructor(props) {
@@ -47,6 +48,10 @@ class ModalLogin extends React.Component {
       });
     } else {
       this.props.Login(username, password);
+      Swal.fire({
+        icon: 'success',
+        text: 'Your login has been successful',
+      });
 
       // Axios.get(API_URL + `/users` + url + `&password=${password}`)
       //   .then((res) => {

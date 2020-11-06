@@ -1,6 +1,7 @@
 const express = require('express');
 // hak akses dari front-end
 const cors = require('cors');
+const bearerToken = require('express-bearer-token');
 // membaca data yang dikirim oleh request endpoint/url front-end
 const bodyParser = require('body-parser');
 
@@ -25,6 +26,7 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(bearerToken()); // bearerToken, digunakan untuk mengambil authorization oleh header request url dari frontend
 
 app.get('/', (req, res) => {
   res.status(200).send('<h1>REST API</h1>');

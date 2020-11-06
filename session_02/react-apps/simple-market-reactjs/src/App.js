@@ -18,6 +18,7 @@ import ProfilePage from './pages/profile';
 import RegisterPage from './pages/register';
 import SlideManagement from './pages/slideManagement';
 import Transaction from './pages/transaction';
+import VerificationPage from './pages/verification';
 import { login, getProducts, KeepLogin, getCart } from './redux/actions';
 
 class App extends React.Component {
@@ -52,6 +53,7 @@ class App extends React.Component {
           <Route path='/product-detail' component={ProductDetail} />
           <Route path='/register' component={RegisterPage} />
           <Route path='/about' component={AboutPage} />
+          <Route path='/verification/:token' component={VerificationPage} />
 
           {this.props.role && this.props.role === 'admin' ? (
             <>

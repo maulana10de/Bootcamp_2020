@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 import CarouselCom from '../components/Carousel';
 import Axios from 'axios';
 import { API_URL } from '../assets/path/urls';
@@ -19,7 +19,7 @@ class Homepage extends React.Component {
   getCarousel = () => {
     Axios.get(API_URL + '/carousel')
       .then((res) => {
-        console.log('GET MAP STATE TO PROPS :', res.data);
+        // console.log('GET MAP STATE TO PROPS :', res.data);
         this.props.getSlides(res.data);
       })
       .catch((err) => {
@@ -30,16 +30,13 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron className='text-center'>
           <h1 className='display-3'>AdiSport Indonesia</h1>
           <hr className='my-2' />
           <p>
             Through sports, we have the power to change lives. Sports keep us
             fit. They keep us mindful. They bring us together. Athletes inspire
             us.
-          </p>
-          <p className='lead'>
-            <Button color='primary'>Shop Now</Button>
           </p>
         </Jumbotron>
         <CarouselCom carousel={this.props.slides} />
